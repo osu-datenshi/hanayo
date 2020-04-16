@@ -18,7 +18,7 @@ func Recovery(client *raven.Client, onlyCrashes bool) gin.HandlerFunc {
 		var requestBody []byte
 
 		defer func() {
-			st := raven.NewStacktrace(0, 3, []string{"git.github.com/osuthailand"})
+			st := raven.NewStacktrace(0, 3, []string{"git.github.com/osu-datenshi"})
 
 			tokenRaw, ex := c.Get("token")
 			var token string

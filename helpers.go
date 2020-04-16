@@ -14,9 +14,9 @@ import (
 	"bytes"
 
 	"github.com/gin-gonic/gin"
-	"github.com/osuthailand/hanayo/modules/bbcode"
-	tp "github.com/osuthailand/hanayo/modules/top-passwords"
-	"github.com/osuthailand/api/common"
+	"github.com/osu-datenshi/hanayo/modules/bbcode"
+	tp "github.com/osu-datenshi/hanayo/modules/top-passwords"
+	"github.com/osu-datenshi/api/common"
 )
 
 //go:generate go run scripts/generate_mappings.go -g
