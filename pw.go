@@ -9,9 +9,20 @@ import (
 	"gopkg.in/mailgun/mailgun-go.v1"
 	"github.com/osu-datenshi/api/common"
 	"zxq.co/x/rs"
+
+	"path/filepath"
+	"os"
+	"fmt"
 )
 
+type emailWrapper struct {
+	Content string
+	Url string
+}
+
 func passwordReset(c *gin.Context) {
+	var eWrap emailWrapper;
+
 	ctx := getContext(c)
 	if ctx.User.ID != 0 {
 		simpleReply(c, errorMessage{T(c, "You're already logged in!")})
@@ -64,18 +75,37 @@ func passwordReset(c *gin.Context) {
 		return
 	}
 
-	content := T(c,
-		"Hey %s! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please <a href='%s'>click here</a> to reset your password on Datenshi. Otherwise, silently ignore this email.",
-		username,
-		config.BaseURL+"/pwreset/continue?k="+key,
-	)
+	eWrap.Content = "Hey"+username+"! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please click the button below to reset your password on Datenshi. Otherwise, silently ignore this email."
+	eWrap.Url = config.BaseURL+"/pwreset/continue?k="+key
+
+	cwd, _ := os.Getwd()
+
+	// Get email html template in string format
+	htmlContent, err := ParseTemplate(filepath.Join(cwd, "templates", "./email/pw-recover.html"), eWrap)
+	if err != nil {
+		c.Error(err)
+		resp500(c)
+		return
+	}
+	fmt.Println(htmlContent)
+
+	// Get email text template in string format
+	textContent, err := ParseTemplate(filepath.Join(cwd, "templates", "./email/pw-recover.tmpl"), eWrap)
+	if err != nil {
+		c.Error(err)
+		resp500(c)
+		return
+	}
+	fmt.Println(textContent)
+
 	msg := mailgun.NewMessage(
 		config.MailgunFrom,
 		T(c, "Datenshi password recovery instructions"),
-		content,
+		textContent,
 		email,
 	)
-	msg.SetHtml(content)
+
+	msg.SetHtml(htmlContent)
 	_, _, err = mg.Send(msg)
 
 	if err != nil {
