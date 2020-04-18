@@ -125,10 +125,10 @@ msgstr ""
 msgid "Verify account"
 msgstr ""
 
-msgid "Your account has been created, however it still <b>needs to be verified!</b> Please log in into <b><u>osu! (the game)</u></b> using your account. <b>There is <u>no email confirmation</u> at the moment. All you need to do is connect to Ripple from the osu! client!</b> If you're having trouble, <a href='/doc/1'>follow this guide</a>."
+msgid "Your account has been created, however it still <b>needs to be verified!</b> Please log in into <b><u>osu! (the game)</u></b> using your account. <b>There is <u>no email confirmation</u> at the moment. All you need to do is connect to Datenshi from the osu! client!</b> If you're having trouble, <a href='/doc/1'>follow this guide</a>."
 msgstr ""
 
-msgid "<b class='big text'>Do not let anyone except yourself log into your Ripple account!</b><br> Get on our <a href='%s'>Discord server's</a> #help channel instead (after following the steps on this page) so that we can help you out if you have trouble connecting."
+msgid "<b class='big text'>Do not let anyone except yourself log into your Datenshi account!</b><br> Get on our <a href='%s'>Discord server's</a> #help channel instead (after following the steps on this page) so that we can help you out if you have trouble connecting."
 msgstr ""
 
 msgid "The Guide (<a href='/doc/connection_guide' target='_blank'>Windows</a>, <a href='/doc/linux' target='_blank'>Linux</a>). TL;DR version below."
@@ -137,7 +137,7 @@ msgstr ""
 msgid "Download the server switcher"
 msgstr ""
 
-msgid "Extract it, disable your antivirus, execute <i>RippleServerSwitcher.exe</i> <b>as administrator</b>"
+msgid "Extract it, disable your antivirus, execute <i>datenshi.exe</i> <b>as administrator</b>"
 msgstr ""
 
 msgid "Click on <b>Connect to Ripple</b>, then <b>Ok/Yes</b>"
@@ -165,16 +165,16 @@ msgstr ""
 msgid "Congratulations for not reading things!"
 msgstr ""
 
-msgid "Multiaccounts are not allowed on Ripple"
+msgid "Multiaccounts are not allowed on Datenshi"
 msgstr ""
 
-msgid "Your new account has been <b>banned</b> and your main account has been <b>restricted</b>. You can appeal in a month by sending an email to <b><a href='https://support.ripple.moe'>support.ripple.moe</a></b>. You better read the rules next time."
+msgid "Your new account has been <b>banned</b> and your main account has been <b>restricted</b>. You can appeal in a month by sending an email to <b><a href='https://support.datenshi.xyz'>support.datenshi.xyz</a></b>. You better read the rules next time."
 msgstr ""
 
-msgid "Welcome to Ripple"
+msgid "Welcome to Datenshi"
 msgstr ""
 
-msgid "We're glad to have you here. <b>Your account is now active.</b> You can now play on Ripple and <a href='/login'>log in</a> on the website!"
+msgid "We're glad to have you here. <b>Your account is now active.</b> You can now play on Datenshi and <a href='/login'>log in</a> on the website!"
 msgstr ""
 
 msgid "Here's a few things you might want to check out:"

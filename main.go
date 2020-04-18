@@ -338,7 +338,7 @@ func generateEngine() *gin.Engine {
 	r.Any("/blog/*url", blogRedirect)
 
 	r.GET("/help", func(c *gin.Context) {
-		c.Redirect(301, "https://discord.gg/Qp3WQU8")
+		c.Redirect(301, "https://discord.io/datenshi")
 	})
 
 	loadSimplePages(r)
@@ -349,5 +349,5 @@ func generateEngine() *gin.Engine {
 }
 
 const alwaysRespondText = `Ooops! Looks like something went really wrong while trying to process your request.
-Perhaps report this to a Ainu developer?
+Perhaps report this to a Datenshi developer?
 Retrying doing again what you were trying to do might work, too.`
