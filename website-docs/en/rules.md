@@ -24,7 +24,7 @@ These apply to both Discord AND the in-game chat. The Discord chat also has some
 
 1. Avoid any kind of insults to people. Try to be friendly. If not, try to discuss in a constructive manner.
 2. Racial slurs are absolutely not allowed. Terms like "retarded", and "autistic" are fine on objects, definitely not on people.
-3. Don't **spam or flood**, unless you're occasionally sending a link to e.g. Twitch when you're streaming Ripple when no discussion is going on.
+3. Don't **spam or flood**, unless you're occasionally sending a link to e.g. Twitch when you're streaming Datenshi when no discussion is going on.
 4. Any kind of **illegal content, warez, or viruses** is strictly prohibited. (This includes posting parts of source code that you have no legal right to share.)
 5. No NSFW or gore content.
 6. Unless it's a language channel, please speak English.
@@ -41,14 +41,14 @@ These apply to both Discord AND the in-game chat. The Discord chat also has some
 
 <h3><i class="file text outline icon"></i> Cheat/multiaccount policy</h3>
 
-#### _This is how we handle cheaters and multiaccounters on Ripple._
+#### _This is how we handle cheaters and multiaccounters on Datenshi._
 
 1. Cheating and multiaccount is strictly prohibited.
-2. It doesn't matter if you cheated on any other osu! server - we only care about what you did on Ripple.
-3. Multiaccounts are **NOT** allowed, with the **SOLE EXCEPTION OF CHAT BOTS**.  If you are developing one and need an account for it,  mail [support](mailto:support@ripple.moe) (or a [dev](mailto:howl@ripple.moe))
+2. It doesn't matter if you cheated on any other osu! server - we only care about what you did on Datenshi.
+3. Multiaccounts are **NOT** allowed, with the **SOLE EXCEPTION OF CHAT BOTS**.  If you are developing one and need an account for it,  mail [support](mailto:support@datenshi.xyz) (or a [dev](mailto:howl@datenshi.xyz))
 4. We reserve the right to change these rules as we see fit.
 
 <h3><i class="list layout icon"></i> Miscellaneous</h3>
 
-1. You can change your profile flag mailing [support](mailto:support@ripple.moe), and sending a picture with a valid document and a post-it or a piece of paper with your Ripple name.
-2. Name changes are handled through our [support website.](https://support.ripple.moe)
+1. You can change your profile flag mailing [support](mailto:support@datenshi.xyz), and sending a picture with a valid document and a post-it or a piece of paper with your Datenshi name.
+2. Name changes are handled through our [support website.](https://support.datenshi.xyz)
