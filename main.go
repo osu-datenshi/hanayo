@@ -121,16 +121,17 @@ func main() {
 	var configDefaults = map[*string]string{
 		&config.ListenTo:         ":6969",
 		&config.CookieSecret:     rs.String(46),
-		&config.AvatarURL:        "https://a.ainu.pw",
-		&config.BaseURL:          "https://ainu.pw",
-		&config.BanchoAPI:        "https://c.ainu.pw",
+		&config.AvatarURL:        "https://a.datenshi.xyz",
+		&config.BaseURL:          "https://datenshi.xyz",
+		&config.BanchoAPI:        "",
 		&config.CheesegullAPI:    "https://storage.ainu.pw/api",
 		&config.API:              "http://localhost:40001/api/v1/",
 		&config.APISecret:        "Potato",
 		&config.IP_API:           "https://ip.zxq.co",
-		&config.DiscordServer:    "https://discord.gg/Qp3WQU8",
+		&config.DiscordServer:    "https://discord.io/datenshi",
+		&config.featuredvideo:	  "<iframe width="560" height="315" src="https://www.youtube.com/embed/ZKpEqeEqrKI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"
 		&config.MainRippleFolder: "/root/ripple/",
-		&config.MailgunFrom:      `"Ainu" <noreply@ripple.moe>`,
+		&config.MailgunFrom:      `"Datenshi" <noreply@datenshi.xyz>`,
 	}
 	for key, value := range configDefaults {
 		if *key == "" {

@@ -27,7 +27,11 @@ KyutGrill=homepage2.jpg
 {{/* End CSS */}}
 <div class="ui container">
 <div class="ui center aligned segment">
-	<img src="/static/logos/ainu.png">
+	<img src="/static/logos/datenshi.png">
+</div>
+<div class="ui center aligned segment">
+	<h1 class="ui header">{{ .T "Featured Video" }}</h1>
+	{{ config "featuredvideo" }}
 </div>
 {{ $set := systemSettings "website_home_alert" }}
 {{ with $set.website_home_alert.String }}
