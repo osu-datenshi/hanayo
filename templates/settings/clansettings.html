@@ -23,31 +23,29 @@ Include=menu.html
                         {{ $desc := or $c.description.String "" }}
                         {{ $icon := or $c.icon.String "" }}
                         {{ $bg := or $c.background.String "" }}
+			{{ $nm := or $c.name.String "" }}
                         <form id="register-form" class="ui form" method="post" enctype="multipart/form-data" action="/settings/clansettings">
                             <div class="field">
                                 <label class="left aligned">{{ "Clantag (2 to 6 characters)" }}</label>
                                 <input tabindex="1" type="text" name="tag" placeholder="{{ $.T "Clantag" }}" value="{{ $tag }}" pattern="{2,6}$">
                             </div>
-                            <br/>
-                            <textarea tabindex="1" class="monospace" name="password">{{ $desc }}</textarea>
-
+			    <div class="field">
+		    	    	<label class="left aligned">{{ "Description" }}</label>
+                            	<input tabindex="1" type="text" name="description" value="{{ $desc }}">
+			   </div>
                             <div class="field">
-                                <label class="left aligned">{{ $.T "Icon (optional)" }}</label>
+                                <label class="left aligned">{{ $.T "Icon url" }}</label>
+			   	<input tabindex="1" type="url" name="icon" value="{{ $icon }}">	
                              </div>
-
-                            <div class="ui buttons">
-                                <label tabindex="1" for="file" class="ui green labeled icon button">
-                                    <i class="file icon"></i>
-                                    {{ .T "Open File" }}
-                                </label>
-                            </div>
-                            <input type="file" id="file" style="display:none" accept="image/*" name="avatar">
                             {{ if has .Context.User.Privileges 4 }}
                                 <div class="field">
                                     <label class="left aligned">{{ $.T "Background [URL] (optional)" }}</label>
-                                    <input tabindex="4" type="url" name="bg" placeholder="{{ $.T "Background URL" }}" value="{{ $bg }}">
+                                    <input tabindex="4" type="url" name="bg" value="{{ $bg }}">
                                 </div>
-
+				<div class="field">
+				    <label class="left aligned">{{ $.T "Changename (STILL WORK IN PROGRESS)" }}</label>
+				    <input tabindex="1" type="text" name="name" value="{{ $nm }}">
+				</div>
                             {{ end }}
                             {{ ieForm .Gin }}
                         </form>
