@@ -129,7 +129,6 @@ func main() {
 		&config.APISecret:        "Potato",
 		&config.IP_API:           "https://ip.zxq.co",
 		&config.DiscordServer:    "https://discord.io/datenshi",
-		&config.featuredvideo:	  "<iframe width="560" height="315" src="https://www.youtube.com/embed/ZKpEqeEqrKI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"
 		&config.MainRippleFolder: "/root/ripple/",
 		&config.MailgunFrom:      `"Datenshi" <noreply@datenshi.xyz>`,
 	}

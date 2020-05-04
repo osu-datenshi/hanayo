@@ -138,7 +138,7 @@ func randSeq(n int) string {
 
 func createInvite(c *gin.Context) {
 ctx := getContext(c)
-	if string(c.PostForm("description")) == "" && string(c.PostForm("icon")) == "" && string(c.PostForm("tag")) == "" && string(c.PostForm("bg")) == "" {
+	if string(c.PostForm("description")) == "" && string(c.PostForm("icon")) == "" && string(c.PostForm("tag")) == "" && string(c.PostForm("bg")) == "" && string(c.PostForm("nama")) == "" {
 		
 		
 		if ctx.User.ID == 0 {
@@ -186,8 +186,11 @@ ctx := getContext(c)
 			addMessage(c, errorMessage{T(c, "Someone already used that TAG! Please try another!")})
 			return
 		}
-		
-		db.Exec("UPDATE clans SET description = ?, icon = ?, tag = ?, background = ? WHERE id = ?", c.PostForm("description"), c.PostForm("icon"), tag, c.PostForm("bg"), clan)
+		db.Exec("UPDATE clans SET description = ? WHERE id = ?", c.PostForm("description"), clan)
+		db.Exec("UPDATE clans SET icon = ? WHERE id = ?", c.PostForm("icon"), clan)
+		db.Exec("UPDATE clans SET tag = ? WHERE id = ?", tag, clan)
+		db.Exec("UPDATE clans SET background = ? WHERE id = ?", c.PostForm("bg"), clan)
+		db.Exec("UPDATE clans SET name = ? WHERE id ?", c.PostForm("nama"), clan)
 	}
 	addMessage(c, successMessage{T(c, "Success!")})
 	getSession(c).Save()
