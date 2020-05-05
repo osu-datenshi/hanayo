@@ -190,7 +190,7 @@ ctx := getContext(c)
 		db.Exec("UPDATE clans SET icon = ? WHERE id = ?", c.PostForm("icon"), clan)
 		db.Exec("UPDATE clans SET tag = ? WHERE id = ?", tag, clan)
 		db.Exec("UPDATE clans SET background = ? WHERE id = ?", c.PostForm("bg"), clan)
-		db.Exec("UPDATE clans SET name = ? WHERE id ?", c.PostForm("name"), clan)
+		db.Exec("UPDATE clans SET name = ? WHERE id = ?", c.PostForm("name"), clan)
 	}
 	addMessage(c, successMessage{T(c, "Success!")})
 	getSession(c).Save()
