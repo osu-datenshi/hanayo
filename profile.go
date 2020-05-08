@@ -22,7 +22,6 @@ func userProfile(c *gin.Context) {
 	)
 
 	ctx := getContext(c)
-
 	u := c.Param("user")
 	if _, err := strconv.Atoi(u); err != nil {
 		err := db.QueryRow("SELECT id, username, privileges FROM users WHERE username = ? AND "+ctx.OnlyUserPublic()+" LIMIT 1", u).Scan(&userID, &username, &privileges)
@@ -87,7 +86,6 @@ func relaxProfile(c *gin.Context) {
 	)
 
 	ctx := getContext(c)
-
 	u := c.Param("user")
 	if _, err := strconv.Atoi(u); err != nil {
 		err := db.QueryRow("SELECT id, username, privileges FROM users WHERE username = ? AND "+ctx.OnlyUserPublic()+" LIMIT 1", u).Scan(&userID, &username, &privileges)

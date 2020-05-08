@@ -72,6 +72,12 @@ func loginSubmit(c *gin.Context) {
 		return
 	}
 
+	// recaptcha verify
+	if config.RecaptchaPrivate != "" && !recaptchaCheck(c) {
+		simpleReply(c, errorMessage{T(c, "Captcha is invalid.")})
+		return
+	}
+
 	if data.PasswordVersion == 1 {
 		addMessage(c, warningMessage{T(c, "Your password is sooooooo old, that we don't even know how to deal with it anymore. Could you please change it?")})
 		c.Redirect(302, "/pwreset")

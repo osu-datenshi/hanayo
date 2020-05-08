@@ -24,6 +24,11 @@ KyutGrill=login2.jpg
 							<input tabindex="2" type="password" name="password" placeholder="{{ .T "Password" }}" value="{{ .FormData.password }}" required>
 						</div>
 						<input type="hidden" name="redir" value="{{ or (.Gin.Query "redir") .FormData.redir }}">
+						{{ with config "RecaptchaSite" }}
+                                                <div class="field">
+                                                        <div class="g-recaptcha" data-sitekey="{{ . }}"></div>
+                                                </div>
+                                                {{ end }}
 						{{ ieForm .Gin }}
 					</form>
 				</div>
