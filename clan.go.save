@@ -7,7 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"math/rand"
 	"time"
-	"regexp"
 	"strings"
 )
 
@@ -189,21 +188,10 @@ ctx := getContext(c)
 			return
 		}
 
-
-        	// check username is valid by our criteria
-        	clanname := strings.TrimSpace(c.PostForm("name"))
-        	if !clannameRegex.MatchString(clanname) {
-			c.Redirect(302, "/settings/clansettings")
-                	addMessage(c, errorMessage{T(c, "Your clanname must contain alphanumerical characters, spaces, or any of<code>_[]-</code>")})
-                	return
-        	}
-
-		if strings.Contains(clanname, "_") && strings.Contains(clanname, " ") {
-			c.Redirect(302, "/settings/clansettings")
-                	addMessage(c, errorMessage{T(c, "An username can't contain both underscores and spaces.")})
-                	return
-        	}
-
+		if c.PostForm("name") == "_" s(c.PostForm("name"), " ") {
+			addMessage(c, errorMessage{T(c, "A Clan Name can't contain both underscores and spaces.")})
+			return
+		}
 
 		db.Exec("UPDATE clans SET description = ?, icon = ?, tag = ?, background = ?, name = ? WHERE id = ?", c.PostForm("description"), c.PostForm("icon"), tag, c.PostForm("bg"), c.PostForm("name"), clan)
 	}
@@ -318,5 +306,3 @@ func resolveInvite(c string)(int) {
 	fmt.Println(clanid)
 	return clanid
 }
-
-var clannameRegex = regexp.MustCompile(`^[A-Za-z0-9 _\.[\]-]{2,20}$`)
