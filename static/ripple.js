@@ -76,7 +76,7 @@ var singlePageSnippets = {
                                    v.country.toLowerCase() + " flag'></i>" +
                                    escapeHTML(v.username) + "</a>"),
             $("<td />").html(
-              scoreOrPP(v.chosen_mode.ranked_score, v.chosen_mode.pp)),
+              scoreOrPP(v.chosen_mode.pp)),
             $("<td />").text(v.chosen_mode.accuracy.toFixed(2) + "%"),
             // bonus points if you get the undertale joke
             $("<td />").html(addCommas(v.chosen_mode.playcount) +
@@ -87,10 +87,9 @@ var singlePageSnippets = {
         disableSimplepagButtons(data.users.length < 50);
       });
     }
-    function scoreOrPP(s, pp) {
+    function scoreOrPP(pp) {
       if (pp === 0)
-        return "<b>" + addCommas(s) + "</b>";
-      return "<b>" + addCommas(pp) + "pp</b> (" + addCommas(s) + ")"
+      return "<b>" + addCommas(pp) + "pp</b>"
     }
 
     // country stuff
@@ -273,14 +272,14 @@ var singlePageSnippets = {
       rates = data;
       us.on('update', function() {
         var months = us.get();
-        var priceEUR = Math.pow(months * 30 * 0.2, 0.70);
-        var priceBTC = priceEUR / rates.EUR;
+        var priceIDR = Math.pow(months * 30 * 0.2, 0.70);
+        var priceBTC = priceIDR / rates.IDR;
         var priceUSD = priceBTC * rates.USD;
         $("#cost")
-          .html(T("<b>{{ months }}</b> month costs <b>€ {{ eur }}</b>", {
+          .html(T("<b>{{ months }}</b> month costs <b>IDR {{ idr }}</b>", {
             count : Math.round(+months),
             months : (+months).toFixed(0),
-            eur : priceEUR.toFixed(2),
+            idr : priceIDR.toFixed(2),
           }) +
                   "<br>" + T("($ {{ usd }} / BTC {{ btc }})", {
               usd : priceUSD.toFixed(2),
@@ -290,7 +289,7 @@ var singlePageSnippets = {
           .attr("value",
             (+months).toFixed(0) + " month" + (months == 1 ? "" : "s"));
         $("#bitcoin-amt").text(priceBTC.toFixed(6));
-        $("#paypal-amt").val(priceEUR.toFixed(2));
+        $("#paypal-amt").val(priceIDR.toFixed(2));
       });
     });
     $("#username-input").on("input", function() {
@@ -538,7 +537,7 @@ function _api(base, endpoint, data, success, failure, post, handleAllFailures) {
   handleAllFailures = (typeof handleAllFailures !== undefined) ? handleAllFailures : false;
 
   var errorMessage =
-      "An error occurred while contacting the Ripple API. Please report this to a Ripple developer.";
+      "An error occurred while contacting the Datenshi API. Please report this to a Datenshi developer.";
 
   $.ajax({
     method : (post ? "POST" : "GET"),
@@ -837,3 +836,12 @@ function privilegesToString(privs) {
 function isLoggedIn() {
   return currentUserID > 0;
 }
+
+$(document).ready(function(){
+	$('.right.menu.open').on("click",function(e){
+        e.preventDefault();
+		$('.ui.vertical.menu').toggle();
+	});
+    
+	$('.ui.dropdown').dropdown();
+});

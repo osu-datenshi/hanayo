@@ -26,19 +26,19 @@ KyutGrill=leaderboard2.jpg
 			<a class="{{ favMode $favMode $k }}item" data-mode="{{ $k }}" href="/leaderboard?mode={{ $k }}">{{ $v }}</a>
 		{{ end }}
 	</div>
-	<div class="ui twelve item stackable menu">
+	<div class="ui twelve item unstackable menu">
 		{{ range countryList 11 }}
 			<a class="item lb-country" data-country="{{ . }}"><i class="{{ . }} flag nopad"></i></a>
 		{{ end }}
 		<a class="item" id="country-chooser-modal">...</a>
 	</div>
-	<table class="ui fixed table">
+	<table class="ui fixed unstackable table">
 		<thead>
 			{{ template "simplepag" 5 }}
 			<tr>
 				<th class="two wide"> {{ .T "Rank" }} </th>
 				<th class="four wide">{{ .T "Player" }} </th>
-				<th class="four wide">{{ .T "PP/Score" }} </th>
+				<th class="four wide">{{ .T "PP" }} </th>
 				<th class="three wide">{{ .T "Accuracy" }} </th>
 				<th class="three wide">{{ .T "Playcount" }} </th>
 			</tr>

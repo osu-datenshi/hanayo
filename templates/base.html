@@ -37,7 +37,7 @@
 		<link rel="stylesheet" type="text/css" href="/static/ripple.css?{{ unixNano }}">
 	{{ end }}
 	</head>
-	{{ $s := systemSettings "website_maintenance" "game_maintenance" "website_global_alert" }}
+	{{ $s := systemSettings "website_maintenance" "game_maintenance" "website_global_alert" "featuredvideo" }}
 	{{ with $s.website_maintenance.Int }}
 	<body class="maintenance">
 		<div class="container">
@@ -110,7 +110,7 @@
 			
 			<font style='color:black'>
 			{{ if $ds }}<font style='color:white' >{{ end }}
-			{{ .T "&copy; 2018-%d Build by Ripple & Ainu, thanks for the source! %s" (curryear) (version) | html }}  |
+			{{ .T "&copy; %d Datenshi Community - Hanayo %s" (curryear) (version) | html }}  |
 			<div class="ui scrolling dropdown" style="margin-left: 5px;" id="language-selector">
 				{{ $lang := .Context.Language }}
 				{{ with $lang }}

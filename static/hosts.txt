@@ -1,5 +1,3 @@
-127.0.0.1 localhost
-::1 localhost
 139.99.88.243 osu.ppy.sh
 139.99.88.243 c.ppy.sh
 139.99.88.243 c1.ppy.sh

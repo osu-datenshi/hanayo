@@ -7,31 +7,9 @@ KyutGrill=homepage2.jpg
 {{ $cf := .ClientFlags }}
 {{ $ds := band $cf 1 }}
 {{ $   := . }}
-{{/* CSS Zone */}}
-<style>
-	.status {
-		display: flex;
-		font-size: 14px;
-		font-weight: 500;
-		z-index: 3;
-		position: absolute;
-		-webkit-transform: translateY(-100px) translateX(5px);
-		transform: translateY(-100px) translateX(5px);
-		padding: 2px 10px;
-		color: #fff;
-		margin-left: 5px;
-		border-radius: 20px;
-		background: rgba(0,0,0,.6);
-	}
-</style>
-{{/* End CSS */}}
 <div class="ui container">
 <div class="ui center aligned segment">
 	<img src="/static/logos/datenshi.png">
-</div>
-<div class="ui center aligned segment">
-	<h1 class="ui header">{{ .T "Featured Video" }}</h1>
-	{{ config "featuredvideo" }}
 </div>
 {{ $set := systemSettings "website_home_alert" }}
 {{ with $set.website_home_alert.String }}
@@ -60,3 +38,12 @@ KyutGrill=homepage2.jpg
 	</div>
 	{{ end }}
 {{ end }}
+<div class="ui segments">
+	<h1 class="ui header">{{ "Featured Video" }}</h1>
+	{{ $set := systemSettings "featuredvideo" }}
+	{{ with $set.featuredvideo.String }}
+        <div class="ui segment">
+        {{ . | html }}
+        </div>
+	{{ end }}
+</div>

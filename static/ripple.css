@@ -410,3 +410,56 @@ img.locked-achievement:hover {
 	filter: brightness(0.5) drop-shadow(0 5px 5px #777);
 }
 
+.status-head {
+    padding:0;
+    margin: 0;
+    text-align: right; 
+    font-size: 35px;
+}
+
+.status-footer {
+    font-size: 20px;
+    text-align: right;
+}
+
+.status-icon {
+    font-size: 4em!important;
+    padding-top: 30px;
+}
+
+.ui.grid.main{
+	margin-top: 70px;
+}
+
+
+.mobile.row{
+	padding-top: 0px !important;
+	margin-top: 0px !important;
+}
+
+.mobile.row .ui.inverted.menu{
+	border-radius: 0px !important;
+}
+
+.padding-reset{
+	padding: 0px !important;
+}
+
+.ui.message{
+	padding: 40px !important;
+}
+
+@media (max-width: 767px) {
+  	.ui.grid.main{
+  		margin-top: 70px;
+	}
+	.ui.vertical.menu.navbar{
+		margin-top: 0px !important;
+	}
+}
+
+.ui.vertical.menu{
+	margin-top: -15px !important;
+	width: 100%;
+	display: none;
+}
