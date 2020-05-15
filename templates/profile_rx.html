@@ -1,7 +1,6 @@
 {{ define "tpl" }}
 <div class="ui container">
 	{{ if .UserID }}
-		{{ $aoba := eq .UserID 1000 }}
 		{{ $gqm := atoi (.Gin.Query "mode") }}
 		{{ $global := . }}
 		{{ with (.Get "users/rxfull?id=%d" .UserID) }}
@@ -51,7 +50,15 @@
 					</div>
 					<div class="table element">
 						<h1 class="ui header">
-							{{ if $aoba }}							
+						{{ $oof := . }}
+                                                {{ if  eq $oof.clan.tag "" }}
+                                                {{ $global.T "" }}
+                                                {{ else }}
+                                                <a href="/c/{{ $oof.clan.id }}?mode=0">[{{ $oof.clan.tag }}]</a>
+                                                {{ end }}
+                                                {{ $ochi  := has .privileges 4 }}
+                                                {{ if $ochi }}
+
 							<b>
 
 <script>
@@ -129,15 +136,7 @@ starteffect()
 							{{ .username }}
 							{{ end }}
 						</h1>
-						
-						{{ $oof := . }}
-						
-						{{ if eq $oof.clan.name "" }}
-						{{ $global.T "Clan: None" }}
-						{{ else }}
-						{{ $global.T "Clan: %s" ($oof.clan.name) }}
-						{{ end }}
-						
+												
 						{{ if .username_aka }}
 							<div class="subtitle">
 								{{ $global.T "(aka <b>%s</b>)" (.username_aka | htmlescaper) | html }}

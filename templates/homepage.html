@@ -20,26 +20,28 @@ KyutGrill=homepage2.jpg
 {{/* Not logged in block */}}
 {{ if not .Context.User.ID }}
 	<div class="ui segment">
-		<h1 class="ui header">{{ .T "Selamat Datang di Datenshi!" }}</h1>
+		<h1 class="ui header">{{ .T "Welcome to Datenshi!" }}</h1>
 		<p>
-			{{ .T "Kamu adalah pendatang, silahkan register untuk bermain!" }}
+			{{ .T "Welcome to the first Indonesian osu! Private Server, We are welcoming everyone in the world to join our server, you can make this server as your home, specially for indonesian people, we are still growing for making it better, lets join to our Community on Discord!. Currently we have  %s users online and %s total registered users!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
 		</p>
-		<p>
-			{{ .T "Datenshi osu! Private Server, tersedia Multiplayer, PP System, Relax System, dan Clans. Kamu juga bisa melihatnya di <a href='/about'>about.</a> untuk lebih lanjut. Kita punya komunitas, silahkan gabung ke Discord kami, Sebagai informasi tambahan untukmu, <b>saat ini kita memiliki total  %s user online dan %s user terdaftar!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
-		</p>
-		<h3 class="ui header center aligned">{{ .T "Apalagi yang kamu tunggu? mari bergabung ke Datenshi!! <br>Kamu juga bisa bertukar official server atau Datenshi Server kapanpun!!" | html }}</h3>
+		<h3 class="ui header center aligned">{{ .T "What are you waiting for? come and join us!!" | html }}
+		<br>
+		<br>
+		<a href="/register"><div class="ui button">Register</div></a>
+		<a href="https://link.troke.id/datenshi"><div class="ui instagram button">Discord</div></a><h3>
 	</div>
 {{ else }}
 	<div class="ui segment">
-		<h1 class="ui header">{{ .T "Halo cok, %s!" .Context.User.Username }}</h1>
+		<h1 class="ui header">{{ .T "Halo sayang, %s!" .Context.User.Username }}</h1>
 		<p>
-			{{ .T "Selamat Datang ke Datenshi! Saat ini kita memiliki total <b>%s online user dan %s total user terdaftar.</b> Sangat bagus untuk farming pp right?" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
+			{{ .T "Welcome back to Datenshi, are you still having problem with us? dont worry, we can help you as we can, just go on Discord Server! Currently we have <b>%s online users and %s total registered users.</b> it's a great day for farm right??" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
 		</p>
 	</div>
 	{{ end }}
-{{ end }}
 <div class="ui segments">
+	<div class="ui segment">
 	<h1 class="ui header">{{ "Featured Video" }}</h1>
+	</div>
 	{{ $set := systemSettings "featuredvideo" }}
 	{{ with $set.featuredvideo.String }}
         <div class="ui segment">
@@ -47,3 +49,4 @@ KyutGrill=homepage2.jpg
         </div>
 	{{ end }}
 </div>
+{{ end }}

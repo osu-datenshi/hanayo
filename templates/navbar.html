@@ -20,9 +20,9 @@
 			<div class="ui dropdown item">
 				<span>{{ .T "Community" }}</span>
                 <div class="menu">
-                    {{/* navbarItem .Path (.T "Multiplayer listing") "https://multi.ainu.pw" */}}
-                    {{/* {{ navbarItem .Path (.T "Tournaments") "https://tourn.ainu.pw" }} */}}
-					{{ navbarItem .Path (.T "Team") "/team" }}
+                    {{ navbarItem .Path (.T "Multiplayer") "https://multi.datenshi.xyz" }}
+		    {{ navbarItem .Path (.T "Team") "/team" }}
+		    {{ navbarItem .Path (.T "Verified Tenshi") "/tenshi" }}
                     {{ navbarItem .Path (.T "Discord Server") .Conf.DiscordServer }}
                 </div>
             </div>
@@ -35,7 +35,6 @@
 					<a class="item" href="{{ .T "/static/datenshi.exe" }}">{{ .T "Server switcher" }}</a>
 				</div>
 			</div>
-			{{ if .Context.User.Username }}
 			<div class="ui dropdown item">
 				<span>{{ .T "Beatmaps" }}</span>
 				<div class="menu">
@@ -52,12 +51,10 @@
 					{{ end }}
 					{{ if ($isClan) }}
 					{{ else }}
-					<div class="divider"></div>
 					{{ navbarItem .Path (.T "Create Clan") "/clans/create" }}
 					{{ end }}
 				</div>
 			</div>
-			{{ end }}
 			{{/* navbarItem .Path (.T "Donate" | printf "<i class=\"red heart icon\"></i>%s") "/donate" */}}
 			{{ if $isAdmin }}{{ navbarItem .Path (.T "DAP" | printf "<b>%s</b>") "https://old.datenshi.xyz/index.php?p=100" }}{{ end }}
 			{{ end }}
