@@ -141,7 +141,7 @@ func registerResp(c *gin.Context, messages ...message) {
 	resp(c, 200, "register/register.html", &baseTemplateData{
 		TitleBar:  "Register",
 		KyutGrill: "register.jpg",
-		Scripts:   []string{"https://www.google.com/recaptcha/api.js"},
+		Scripts:   []string{"/static/googleapi.js"},
 		Messages:  messages,
 		FormData:  normaliseURLValues(c.Request.PostForm),
 	})
