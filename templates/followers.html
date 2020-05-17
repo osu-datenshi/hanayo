@@ -1,0 +1,53 @@
+{{/*###
+Handler=/followers
+TitleBar=Followers
+MinPrivileges=3
+KyutGrill=friends.jpg
+*/}}
+{{ define "tpl" }}
+<div class="ui container">
+	<div class="ui segments">
+		<div class="ui segment">
+			{{ .T "On this page you can see all of your followers, and add new friends if you see fit." }}
+		</div>
+		<div class="ui segment">
+		{{ $ := . }}
+		{{ $page := or (atoint (.Gin.Query "p")) 1 }}
+		{{ $followers := .Get "mitsuha/followers_friends?p=%d&l=40&sort=username,asc" $page }}
+
+			{{ with $followers }}
+				<div class="ui four column stackable grid">
+				{{ range .subs }}
+					<div class="ui column">
+						<h4 class="ui image header">
+							<img src="{{ config "AvatarURL" }}/{{ .id }}" alt="Avatar" class="ui mini rounded image"{{ if not (has .privileges 1) }} style="opacity: 0.5"{{ end }}>
+							<div class="content">
+								<a href="/u/{{ .id }}"{{ if not (has .privileges 1) }} style="opacity: 0.5"{{ end }}>{{ .username }}</a>
+							</div>
+						</h4>
+					</div>
+				{{ end }}
+				</div>
+			{{ end }}
+		</div>
+	{{ $left := gt $page 1 }}
+	{{ $right := eq (len (rsin $followers.subs)) 40 }}
+	{{ if or $left $right }}
+		<div class="ui right aligned segment">
+			<div class="ui pagination menu">
+			{{ if $left }}
+				<a class="icon item" href="/subs?p={{ minus (float $page) 1 }}">
+					<i class="left chevron icon"></i>
+				</a>
+			{{ end }}
+			{{ if $right }}
+				<a class="icon item" href="/subs?p={{ plus (float $page) 1 }}">
+					<i class="right chevron icon"></i>
+				</a>
+			{{ end }}
+			</div>
+		</div>
+	{{ end }}
+	</div>
+</div>
+{{ end }}
