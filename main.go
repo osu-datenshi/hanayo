@@ -305,9 +305,11 @@ func generateEngine() *gin.Engine {
 	r.POST("/irc/generate", ircGenToken)
 
 	r.GET("/settings/password", changePassword)
+	r.GET("/settings/changename", gantinamabro)
 	r.GET("/settings/authorized_applications", authorizedApplications)
 	r.POST("/settings/authorized_applications/revoke", revokeAuthorization)
 	r.POST("/settings/password", changePasswordSubmit)
+	r.POST("/settings/changename", gantinamabroSubmit)
 	r.POST("/settings/userpage/parse", parseBBCode)
 	r.POST("/settings/avatar", avatarSubmit)
 	r.POST("/settings/2fa/disable", disable2fa)

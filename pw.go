@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"strings"
-
+	"regexp"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/mailgun/mailgun-go.v1"
@@ -216,9 +216,63 @@ func changePassword(c *gin.Context) {
 	if err != nil {
 		c.Error(err)
 	}
+
 	simple(c, getSimpleByFilename("settings/password.html"), nil, map[string]interface{}{
 		"email": s["email"],
 	})
+}
+
+func gantinamabro(c *gin.Context) {
+	ctx := getContext(c)
+	if ctx.User.ID == 0 {
+                resp403(c)
+		return
+        }
+	if ctx.User.Privileges&common.UserPrivilegeDonor == 0 {
+		c.Redirect(302, "/settings")
+		simpleReply(c, errorMessage{T(c, "You're not a donor!")})
+		return
+	}
+        s, err := qb.QueryRow("SELECT username FROM users WHERE id = ?", ctx.User.ID)
+        if err != nil {
+                c.Error(err)
+        }
+
+        simple(c, getSimpleByFilename("settings/changename.html"), nil, map[string]interface{}{
+                "username": s["username"],
+        })
+}
+
+func gantinamabroSubmit(c *gin.Context) {
+	ctx := getContext(c)
+	if ctx.User.ID == 0 {
+		resp403(c)
+		return
+	}
+        if ok, _ := CSRF.Validate(ctx.User.ID, c.PostForm("csrf")); !ok {
+                addMessage(c, errorMessage{T(c, "Your session has expired. Please try redoing what you were trying to do.")})
+                return
+        }
+
+	// check username is valid by our criteria
+        gantinama := strings.TrimSpace(c.PostForm("gantinama"))
+        if !gantinamaRegex.MatchString(gantinama) {
+		c.Redirect(302, "/settings/changename")
+                simpleReply(c, errorMessage{T(c, "Your name must contain alphanumerical characters, spaces, or any of<code>_[]-</code>")})
+                return
+        }
+
+	if c.PostForm("gantinama") == "" {
+		c.Redirect(302, "/settings/changename")
+                simpleReply(c, errorMessage{T(c, "Username cannot empity.")})
+                return
+        }
+	db.Exec("UPDATE users SET username = ?, username_safe = ?  WHERE id = ?", c.PostForm("gantinama"), c.PostForm("gantinama"), ctx.User.ID)
+	db.Exec("UPDATE users_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
+	db.Exec("UPDATE rx_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
+	addMessage(c, successMessage{T(c, "Your name change has been saved!")})
+        c.Redirect(302, "/settings/changename")
+
 }
 
 func changePasswordSubmit(c *gin.Context) {
@@ -274,6 +328,7 @@ func changePasswordSubmit(c *gin.Context) {
 	}
 
 	db.Exec("UPDATE users SET flags = flags & ~3 WHERE id = ? LIMIT 1", ctx.User.ID)
-
 	messages = append(messages, successMessage{T(c, "Your settings have been saved.")})
 }
+
+var gantinamaRegex = regexp.MustCompile(`^[A-Za-z0-9 _\.[\]-]{2,20}$`)
