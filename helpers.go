@@ -83,7 +83,6 @@ func parseBBCode(c *gin.Context) {
 	d := bbcode.Compile(string(body))
 	c.String(200, d)
 }
-
 func discordFinish(c *gin.Context) {
 	sess := getSession(c)
 	defer func() {

@@ -36,7 +36,7 @@ func avatarSubmit(c *gin.Context) {
 		m = errorMessage{T(c, "An error occurred.")}
 		return
 	}
-	img = resize.Thumbnail(256, 256, img, resize.Bilinear)
+	img = resize.Thumbnail(200, 200, img, resize.Bilinear)
 	f, err := os.Create(fmt.Sprintf("%s/%d.png", config.AvatarsFolder, ctx.User.ID))
 	defer f.Close()
 	if err != nil {
