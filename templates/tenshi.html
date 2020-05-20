@@ -1,0 +1,18 @@
+{{/*###
+Handler=/tenshi
+TitleBar=Verified Tenshi
+Include=user_group.html
+KyutGrill=team2.jpg
+*/}}
+{{ define "tpl" }}
+<div class="ui container">
+	<div class="ui segments">
+		<div class="ui segment">
+		{{ "This is our list verified tenshi who send their liveplay for proofing that they doesnt use any illegal programs and they are marks as a legit players! you want to get verified tenshi? send your liveplay to us in Discord !" }}
+		</div>
+		<div class="ui segment">
+		{{ template "userGroup" (.Get "badges/members?id=%d" 1004) }}
+		</div>
+	</div>
+</div>
+{{ end }}
