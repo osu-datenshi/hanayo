@@ -9,6 +9,7 @@ import (
 	"time"
 	"regexp"
 	"strings"
+	"github.com/osu-datenshi/api/common"
 )
 
 // TODO: replace with simple ResponseInfo containing userid
@@ -34,8 +35,7 @@ func leaveClan(c *gin.Context) {
 			return
 		}
 		// กูไม่รู้หรอกว่ามันจะได้ผลมั้ย แต่ควยชั่งแม่งเย็ดแม่
-		
-			
+
 		db.Exec("DELETE FROM user_clans WHERE user = ? AND clan = ?", getContext(c).User.ID, i)
 		addMessage(c, successMessage{T(c, "You've left the clan.")})
 		getSession(c).Save()
@@ -53,12 +53,11 @@ func leaveClan(c *gin.Context) {
 		db.Exec("DELETE FROM user_clans WHERE clan = ?", i)
 		// ควยไม่สร้างแม่งละสัส :c
 		db.Exec("DELETE FROM clans WHERE id = ?", i)
-		
+
 		addMessage(c, successMessage{T(c, "Your clan has been disbanded")})
 		getSession(c).Save()
 		c.Redirect(302, "/clans?mode=0")
 	}
-	
 
 }
 
@@ -123,7 +122,7 @@ func checkCount(rows *sql.Rows) (count int) {
     	if err != nil {
 			panic(err)
 		}
-    }   
+    }
     return count
 }
 
@@ -140,9 +139,8 @@ func randSeq(n int) string {
 
 func createInvite(c *gin.Context) {
 ctx := getContext(c)
-	if string(c.PostForm("description")) == "" && string(c.PostForm("icon")) == "" && string(c.PostForm("tag")) == "" && string(c.PostForm("bg")) == "" && string(c.PostForm("name")) == "" {
-		
-		
+	if string(c.PostForm("description")) == "" && string(c.PostForm("icon")) == "" && string(c.PostForm("tag")) == "" && string(c.PostForm("bg")) == "" {
+
 		if ctx.User.ID == 0 {
 			resp403(c)
 			return
@@ -157,11 +155,11 @@ ctx := getContext(c)
 			resp403(c)
 			return
 		}
-		
+
 		db.Exec("DELETE FROM clans_invites WHERE clan = ?", clan)
-		
+
 		var s string
-		
+
 		s = randSeq(8)
 
 		db.Exec("INSERT INTO clans_invites(clan, invite) VALUES (?, ?)", clan, s)
@@ -176,12 +174,12 @@ ctx := getContext(c)
 			resp403(c)
 			return
 		}
-		
+
 		tag := "0"
 		if c.PostForm("tag") != "" {
 			tag = c.PostForm("tag")
 		}
-		
+
 		if db.QueryRow("SELECT 1 FROM clans WHERE tag = ? AND id != ?", c.PostForm("tag"), clan).
 		Scan(new(int)) != sql.ErrNoRows {
 			resp403(c)
@@ -189,29 +187,79 @@ ctx := getContext(c)
 			return
 		}
 
-
-        	// check username is valid by our criteria
-        	clanname := strings.TrimSpace(c.PostForm("name"))
-        	if !clannameRegex.MatchString(clanname) {
-			c.Redirect(302, "/settings/clansettings")
-                	addMessage(c, errorMessage{T(c, "Your clanname must contain alphanumerical characters, spaces, or any of<code>_[]-</code>")})
-                	return
-        	}
-
-		if strings.Contains(clanname, "_") && strings.Contains(clanname, " ") {
-			c.Redirect(302, "/settings/clansettings")
-                	addMessage(c, errorMessage{T(c, "An username can't contain both underscores and spaces.")})
-                	return
-        	}
-
-
-		db.Exec("UPDATE clans SET description = ?, icon = ?, tag = ?, background = ?, name = ? WHERE id = ?", c.PostForm("description"), c.PostForm("icon"), tag, c.PostForm("bg"), c.PostForm("name"), clan)
+		db.Exec("UPDATE clans SET description = ?, icon = ?, tag = ?, background = ? WHERE id = ?", c.PostForm("description"), c.PostForm("icon"), tag, c.PostForm("bg"), clan)
 	}
 	addMessage(c, successMessage{T(c, "Success!")})
 	getSession(c).Save()
 	c.Redirect(302, "/settings/clansettings")
 }
 
+func gantinamaclan(c *gin.Context) {
+	ctx := getContext(c)
+	if ctx.User.ID == 0 {
+                resp403(c)
+		return
+        }
+	var perms int
+        db.QueryRow("SELECT perms FROM user_clans WHERE user = ? AND perms = 8 LIMIT 1", ctx.User.ID).Scan(&perms)
+        var clan int
+        db.QueryRow("SELECT clan FROM user_clans WHERE user = ? AND perms = 8 LIMIT 1", ctx.User.ID).Scan(&clan)
+	if clan == 0 {
+		c.Redirect(302, "/settings")
+		addMessage(c, errorMessage{T(c, "You dont have a clan")})
+		return
+	}
+	if perms == 0 {
+		c.Redirect(302, "/settings")
+		addMessage(c, errorMessage{T(c, "You are not leader")})
+		return
+	}
+	if ctx.User.Privileges&common.UserPrivilegeDonor == 0 {
+		c.Redirect(302, "/settings")
+		simpleReply(c, errorMessage{T(c, "You're not a donor!")})
+		return
+	}
+        s, err := qb.QueryRow("SELECT name FROM clans WHERE id = ?", clan)
+        if err != nil {
+                c.Error(err)
+        }
+
+        simple(c, getSimpleByFilename("settings/changeclanname.html"), nil, map[string]interface{}{
+                "name": s["name"],
+        })
+}
+
+func gantinamaclanSubmit(c *gin.Context) {
+	ctx := getContext(c)
+	if ctx.User.ID == 0 {
+		resp403(c)
+		return
+	}
+        var perms int
+        db.QueryRow("SELECT perms FROM user_clans WHERE user = ? AND perms = 8 LIMIT 1", ctx.User.ID).Scan(&perms)
+        var clan int
+        db.QueryRow("SELECT clan FROM user_clans WHERE user = ? AND perms = 8 LIMIT 1", ctx.User.ID).Scan(&clan)
+	if c.PostForm("gantinamaclan") == "" {
+		c.Redirect(302, "settings/changeclanname")
+		addMessage(c, errorMessage{T(c, "Your clanname cannot be empity")})
+		return
+	}
+        clanname := strings.TrimSpace(c.PostForm("gantinamaclan"))
+        if !clannameRegex.MatchString(clanname) {
+                 c.Redirect(302, "/settings/changeclanname")
+                 addMessage(c, errorMessage{T(c, "Your clanname must contain alphanumerical characters, spaces, or any of<code>_[]-</code>")})
+                 return
+        }
+
+        if strings.Contains(clanname, "_") {
+                 c.Redirect(302, "/settings/changeclanname")
+                 addMessage(c, errorMessage{T(c, "An name can't contain both underscores and spaces.")})
+                 return
+        }
+	db.Exec("UPDATE clans SET name = ? WHERE id = ?", c.PostForm("gantinamaclan"), clan)
+	addMessage(c, successMessage{T(c, "Success!")})
+	c.Redirect(302, "/settings/changeclanname")
+}
 
 func clanInvite(c *gin.Context) {
 	i := c.Param("inv")

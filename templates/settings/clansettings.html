@@ -26,7 +26,11 @@ Include=menu.html
 			{{ $nm := or $c.name.String "" }}
                         <form id="register-form" class="ui form" method="post" enctype="multipart/form-data" action="/settings/clansettings">
                             <div class="field">
-                                <label class="left aligned">{{ "Clantag (2 to 6 characters)" }}</label>
+				<label class="left aligned"><a href="/settings/changeclanname">{{ .T "Clan name" }}</a></label>
+				<input type="text" value="{{ $nm  }}" disabled>
+			    </div>
+		            <div class="field">
+                                <label class="left aligned">{{ "Clantag (2 to 6 characters dont use [])" }}</label>
                                 <input tabindex="1" type="text" name="tag" placeholder="{{ $.T "Clantag" }}" value="{{ $tag }}" pattern="{2,6}$">
                             </div>
 			    <div class="field">
@@ -42,10 +46,6 @@ Include=menu.html
                                     <label class="left aligned">{{ $.T "Background [URL] (optional)" }}</label>
                                     <input tabindex="4" type="url" name="bg" value="{{ $bg }}">
                                 </div>
-				<div class="field">
-				    <label class="left aligned">{{ $.T "Changename(2-20 characters)" }}</label>
-				    <input tabindex="1" type="text" name="name" value="{{ $nm }}">
-				</div>
                             {{ end }}
                             {{ ieForm .Gin }}
                         </form>
@@ -69,8 +69,6 @@ Include=menu.html
                                 {{ $.T "Generate a new invite!" }}
                             </button>
                         </form>
-                        <br>
-                        <font size="6">Members {{ $g }}</font>
                         <br>
                         {{ range (.Get "clans/members?id=%d&r=%d" $g 1).members }}
                             <form id="kick-form" class="ui form" method="post" action="/settings/clansettings/k">
