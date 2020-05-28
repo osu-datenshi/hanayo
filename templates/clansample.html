@@ -33,20 +33,25 @@ Include=clan_members.html
 			<a class="mode item" href="/c/{{ .id }}?mode=2">osu!catch</a>
 			<a class="mode item" href="/c/{{ .id }}?mode=3">osu!mania</a>
 		</div>
+		{{ if .description }}
+			{{ with parseUserpage .description }}
+ 			<div class="ui raised segment twemoji" id="userpage-content">
+                	{{ html . }}
+                	</div>
+			{{ end }}
+		{{ end }}
+		{{ end}}
 		<div class="ui segment">
 				<div class="ui two column divided stackable grid">
 					<div class="row">
 						<div class="column">
-
-								{{ $global.T "%s" (.description | htmlescaper) | html }}
-							{{ end }}
-							<br><br><table class="ui very basic two column compact table nopad">
+								<table class="ui very basic two column compact table nopad">
 								<tbody>
 								{{ with (.Get "clans/stats?id=%d&m=%d" .ClanID (.Gin.Query "mode"))}}
 									<td></td>
 									<tr>
-											<td><b>{{ $global.T "Global Rank" }}</b></td>
-											<td class="right aligned">#{{ humanize .rank }}</td>
+										<td><b>{{ $global.T "Global Rank" }}</b></td>
+										<td class="right aligned">#{{ humanize .rank }}</td>
 									</tr>
 									<tr>
 										<td><b>{{ $global.T "PP" }}</b></td>
@@ -73,7 +78,7 @@ Include=clan_members.html
 										<td><b>{{ $global.T "Total Hits" }}</b></td>
 										<td class="right aligned">{{ humanize .chosen_mode.total_hits }}</td>
 									</tr>
-									{{end}}
+								{{end}}
 								{{ range (.Get "clans?id=%d" .ClanID).clans }}
 								</tbody>
 							</table>{{ end }}
