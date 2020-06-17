@@ -20,6 +20,7 @@ NoCompile=true
 		{{ if has .Context.User.Privileges 4 }}
 		
 			{{ navbarItem .Path (.T "Profile background") "/settings/profbackground" }}
+			{{ navbarItem .Path (.T "Changename") "/settings/changename" }}
 
 		{{ end }}
 	</div>

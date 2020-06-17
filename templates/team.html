@@ -11,6 +11,10 @@ KyutGrill=team2.jpg
 			<h3>{{ .T "This is a list of the wonderful people who keep Datenshi up and running and deal with its community." }}</h3>
 		</div>
 		<div class="ui left aligned segment">
+			<h1 class="ui heading">{{ .T "Owner" }}</h1>
+			{{ template "userGroup" (.Get "badges/members?id=%d" 1001) }}
+		</div>
+		<div class="ui left aligned segment">
 			<h1 class="ui heading">{{ .T "Developers" }}</h1>
 			{{ template "userGroup" (.Get "badges/members?id=%d" 2) }}
 		</div>

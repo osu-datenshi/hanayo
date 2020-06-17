@@ -16,7 +16,7 @@ KyutGrill=leaderboard2.jpg
 			<a class="2 item" href="/clans?mode=2">osu!catch</a>
 			<a class="3 item" href="/clans?mode=3">osu!mania</a>
 	</div>
-	<table class="ui fixed table">
+	<table class="ui fixed unstackable table">
 		<thead>
 			{{ template "simplepag" 4 }}
 			<tr>
@@ -26,7 +26,7 @@ KyutGrill=leaderboard2.jpg
 				<th class="four wide">{{ .T "Playcount" }} </th>
 			</tr>
 	</table>
-	<table class="ui fixed table">
+	<table class="ui compact unstackable table">
 		<thead>
 		{{ range (.Get "clans/stats/all?m=$d" $favMode).clans }}
 			{{ if .name }}

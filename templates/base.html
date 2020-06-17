@@ -35,7 +35,7 @@
 
 		<link rel="icon" href="https://i.datenshi.xyz/static/favicon.ico">
 
-		<link rel="stylesheet" type="text/css" href="https://i.datenshi.xyz/static/{{ if $ds }}dark/{{ end }}semantic.min.css?{{ unixNano }}">
+		<link rel="stylesheet" type="text/css" href="https://i.datenshi.xyz/static/dark/semantic.min.css?{{ unixNano }}">
 		<link rel="stylesheet" type="text/css" href="https://i.datenshi.xyz/static/ripple.css?{{ unixNano }}">
 		<link rel="stylesheet" type="text/css" href="https://i.datenshi.xyz/static/snow/snow.css?{{ unixNano }}">
 	{{ end }}
@@ -107,7 +107,7 @@
 				{{ end }}
 				{{ $settings := systemSettings "website_maintenance" "game_maintenance" "website_global_alert" }}
 				{{ with $settings.website_global_alert.String }}
-					<div class="ui warning message">
+					<div class="ui info message">
 						{{ . | html }}
 					</div>
 				{{ end }}
@@ -123,9 +123,8 @@
 <br />
 		<center><div class="footer twemoji">
 			
-			<font style='color:black'>
-			{{ if $ds }}<font style='color:white' >{{ end }}
-			{{ .T "&copy; %d Datenshi Community - Hanayo %s" (curryear) (version) | html }}  |
+			<font style='color:white' >
+			{{ .T "&copy; %d Datenshi Community" (curryear) | html }}  |
 			<div class="ui scrolling dropdown" style="margin-left: 5px;" id="language-selector">
 				{{ $lang := .Context.Language }}
 				{{ with $lang }}

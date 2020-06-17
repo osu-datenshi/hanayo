@@ -8,19 +8,26 @@ Include=menu.html
         <div class="ui stackable grid">
                 {{ template "settingsSidebar" . }}
                 <div class="twelve wide column">
-                        <div class="ui segment">
-				{{ $csrf := csrfGenerate .Context.User.ID }}
-                                <form class="ui form" method="post">
-                                        <div class="field">
-                                                <label>{{ .T "Change Username" }}</label>
-                                                <input tabindex="1" type="text" name="gantinama" value="{{ or .FormData.gantinama .RequestInfo.username }}">
-                                        </div>
-					{{ $csrf }}
-                                        {{ ieForm .Gin }}
-                                        <div style="text-align: right">
-                                                <button tabindex="4" type="submit" class="ui blue button">{{ .T "Save" }}</button>
-                                        </div>
-                                </form>
+                        <div class="ui segments">
+				<div class="ui segment">
+					<p>
+						{{ "Remember to change your discord name too!" }}
+					</p>
+				</div>
+				<div class="ui segment">
+					{{ $csrf := csrfGenerate .Context.User.ID }}
+                                	<form class="ui form" method="post">
+                                        	<div class="field">
+                                                	<label>{{ .T "Change Username (2-20 characters)" }}</label>
+                                                	<input tabindex="1" type="text" name="gantinama" value="{{ or .FormData.gantinama .RequestInfo.username }}" pattern="{2,6}$">
+                                        	</div>
+						{{ $csrf }}
+                                        	{{ ieForm .Gin }}
+                                        	<div style="text-align: right">
+                                                	<button tabindex="4" type="submit" class="ui blue button">{{ .T "Save" }}</button>
+                                        	</div>
+                                	</form>
+				</div>
                         </div>
                 </div>
         </div>

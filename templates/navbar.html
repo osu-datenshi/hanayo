@@ -23,6 +23,7 @@
                     {{ navbarItem .Path (.T "Multiplayer") "https://multi.datenshi.xyz" }}
 		    {{ navbarItem .Path (.T "Team") "/team" }}
 		    {{ navbarItem .Path (.T "Verified Tenshi") "/tenshi" }}
+		    {{ navbarItem .Path (.T "Top Donators") "/topdonors" }}
                     {{ navbarItem .Path (.T "Discord Server") .Conf.DiscordServer }}
                 </div>
             </div>
@@ -38,6 +39,7 @@
 			<div class="ui dropdown item">
 				<span>{{ .T "Beatmaps" }}</span>
 				<div class="menu">
+					{{ navbarItem .Path (.T "Beatmaps") "/beatmaps" }}
 					{{ navbarItem .Path (.T "Request beatmap ranking") "/beatmaps/rank_request" }}
 				</div>
 			</div>
@@ -55,7 +57,7 @@
 					{{ end }}
 				</div>
 			</div>
-			{{/* navbarItem .Path (.T "Donate" | printf "<i class=\"red heart icon\"></i>%s") "/donate" */}}
+			{{ navbarItem .Path (.T "Donate" | printf "<i class=\"red heart icon\"></i>%s") "https://trakteer.id/osudatenshi" }}
 			{{ if $isAdmin }}{{ navbarItem .Path (.T "DAP" | printf "<b>%s</b>") "https://old.datenshi.xyz/index.php?p=100" }}{{ end }}
 			{{ end }}
 		<div class="firetrucking-right-menu">

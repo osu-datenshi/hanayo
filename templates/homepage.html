@@ -22,19 +22,21 @@ KyutGrill=homepage2.jpg
 	<div class="ui segment center aligned">
 		<h1 class="ui header">{{ .T "Welcome to Datenshi!" }}</h1>
 		<p>
-			{{ .T "Welcome to the first Indonesian osu! Private Server, We are welcoming everyone in the world to join our server, you can make this server as your home, specially for indonesian people, we are still growing for making it better, lets join to our Community on Discord!. Currently we have  %s users online and %s total registered users!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
+			{{ .T "Welcome to the first Indonesian osu! Private Server, If you Indonesian, we recommended you join our server!. We make this special for Indonesian people and non-indonesian too, we are welcome for everyone ! make sure you are following the rules! Just make this server as your home~! We are Active Community so we suggest you to join our Discord Server too, we have a lots of events for you! Just stay tune and keep farming!" }}
 		</p>
 		<h3 class="ui header center aligned">{{ .T "What are you waiting for? come and join us!!" | html }}
 		<br>
 		<br>
 		<a href="/register"><div class="ui inverted violet button"><i class="edit icon"></i>Register</div></a>
-		<a href="https://link.troke.id/datenshi"><div class="ui inverted violet button"><i class="fab fa-discord"></i> Discord</div></a>
-		<a href="https://i.datenshi.xyz/static/datenshi.exe"><div class="ui inverted violet button"><i class="download icon"></i>Switcher</div></a>
+		<a href="https://link.troke.id/datenshi"><div class="ui inverted violet button"><i class="fab fa-discord"></i>  Discord</div></a>
+		<a href="https://i.datenshi.xyz/static/datenshi.exe"><div class="ui inverted violet button"><i class="download icon"></i>Switcher</div></a><br><br>
+		<div class="ui inverted violet button"><i class="icon user"></i>{{ .T "%s Online" (rediget "ripple:online_users") | html }}</div>
+		<div class="ui inverted violet button"><i class="edit icon"></i>{{ .T "%s Registered" (rediget "ripple:registered_users") | html }}</div>
 		<h3>
 	</div>
 {{ else }}
 	<div class="ui center aligned segment">
-		<h1 class="ui header">{{ .T "Halo sayang, %s!" .Context.User.Username }}</h1>
+		<h1 class="ui header">{{ .T "Halo bro, %s!" .Context.User.Username }}</h1>
 		<p>
 			{{ .T "Welcome back to Datenshi, We hope we can make you feel enjoy on our server, if you still having problem with us? dont worry, we can help you as we can, just go on Discord Server! also if you found any problem, report them to our Staff! Make sure you already read our Documentation before asking some help!" }}
 		</p>

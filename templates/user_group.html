@@ -3,7 +3,7 @@ NoCompile=true
 */}}
 {{ define "userGroup" }}
 {{ with . }}
-	<div class="ui five column stackable grid">
+	<div class="ui five column unstackable grid">
 		{{ $teamJSON := teamJSON }}
 		{{ range .members }}
 			{{/* ignore fokabot */}}
@@ -11,7 +11,7 @@ NoCompile=true
 				{{ $tj := index $teamJSON (print .id)}}
 				<div class="column">
 					<h4 class="ui image header">
-                                	<img src="{{ config "AvatarURL" }}/{{ .id }}" alt="Avatar" class="ui mini rounded image">
+                                	<img src="{{ config "AvatarURL" }}/{{ .id }}" alt="Avatar" class="ui tiny rounded image">
                                 		<div class="content">
                                	 			<a href="/u/{{ .id }}">{{ country .country false }}{{ .username }}</a>
                                 		</div>
