@@ -55,6 +55,7 @@ var pageMappings = map[int]interface{}{
 	40: "/settings/discord",
 	41: "/register", // elmo
 	42: "/pendaftaran", //pendaftaran
+	43: "/switcher", //switcher
 }
 
 // CheckRedirect checks if the request is to be redirected to another page.

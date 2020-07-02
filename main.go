@@ -275,7 +275,6 @@ func generateEngine() *gin.Engine {
 
 	r.Static("/static", "static")
 	//r.StaticFile("/favicon.ico", "https://i.datenshi.xyz/static/favicon.ico")
-
 	r.POST("/login", loginSubmit)
 	r.GET("/logout", logout)
 
