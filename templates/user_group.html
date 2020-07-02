@@ -3,19 +3,21 @@ NoCompile=true
 */}}
 {{ define "userGroup" }}
 {{ with . }}
-	<div class="ui five column unstackable grid">
+	<div class="ui five column grid">
 		{{ $teamJSON := teamJSON }}
 		{{ range .members }}
 			{{/* ignore fokabot */}}
 			{{ if ne (int .id) 999 }}
 				{{ $tj := index $teamJSON (print .id)}}
 				<div class="column">
-					<h4 class="ui image header">
-                                	<img src="{{ config "AvatarURL" }}/{{ .id }}" alt="Avatar" class="ui tiny rounded image">
-                                		<div class="content">
-                               	 			<a href="/u/{{ .id }}">{{ country .country false }}{{ .username }}</a>
-                                		</div>
-                                	</h4>
+					<div class="ui fluid card">
+					<div class="image">
+                                		<img src="{{ config "AvatarURL" }}/{{ .id }}" alt="Avatar" class="ui mini rounded image">
+                                	</div>	
+					<div class="content">
+                               	 		<a class="header" href="/u/{{ .id }}">{{ country .country false }}{{ .username }}</a>
+                                	</div>
+					</div>
                                 </div>
 			{{ end }}
 		{{ end }}

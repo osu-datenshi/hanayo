@@ -33,7 +33,7 @@
 					{{ navbarItem .Path (.T "About") "/about" }}
 					{{ navbarItem .Path (.T "Rules") "/doc/rules" }}
 					{{ navbarItem .Path (.T "Documentation") "/doc" }}
-					<a class="item" href="{{ .T "https://i.datenshi.xyz/static/datenshi.exe" }}">{{ .T "Server switcher" }}</a>
+					<a class="item" href="{{ .T "https://datenshi.xyz/switcher" }}">{{ .T "Server switcher" }}</a>
 				</div>
 			</div>
 			<div class="ui dropdown item">
@@ -57,7 +57,6 @@
 					{{ end }}
 				</div>
 			</div>
-			{{ navbarItem .Path (.T "Donate" | printf "<i class=\"red heart icon\"></i>%s") "https://trakteer.id/osudatenshi" }}
 			{{ if $isAdmin }}{{ navbarItem .Path (.T "DAP" | printf "<b>%s</b>") "https://old.datenshi.xyz/index.php?p=100" }}{{ end }}
 			{{ end }}
 		<div class="firetrucking-right-menu">
@@ -69,6 +68,7 @@
 					</div>
 				</div>
 			</div>
+			{{ navbarItem .Path (.T "Donate" | printf "<i class=\"red heart icon\"></i>%s") "https://trakteer.id/osudatenshi" }}
 			{{ if .Context.User.Username }}
 				<div class="ui dropdown item">
 					<img id="avatar" class="ui avatar image" src="{{ config "AvatarURL" }}/{{ .Context.User.ID }}">

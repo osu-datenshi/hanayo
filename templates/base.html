@@ -30,10 +30,11 @@
 		</noscript>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta property="og:image" content="http://i.datenshi.xyz/static/favicon.ico" />
 
 		<title>{{ if .TitleBar }}{{ .T .TitleBar }}{{ end }} {{ .T "- Datenshi" }}</title>
 
-		<link rel="icon" href="https://i.datenshi.xyz/static/favicon.ico">
+		<link rel="icon" href="https://i.datenshi.xyz/static/logos/text-white.png">
 
 		<link rel="stylesheet" type="text/css" href="https://i.datenshi.xyz/static/dark/semantic.min.css?{{ unixNano }}">
 		<link rel="stylesheet" type="text/css" href="https://i.datenshi.xyz/static/ripple.css?{{ unixNano }}">
@@ -158,6 +159,7 @@
 		<script src="https://kit.fontawesome.com/eb82e32539.js" crossorigin="anonymous"></script>
 		<script src="https://i.datenshi.xyz/static/dist.min.js?{{ unixNano }}"></script>
 		<script src="https://i.datenshi.xyz/static/timeago-locale/jquery.timeago.{{ with $lang }}{{ . }}{{end}}.js"></script>
+		<script id="cid0020000253653087007" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 200px;height: 300px;">{"handle":"datenshichat","arch":"js","styles":{"a":"000000","b":100,"c":"FFFFFF","d":"FFFFFF","k":"000000","l":"000000","m":"000000","n":"FFFFFF","p":"10","q":"000000","r":100,"pos":"br","cv":1,"cvfntw":"lighter","cvbg":"000000","cvw":200,"cvh":30,"ticker":1,"fwtickm":1}}</script>
 		{{ if .Scripts }}
 			{{ range .Scripts }}
 				<script src="https://i.datenshi.xyz{{ . }}?{{ unixNano }}"></script>
