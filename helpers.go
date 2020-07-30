@@ -131,7 +131,7 @@ func discordFinish(c *gin.Context) {
 	vals.Set("discord_id", x.ID)
 	vals.Set("secret", config.DonorBotSecret)
 	// send request
-	resp, err = http.Post(config.DonorBotURL+"/api/v1/give_donor", "application/x-www-form-urlencoded", bytes.NewReader([]byte(vals.Encode())))
+	resp, err = http.Post(config.DonorBotURL+"/crot/give_donor", "application/x-www-form-urlencoded", bytes.NewReader([]byte(vals.Encode())))
 	if err != nil {
 		c.Error(err)
 		addMessage(c, errorMessage{T(c, "An error occurred.")})

@@ -18,7 +18,6 @@ type clanData struct {
 	ClanID int
 }
 
-
 func leaveClan(c *gin.Context) {
 	i := c.Param("cid")
 	// login check
