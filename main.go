@@ -303,6 +303,7 @@ func generateEngine() *gin.Engine {
 	r.POST("/2fa_gateway/recover", recover2faSubmit)
 
 	r.POST("/irc/generate", ircGenToken)
+	r.POST("/discordtokens/generate", DiscordGenToken)
 
 	r.GET("/settings/password", changePassword)
 	r.GET("/settings/changename", gantinamabro)
