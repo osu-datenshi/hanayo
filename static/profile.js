@@ -23,6 +23,7 @@ $(document).ready(function() {
 		$("#mode-menu>.active.item").removeClass("active");
 		var needsLoad = $("#scores-zone>[data-mode=" + m + "][data-loaded=0]");
 		if (needsLoad.length > 0)
+			initRecentActivity($("#recent-activity>div[data-mode=" + m + "]"), m)
 			initialiseScores(needsLoad, m);
 		$(this).addClass("active");
 		window.history.replaceState('', document.title, wl.pathname + "?mode=" + m + wl.hash);
@@ -30,7 +31,11 @@ $(document).ready(function() {
 	initialiseAchievements();
 	initialiseFriends();
 	// load scores page for the current favourite mode
-	var i = function(){initialiseScores($("#scores-zone>div[data-mode=" + favouriteMode + "]"), favouriteMode)};
+	var i = function(){
+		initRecentActivity($("#recent-activity>div[data-mode=" + favouriteMode + "]"), favouriteMode)
+		initialiseScores($("#scores-zone>div[data-mode=" + favouriteMode + "]"), favouriteMode)
+		};
+		
 	if (i18nLoaded)
 		i();
 	else
@@ -103,7 +108,7 @@ function initialiseAchievements() {
 				shown++;
 				$ach.append(
 					$("<div class='ui two wide column'>").append(
-						$("<img src='/static/medals-" +
+						$("<img src='https://i.datenshi.xyz/static/medals-" +
 							"client/" + ach.icon + ".png' alt='" + ach.name +
 							"' class='" +
 							(!ach.achieved ? "locked-achievement" : "achievement") +
@@ -186,6 +191,7 @@ function friendClick() {
 }
 
 var defaultScoreTable;
+var recentActivityTable;
 function setDefaultScoreTable() {
 	defaultScoreTable = $("<table class='ui table score-table' />")
 		.append(
@@ -211,6 +217,18 @@ function setDefaultScoreTable() {
 			)
 		)
 	;
+	recentActivityTable = $("<table class='ui table score-table' />")
+        .append(
+            $("<thead />").append(
+                $("<tr />").append(
+                    $("<th>" + T("Message") + "</th>"),
+                    $("<th>" + T("Time") + "</th>")
+                )
+            )
+        )
+        .append(
+            $("<tbody />")
+        );
 }
 i18next.on('loaded', function(loaded) {
 	setDefaultScoreTable();
@@ -272,6 +290,39 @@ function loadMoreMostPlayed() {
 	var mode = t.parents("div[data-mode]").data("mode");
 	loadMostPlayedBeatmaps(mode);
 }
+// CREDITS GOES TO KURIKKU.PW THE BEST SERVER
+function initRecentActivity(el, mode) {
+    el.attr("data-loaded", "1");
+    var recentActivity = recentActivityTable.clone(true).addClass("green");
+    recentActivity.attr("data-type", "rac");
+    el.append($("<div class='ui segments no bottom margin' />").append(
+        $("<div class='ui segment' />").append("<h2 class='ui header'>" + T("Recent Activity") + "</h2>", recentActivity),
+    ));
+    loadRecentActivity("rac", mode)    
+}
+function loadRecentActivity(type, mode) {
+    var table = $("#recent-activity div[data-mode=" + mode + "] table[data-type=" + type + "] tbody");
+    api("users/get_activity", {
+        mode: mode,
+        userid: userID,
+    }, function (r) {
+        if(!r.logs) {
+        	return;
+	}
+        r.logs.forEach(function (v, idx) {
+			var sianjingcrot = "#878787";
+            table.append($("<tr class='new score-row'/>").append(
+                $(
+                    "<td style='background: linear-gradient(90deg, #58326e, #8f4897, #7a3636), url(https://assets.ppy.sh/beatmaps/" + v.beatmap_id + "/covers/cover.jpg) no-repeat right !important; background-size: cover !important;'><img src='https://i.datenshi.xyz/static/ranking-icons/" + v.rank + ".png' class='score rank' alt='" + v.rank + "'> " +
+                    escapeHTML(v.body) + "<a href='https://datenshi.xyz/b/"+v.beatmap_id+"'>"+ escapeHTML(v.song_name) + "</a> <br />"
+                ),
+                $("<td style='background: linear-gradient(90deg, #7a3636, #7a3636, #7a3636), url(https://assets.ppy.sh/beatmaps/" + v.beatmap_id + "/covers/cover.jpg) no-repeat right !important; background-size: cover !important;'><time class='new timeago' datetime='" + v.time + "'>" + v.time + "</time></td>")
+            ));
+        });
+        $(".new.timeago").timeago().removeClass("new");
+        $(".new.score-row").removeClass("new");
+    });
+}
 // currentPage for each mode
 var currentPage = {
 	0: {best: 0, recent: 0, mostPlayed: 0},
@@ -302,12 +353,19 @@ function loadScoresPage(type, mode) {
 		r.scores.forEach(function(v, idx){
 			scoreStore[v.id] = v;
 			var scoreRank = getRank(mode, v.mods, v.accuracy, v.count_300, v.count_100, v.count_50, v.count_miss);
-			var scoreRankIcon = "<img src='/static/ranking-icons/" + scoreRank + ".svg' class='score rank' alt='" + scoreRank + "'> ";
+			var scoreRankIcon = "<img src='https://i.datenshi.xyz/static/ranking-icons/" + scoreRank + ".svg' class='score rank' alt='" + scoreRank + "'> ";
 			var rowColor = '';
+			//CREDIT USSR.PL (RealistikOsu)
+			if (v.completed < 2){
+				var CROT = "#6b201f";
+			} else {
+				var CROT = "#272727";
+			}
+
 			if (type === 'recent') {
 				rowColor = v.completed === 3 ? 'positive' : v.completed < 2 ? 'error' : '';
 			}
-			table.append($("<tr class='new score-row " + rowColor + "' data-scoreid='" + v.id + "' />").append(
+			table.append($("<tr class='new score-row " + rowColor + "' data-scoreid='" + v.id + "' style='background: linear-gradient(90deg," + CROT + ", #00000087," + CROT + "), url(https://assets.ppy.sh/beatmaps/" + v.beatmap.beatmapset_id + "/covers/cover.jpg) no-repeat right !important; background-size: cover !important;' />").append(
 				$(
 					"<td>" + (v.completed < 2 ? '' : scoreRankIcon) +
 					escapeHTML(v.beatmap.song_name) + " <b>" + getScoreMods(v.mods) + "</b> <i>(" + v.accuracy.toFixed(2) + "%)</i><br />" +

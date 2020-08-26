@@ -5,33 +5,56 @@ KyutGrill=leaderboard2.jpg
 */}}
 {{ define "tpl" }}
 <div class="ui container">
-	 {{ $favMode := _or (atoi (.Gin.Query "mode")) }}
-	<script>
-		var favouriteMode = {{ $favMode }};
-		var page = {{ .Gin.Query "p" | atoint | atLeastOne }};
-	</script>
-	<div class="ui four item menu" id="mode-menu">
-			<a class="0 item" href="/clans?m=0">osu!</a>
-			<a class="1 item" href="/clans?m=1">osu!taiko</a>
-			<a class="2 item" href="/clans?m=2">osu!catch</a>
-			<a class="3 item" href="/clans?m=3">osu!mania</a>
-	</div>
+        {{ $favMode := _or (atoi (.Gin.Query "mode")) }}
+        <script>
+                var favouriteMode = {{ $favMode }};
+                var page = {{ .Gin.Query "p" | atoint | atLeastOne }};
+        </script>
+        <div class="ui four item menu" id="mode-menu">
+                        <a class="0 item" href="/clans?mode=0">osu!</a>
+                        <a class="1 item" href="/clans?mode=1">osu!taiko</a>
+                        <a class="2 item" href="/clans?mode=2">osu!catch</a>
+                        <a class="3 item" href="/clans?mode=3">osu!mania</a>
+        </div>
+        <table class="ui fixed unstackable table">
+                <thead>
+                        {{ template "simplepag" 4 }}
+                        <tr>
+                                <th class="four wide">{{ .T "Rank" }} </th>
+                                <th class="four wide">{{ .T "Clan" }} </th>
+                                <th class="four wide">{{ .T "PP/Score" }} </th>
+                                <th class="four wide">{{ .T "Playcount" }} </th>
+                        </tr>
+		</thead>
+	</table>
 	<table class="ui fixed unstackable table">
 		<thead>
-			{{ template "simplepag" 4 }}
-			<tr>
-				<th class="four wide">{{ .T "Rank" }} </th>
-				<th class="four wide">{{ .T "Clan" }} </th>
-				<th class="four wide">{{ .T "PP/Score" }} </th>
-				<th class="four wide">{{ .T "Playcount" }} </th>
-			</tr>
-	</table>
-		</thead>
-		<tbody>
+		<tbody id="clanData">
 		</tbody>
-	<tfoot>
+                </thead>
 			{{ template "simplepag" 4 }}
-	</tfoot>
 	</table>
 </div>
+<script>
+const tbody = document.querySelector('#clanData');
+
+fetch('https://datenshi.xyz/api/v1/misaki/clans').then(response => response.json())
+.then(data => {
+  // Sort the array by ID, could use another column
+ // data.clans.sort((a, b) => (a.average_pp < b.average_pp) ? 1 : -1)
+  for(let i = 0; i < data.clans.length; i++){
+    const clan = data.clans[i];
+    const row = document.createElement('tr');
+    row.innerHTML = `
+	<td>${i+1}</td>
+	<td><a href="/c/${clan.id}">${clan.name}</a></td>
+	<td>${Math.round(clan.average_pp)}pp (${new Intl.NumberFormat('en-GB').format(clan.total_score)})</td>
+	<td>${clan.member_count}</td>`;
+    tbody.appendChild(row);
+  }
+}).catch(err => {
+     console.log(err);
+});
+</script>
 {{ end }}
+
