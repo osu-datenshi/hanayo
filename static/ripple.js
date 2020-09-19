@@ -337,7 +337,7 @@ var singlePageSnippets = {
     setInterval(function() {
       api("beatmaps/rank_requests/status", {}, updateRankRequestPage);
     }, 10000);
-    var re = /^https?:\/\/osu.ppy.sh\/(s|b)\/(\d+)$/gi;
+    var re = /^https?:\/\/osu.ppy.sh\/(s|b|beatmaps|beatmapsets)\/(\d+)\#?(fruits|taiko|mania|osu)?\/?(\d+)?$/gi;
     $("#b-form")
       .submit(function(e) {
         e.preventDefault();
@@ -354,7 +354,7 @@ var singlePageSnippets = {
           return false;
         }
         var postData = {};
-        if (reData[1] == "s")
+        if (reData[1] == "s" || reData[1] == "beatmapsets")
           postData.set_id = +reData[2];
         else
           postData.id = +reData[2];
