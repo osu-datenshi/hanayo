@@ -1,25 +1,21 @@
-# Hanayo ![build status](https://ci.zxq.co/api/badges/ripple/hanayo/status.svg)
+# Hanayo
 
-This repository has a mirror [here](https://github.com/osuripple/hanayo). The original repo is still [here](https://github.com/osuthailand/hanayo).
+Original source dari [Ripple Hanayo](https://github.com/osuripple/hanayo) dan sedikit modifikasi dari osu!thailand source
 
-## To fellow developers: this is not how you do it!
+Source ini digunakan untuk bagian website nya
 
-The biggest flaw of hanayo are that when I set out to create it, I wanted to create a template system that:
+cara build `go get https://github.com/osu-datenshi/hanayo` dan setelah itu `go build`
 
-* Created a handler by simply having the file "be there"
-* Could fetch the data it needed on its own, often from the Ripple API
-* Had the actual Go code be as little as possible
+Reminder : Static folder dipisahkan agar mempermudah proses development, dan untuk folder profile background (`/static/profbackgrounds`) perlu dibuatkan manual di dalam vps, sedangkan folder utama di upload ke server yg lain agar website load lebih cepat seperti CDN, dan folder `website-docs` juga ikut dipisahkan
 
-This was not immediately evident to me, a Go beginner, but what I did there was basically make Go be PHP.
+hal yang harus diperhatikan adalah :
 
-The biggest lesson I learned on how to properly do templates, was learning to use [Vue](https://vuejs.org/). Yes, Vue can be used for the frontend and not really for server-rendered stuff, but even just learning how to do stuff with it can help you understand what a template is actually supposed to be in order to be maintainable.
+- DSN = databasenya (format : `user:password@tcp(localhost:3306)/database`)
+- Mailgun = harus punya akun mailgun (daftar gratis tapi harus pake CC) ini fungsi buat reset password nanti dikirim ke email
+- API Secret = api secret nya buat api backend
+- PASTIKAN EDIT DOMAIN YANG ADA DI SELURUH TEMPLATES (commit [e36e900](https://github.com/osu-datenshi/hanayo/commit/acd44a52ce6df3228984ea5ccd41c4b155ac31e1))
+- PASTIKAN GOOGLE CAPTCHA AKTIF (BIAR NO SPAM)
 
-The key concepts and insights for me where:
+### kontribusi
 
-* Separating clearly code and markup, making the template declarative and keeping as little code in the template
-* A template should be purely functional. Its mere creation should not generate side effects, nor should it be dependent on things that are not its precise inputs: for a given input there is a specific output.
-* The concept of component as a single self-contained entity which is the same wherever you use it is very powerful.
-* Once a template/component starts becoming too big, split it into more components.
-
-But don't stop here. Actually making a project using Vue helps you to understand this much more easily than using mere words. Go ahead and build something, even if just to play around!
-
+buat yg ingin serius kontribusi silahkan pm troke buat di invite ke orgz
