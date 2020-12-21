@@ -9,7 +9,7 @@ KyutGrill=homepage2.jpg
 {{ $   := . }}
 <div class="ui container">
 <div class="ui center aligned segment">
-	<img src="https://i.datenshi.xyz/static/17agustusbaru.png">
+	<img src="https://cdn.troke.id/static/17agustusbaru.png">
 </div>
 {{ $set := systemSettings "website_home_alert" }}
 {{ with $set.website_home_alert.String }}
@@ -20,25 +20,25 @@ KyutGrill=homepage2.jpg
 {{/* Not logged in block */}}
 {{ if not .Context.User.ID }}
 	<div class="ui segment center aligned">
-		<h1 class="ui header">{{ .T "Welcome to Datenshi!" }}</h1>
+		<h1 class="ui header">{{ .T "Selamat datang di Tokek" }}</h1>
 		<p>
-			{{ .T "Welcome to the first Indonesian osu! Private Server, If you Indonesian, we recommended you join our server!. We make this special for Indonesian people and non-indonesian too, we are welcome for everyone ! make sure you are following the rules! Just make this server as your home~! We are Active Community so we suggest you to join our Discord Server too, we have a lots of events for you! Just stay tune and keep farming!" }}
+			{{ .T "Lanjutannya datenshi yang kemarin" }}
 		</p>
-		<h3 class="ui header center aligned">{{ .T "What are you waiting for? come and join us!!" | html }}
+		<h3 class="ui header center aligned">{{ .T "Ayok join ae lah" | html }}
 		<br>
 		<br>
 		<a href="/register"><div class="ui inverted violet button"><i class="edit icon"></i>Register</div></a>
-		<a href="https://link.troke.id/datenshi"><div class="ui inverted violet button"><i class="fab fa-discord"></i>  Discord</div></a>
-		<a href="https://datenshi.xyz/switcher"><div class="ui inverted violet button"><i class="download icon"></i>Switcher</div></a><br><br>
+		<a href="https://link.troke.id/tokekdiscord"><div class="ui inverted violet button"><i class="fab fa-discord"></i>  Discord</div></a>
+		<a href="https://osu.troke.id/switcher"><div class="ui inverted violet button"><i class="download icon"></i>Switcher</div></a><br><br>
 		<div class="ui inverted violet button"><i class="icon user"></i>{{ .T "%s Online" (rediget "ripple:online_users") | html }}</div>
 		<div class="ui inverted violet button"><i class="edit icon"></i>{{ .T "%s Registered" (rediget "ripple:registered_users") | html }}</div>
 		<h3>
 	</div>
 {{ else }}
 	<div class="ui center aligned segment">
-		<h1 class="ui header">{{ .T "Halo bro, %s!" .Context.User.Username }}</h1>
+		<h1 class="ui header">{{ .T "Halo coeg, %s!" .Context.User.Username }}</h1>
 		<p>
-			{{ .T "Welcome back to Datenshi, We hope we can make you feel enjoy on our server, if you still having problem with us? dont worry, we can help you as we can, just go on Discord Server! also if you found any problem, report them to our Staff! Make sure you already read our Documentation before asking some help!" }}
+			{{ .T "Selamat datang kembali coeg" }}
 		</p>
 		<div class="ui inverted violet button"><i class="icon user"></i>{{ .T "%s Online" (rediget "ripple:online_users") | html }}</div>
 		<div class="ui inverted violet button"><i class="edit icon"></i>{{ .T "%s Registered" (rediget "ripple:registered_users") | html }}</div>

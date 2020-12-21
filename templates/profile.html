@@ -167,7 +167,7 @@ starteffect()
 								</a>
 							{{ end }}
 							{{ if hasAdmin $global.Context.User.Privileges }}
-								<a href="https://old.datenshi.xyz/index.php?p=103&id={{ $global.UserID }}"
+								<a href="https://old.troke.id/index.php?p=103&id={{ $global.UserID }}"
 									target="_blank" title="Quick edit" class="ui circular mini blue icon button">
 									<i class="folder open outline icon"></i>
 								</a>
@@ -227,10 +227,10 @@ starteffect()
 						</div>
 						
  							<meta property="og:type" content="website" />
-							<meta property="og:url" content="https://datenshi.xyz/u/{{$user.id}}" />
+							<meta property="og:url" content="https://osu.troke.id/u/{{$user.id}}" />
 							<meta property="og:title" content={{ $global.T "<b>%s</b>" .username}} />
 							<meta property="og:description" content={{ $global.T "<b>%s</b> is a Datenshi player from <b>%s</b>." .username (country .country true)}} />
-							<meta property="og:image" content="https://a.datenshi.xyz/{{$user.id}}" />
+							<meta property="og:image" content="https://a.troke.id/{{$user.id}}" />
 							
 						<div class="column">
 							{{ if and (not .badges) (not .custom_badge) }}

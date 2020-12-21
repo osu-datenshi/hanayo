@@ -6,7 +6,7 @@
 <div class="ui fixed-height stackable secondary white background main menu no margin bottom{{ if .DisableHH }} dropped{{ end }}" id="navbar">
 		<div class="ui container">
 		<div class="item">
-                        <b><a href="/" title="{{ .T "Home page" }}"><img class="logo" src="https://i.datenshi.xyz/static/logos/text-{{ if $ds }}white{{ else }}black{{ end }}.png" alt="datenshi"></a></b>
+                        <b><a href="/" title="{{ .T "Home page" }}"><img class="logo" src="https://cdn.troke.id/static/logos/text-{{ if $ds }}white{{ else }}black{{ end }}.png" alt="Tokek"></a></b>
                 </div>
 		{{ if $isRAP }}
 			{{/*
@@ -17,7 +17,7 @@
 		<div class="ui dropdown item">
 			<span>{{ .T "Community" }}</span>
 			<div class="menu">
-                    		{{ navbarItem .Path (.T "Multiplayer") "https://multi.datenshi.xyz" }}
+                    		{{ navbarItem .Path (.T "Multiplayer") "https://multi.troke.id" }}
                     		{{ navbarItem .Path (.T "Team") "/team" }}
                     		{{ navbarItem .Path (.T "Verified Tenshi") "/tenshi" }}
                     		{{ navbarItem .Path (.T "Top Donators") "/topdonors" }}
@@ -30,7 +30,7 @@
                         	{{ navbarItem .Path (.T "About") "/about" }}
                                 {{ navbarItem .Path (.T "Rules") "/doc/rules" }}
                                 {{ navbarItem .Path (.T "Documentation") "/doc" }}
-                                <a class="item" href="{{ .T "https://datenshi.xyz/switcher" }}">{{ .T "Server switcher" }}</a>
+                                <a class="item" href="{{ .T "https://troke.id/switcher" }}">{{ .T "Server switcher" }}</a>
                         </div>
                 </div>
                 <div class="ui dropdown item">
@@ -54,7 +54,7 @@
                                  {{ end }}
                          </div>
                 </div>
-                {{ if $isAdmin }}{{ navbarItem .Path (.T "DAP" | printf "<b>%s</b>") "https://old.datenshi.xyz/index.php?p=100" }}{{ end }}
+                {{ if $isAdmin }}{{ navbarItem .Path (.T "DAP" | printf "<b>%s</b>") "https://old.troke.id/index.php?p=100" }}{{ end }}
                 {{ end }}
  		<div class="firetrucking-right-menu">
                         <div class="item">
@@ -65,7 +65,7 @@
                                         </div>
                                 </div>
                         </div>
-                        {{ navbarItem .Path (.T "Donate" | printf "<i class=\"red heart icon\"></i>%s") "https://trakteer.id/osudatenshi" }}
+                        {{ navbarItem .Path (.T "Donate" | printf "<i class=\"red heart icon\"></i>%s") "https://saweria.co/troke" }}
                         {{ if .Context.User.Username }}
 			<div class="ui dropdown item">
                         	<img id="avatar" class="ui avatar image" src="{{ config "AvatarURL" }}/{{ .Context.User.ID }}">

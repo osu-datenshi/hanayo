@@ -7,7 +7,7 @@
 	<head>
 		{{ $s := systemSettings "website_maintenance" "game_maintenance" "website_global_alert" }}
 		{{ with $s.website_maintenance.Int }}
-		<link rel="stylesheet" type="text/css" href="https://i.datenshi.xyz/static/maintenance.css?{{ unixNano }}">
+		<link rel="stylesheet" type="text/css" href="https://cdn.troke.id/static/maintenance.css?{{ unixNano }}">
 		<script src="https://kit.fontawesome.com/fdf0b80f23.js" crossorigin="anonymous"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Maintenance - Datenshi</title>
@@ -37,15 +37,15 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-title" content="Datenshi">
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
-		<link rel="apple-touch-icon" href="https://datenshi.xyz/static/logo2.png">
+		<link rel="apple-touch-icon" href="https://cdn.troke.id/static/logo2.png">
 
 		<title>{{ if .TitleBar }}{{ .T .TitleBar }}{{ end }} {{ .T "- Datenshi" }}</title>
 
-		<link rel="icon" href="https://i.datenshi.xyz/static/logos/text-white.png">
+		<link rel="icon" href="https://cdn.troke.id/static/logos/text-white.png">
 
-		<link rel="stylesheet" type="text/css" href="https://i.datenshi.xyz/static/dark/semantic.min.css?{{ unixNano }}">
-		<link rel="stylesheet" type="text/css" href="https://i.datenshi.xyz/static/ripple.css?{{ unixNano }}">
-		<link rel="stylesheet" type="text/css" href="https://i.datenshi.xyz/static/snow/snow.css?{{ unixNano }}">
+		<link rel="stylesheet" type="text/css" href="https://cdn.troke.id/static/dark/semantic.min.css?{{ unixNano }}">
+		<link rel="stylesheet" type="text/css" href="https://cdn.troke.id/static/ripple.css?{{ unixNano }}">
+		<link rel="stylesheet" type="text/css" href="https://cdn.troke.id/static/snow/snow.css?{{ unixNano }}">
 	{{ end }}
 	</head>
 	{{ $s := systemSettings "website_maintenance" "game_maintenance" "website_global_alert" "featuredvideo" }}
@@ -72,14 +72,14 @@
 		*/}}
 		<div class="ui full height main wrapper"
 			{{ if and .DisableHH .KyutGrill }}
-				style="background-image: url('{{ if .KyutGrillAbsolute }}{{ .KyutGrill }}{{ else }}https://i.datenshi.xyz/static/headers/{{ .KyutGrill }}{{ end }}');"
+				style="background-image: url('{{ if .KyutGrillAbsolute }}{{ .KyutGrill }}{{ else }}https://cdn.troke.id/static/headers/{{ .KyutGrill }}{{ end }}');"
 			{{ else if .SolidColour }}
 				style="background-color: {{ .SolidColour }}"
 			{{ end }}>
 			{{ template "navbar" . }}
 			{{ if not .DisableHH }}
 				<div class="huge heading {{ if .HeadingOnRight }}right{{ end }} dropped"
-					style="background-image: url('{{ if .KyutGrillAbsolute }}{{ .KyutGrill }}{{ else }}https://i.datenshi.xyz/static/headers/{{ or .KyutGrill "default.jpg" }}{{ end }}');">
+					style="background-image: url('{{ if .KyutGrillAbsolute }}{{ .KyutGrill }}{{ else }}https://cdn.troke.id/static/headers/{{ or .KyutGrill "default.jpg" }}{{ end }}');">
 					<div id="snow-container">
 						<div>
 							<div class="snow large"></div>
@@ -165,12 +165,12 @@
 		{{/* If we got some more scripts to print, print'em */}}
 		<script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.2"></script>
 		<script src="https://kit.fontawesome.com/eb82e32539.js" crossorigin="anonymous"></script>
-		<script src="https://i.datenshi.xyz/static/dist.min.js?{{ unixNano }}"></script>
-		<script src="https://i.datenshi.xyz/static/timeago-locale/jquery.timeago.{{ with $lang }}{{ . }}{{end}}.js"></script>
+		<script src="https://cdn.troke.id/static/dist.min.js?{{ unixNano }}"></script>
+		<script src="https://cdn.troke.id/static/timeago-locale/jquery.timeago.{{ with $lang }}{{ . }}{{end}}.js"></script>
 		<script id="cid0020000253653087007" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 200px;height: 300px;">{"handle":"datenshichat","arch":"js","styles":{"a":"000000","b":100,"c":"FFFFFF","d":"FFFFFF","k":"000000","l":"000000","m":"000000","n":"FFFFFF","p":"10","q":"000000","r":100,"pos":"br","cv":1,"cvfntw":"lighter","cvbg":"000000","cvw":200,"cvh":30,"ticker":1,"fwtickm":1}}</script>
 		{{ if .Scripts }}
 			{{ range .Scripts }}
-				<script src="https://i.datenshi.xyz{{ . }}?{{ unixNano }}"></script>
+				<script src="https://cdn.troke.id{{ . }}?{{ unixNano }}"></script>
 			{{ end }}
 		{{ end }}
 		
