@@ -81,6 +81,14 @@ func registerSubmit(c *gin.Context) {
 		return
 	}
 
+	// check invite code ANJAY BENER APA KAGA INI GW GA TAU NJIRS
+	// semoga benar
+	if db.QueryRow("SELECT 1 FROM invite_code WHERE code = ?", c.PostForm("invitecode")).
+		Scan(new(int)) != sql.ErrNoRows {
+		registerResp(c, errorMessage{T(c, "Oops your code is wrong! please contact administrator!")})
+		return
+	}
+
 	// check whether an user with that email already exists
 	if db.QueryRow("SELECT 1 FROM users WHERE email = ?", c.PostForm("email")).
 		Scan(new(int)) != sql.ErrNoRows {

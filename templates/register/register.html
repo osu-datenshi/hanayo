@@ -31,6 +31,10 @@
 							<label>{{ .T "Email" }}</label>
 							<input tabindex="3" type="email" name="email" placeholder="{{ .T "Email" }}" value="{{ .FormData.email }}" required>
 						</div>
+						<div class="field">
+							<label>{{ .T "Invite Code" }}</label>
+							<input tabindex="4" type="invitecode" name="invitecode" placeholder="{{ .T "Invite Code" }}" value="{{ .FormData.invitecode }}" required>
+						</div>
 						{{ with config "RecaptchaSite" }}
 						<div class="field">
 							<div class="g-recaptcha" data-sitekey="{{ . }}"></div>
@@ -40,7 +44,7 @@
 					</form>
 				</div>
 				<div class="ui right aligned segment">
-					<button tabindex="4" class="ui primary button" type="submit" form="register-form">{{ .T "Submit" }}</button>
+					<button tabindex="5" class="ui primary button" type="submit" form="register-form">{{ .T "Submit" }}</button>
 				</div>
 			</div>
 		</div>
