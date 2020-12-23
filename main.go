@@ -17,18 +17,17 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"github.com/johnniedoe/contrib/gzip"
-	"github.com/thehowl/conf"
-	"github.com/thehowl/qsql"
-	"gopkg.in/mailgun/mailgun-go.v1"
-	"gopkg.in/redis.v5"
-	"zxq.co/ripple/agplwarning"
 	"github.com/osu-datenshi/hanayo/modules/btcaddress"
 	"github.com/osu-datenshi/hanayo/modules/btcconversions"
 	"github.com/osu-datenshi/hanayo/routers/oauth"
 	"github.com/osu-datenshi/hanayo/routers/pagemappings"
 	"github.com/osu-datenshi/hanayo/services"
 	"github.com/osu-datenshi/hanayo/services/cieca"
-	"zxq.co/ripple/schiavolib"
+	"github.com/thehowl/conf"
+	"github.com/thehowl/qsql"
+	"gopkg.in/mailgun/mailgun-go.v1"
+	"gopkg.in/redis.v5"
+	"zxq.co/ripple/agplwarning"
 	"zxq.co/x/rs"
 )
 
@@ -47,7 +46,7 @@ var (
 		BanchoAPI       string `description:"Bancho base url (without /api) that hanayo will use to contact bancho"`
 		BanchoAPIPublic string `description:"same as above but this will be put in js files and used by clients. Must be publicly accessible. Leave empty to set to BanchoAPI"`
 		CheesegullAPI   string
-		MisakiAPI	string
+		MisakiAPI       string
 		APISecret       string
 		Offline         bool `description:"If this is true, files will be served from the local server instead of the CDN."`
 
@@ -140,7 +139,7 @@ func main() {
 	}
 
 	// initialise db
-	db, err = sqlx.Open("mysql", config.DSN+"?parseTime=true")
+	db, err = sqlx.Open("mysql", config.DSN+"?parseTime=true&allowNativePasswords=true")
 	if err != nil {
 		panic(err)
 	}
@@ -319,7 +318,7 @@ func generateEngine() *gin.Engine {
 	r.POST("/settings/changeclanname", gantinamaclanSubmit)
 	r.GET("/settings/discord/finish", discordFinish)
 	r.POST("/settings/profbackground/:type", profBackground)
-	
+
 	r.POST("/settings/clansettings", createInvite)
 	r.POST("settings/clansettings/k", clanKick)
 	r.GET("/clans/invite/:inv", clanInvite)
