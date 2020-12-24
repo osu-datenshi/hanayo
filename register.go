@@ -12,7 +12,7 @@ import (
 	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"github.com/osu-datenshi/api/common"
-	_ "zxq.co/ripple/schiavolib"
+	"zxq.co/ripple/schiavolib"
 )
 
 func register(c *gin.Context) {
