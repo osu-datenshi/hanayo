@@ -12,7 +12,6 @@ import (
 	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"github.com/osu-datenshi/api/common"
-	"zxq.co/ripple/schiavolib"
 )
 
 func register(c *gin.Context) {
@@ -33,6 +32,7 @@ func register(c *gin.Context) {
 }
 
 func registerSubmit(c *gin.Context) {
+
 	if getContext(c).User.ID != 0 {
 		resp403(c)
 		return
@@ -69,8 +69,8 @@ func registerSubmit(c *gin.Context) {
 	}
 
 	// usernames with both _ and spaces are not allowed
-	if strings.Contains(username, "_") && strings.Contains(username, " ") {
-		registerResp(c, errorMessage{T(c, "An username can't contain both underscores and spaces.")})
+	if strings.Contains(username, inpitcode, "_") && strings.Contains(username, inpitcode, " ") {
+		registerResp(c, errorMessage{T(c, "An username or invite code can't contain both underscores and spaces.")})
 		return
 	}
 
@@ -78,14 +78,6 @@ func registerSubmit(c *gin.Context) {
 	if db.QueryRow("SELECT 1 FROM users WHERE username_safe = ?", safeUsername(username)).
 		Scan(new(int)) != sql.ErrNoRows {
 		registerResp(c, errorMessage{T(c, "An user with that username already exists!")})
-		return
-	}
-
-	// check invite code ANJAY BENER APA KAGA INI GW GA TAU NJIRS
-	// semoga benar
-	if db.QueryRow("SELECT 1 FROM invite_code WHERE code = ?", c.PostForm("invitecode")).
-		Scan(new(int)) != sql.ErrNoRows {
-		registerResp(c, errorMessage{T(c, "Oops your code is wrong! please contact administrator!")})
 		return
 	}
 
@@ -139,7 +131,7 @@ func registerSubmit(c *gin.Context) {
 	logIP(c, int(lid))
 
 	rd.Incr("ripple:registered_users")
-
+	checkInvitCode(c)
 	addMessage(c, successMessage{T(c, "You have been successfully registered on Datenshi! You now need to verify your account.")})
 	getSession(c).Save()
 	c.Redirect(302, "/register/verify?u="+strconv.Itoa(int(lid)))
@@ -153,6 +145,28 @@ func registerResp(c *gin.Context, messages ...message) {
 		Messages:  messages,
 		FormData:  normaliseURLValues(c.Request.PostForm),
 	})
+}
+
+func checkInvitCode(c *gin.Context) {
+
+	inpit := c.PostForm("invitecode")
+
+	var ic struct {
+		ID   int
+		code string
+	}
+
+	err := db.QueryRow(`SELECT * FROM invite_code WHERE code = ? LIMIT 1`, strings.TrimSpace(inpit)).Scan(&ic.ID, &ic.code)
+
+	switch {
+	case err == sql.ErrNoRows:
+		registerResp(c, errorMessage{T(c, "Oops your code is wrong! please contact administrator!")})
+		return
+	case err != nil:
+		c.Error(err)
+		resp500(c)
+		return
+	}
 }
 
 func registrationsEnabled() bool {
