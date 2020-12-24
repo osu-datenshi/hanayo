@@ -69,7 +69,7 @@ func registerSubmit(c *gin.Context) {
 	}
 
 	// usernames with both _ and spaces are not allowed
-	if strings.Contains(username, inpitcode, "_") && strings.Contains(username, inpitcode, " ") {
+	if strings.Contains(username, "_") && strings.Contains(username, " ") {
 		registerResp(c, errorMessage{T(c, "An username or invite code can't contain both underscores and spaces.")})
 		return
 	}
