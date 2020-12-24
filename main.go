@@ -27,8 +27,8 @@ import (
 	"github.com/thehowl/qsql"
 	"gopkg.in/mailgun/mailgun-go.v1"
 	"gopkg.in/redis.v5"
-	"zxq.co/ripple/schiavolib"
 	"zxq.co/ripple/agplwarning"
+	_ "zxq.co/ripple/schiavolib"
 	"zxq.co/x/rs"
 )
 
