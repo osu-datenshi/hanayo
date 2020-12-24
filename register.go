@@ -105,6 +105,25 @@ func registerSubmit(c *gin.Context) {
 		)
 	}
 
+	inpit := c.PostForm("invitecode")
+
+	var ic struct {
+		ID   int
+		code string
+	}
+
+	err := db.QueryRow(`SELECT * FROM invite_code WHERE code = ? LIMIT 1`, strings.TrimSpace(inpit)).Scan(&ic.ID, &ic.code)
+
+	switch {
+	case err == sql.ErrNoRows:
+		registerResp(c, errorMessage{T(c, "Oops your code is wrong! please contact administrator!")})
+		return
+	case err != nil:
+		c.Error(err)
+		resp500(c)
+		return
+	}
+	
 	// The actual registration.
 	pass, err := generatePassword(c.PostForm("password"))
 	if err != nil {
@@ -132,7 +151,6 @@ func registerSubmit(c *gin.Context) {
 	logIP(c, int(lid))
 
 	rd.Incr("ripple:registered_users")
-	checkInvitCode(c)
 	addMessage(c, successMessage{T(c, "You have been successfully registered on Datenshi! You now need to verify your account.")})
 	getSession(c).Save()
 	c.Redirect(302, "/register/verify?u="+strconv.Itoa(int(lid)))
@@ -146,28 +164,6 @@ func registerResp(c *gin.Context, messages ...message) {
 		Messages:  messages,
 		FormData:  normaliseURLValues(c.Request.PostForm),
 	})
-}
-
-func checkInvitCode(c *gin.Context) {
-
-	inpit := c.PostForm("invitecode")
-
-	var ic struct {
-		ID   int
-		code string
-	}
-
-	err := db.QueryRow(`SELECT * FROM invite_code WHERE code = ? LIMIT 1`, strings.TrimSpace(inpit)).Scan(&ic.ID, &ic.code)
-
-	switch {
-	case err == sql.ErrNoRows:
-		registerResp(c, errorMessage{T(c, "Oops your code is wrong! please contact administrator!")})
-		return
-	case err != nil:
-		c.Error(err)
-		resp500(c)
-		return
-	}
 }
 
 func registrationsEnabled() bool {
