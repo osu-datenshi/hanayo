@@ -264,14 +264,23 @@ func gantinamabroSubmit(c *gin.Context) {
 
 	if c.PostForm("gantinama") == "" {
 		c.Redirect(302, "/settings/changename")
-                simpleReply(c, errorMessage{T(c, "Username cannot empity.")})
+                simpleReply(c, errorMessage{T(c, "Username cannot empty.")})
                 return
-        }
+		}
+
+	ceknama := qb.QueryRow("SELECT username FROM users WHERE id = ?", ctx.User.ID)
+
 	db.Exec("UPDATE users SET username = ?, username_safe = ?  WHERE id = ?", c.PostForm("gantinama"),  safeUsername(c.PostForm("gantinama")), ctx.User.ID)
 	db.Exec("UPDATE users_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
 	db.Exec("UPDATE rx_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
+	// kirim ke discord
+	webhook := webhook.DiscordWebhook{}
+	embed := webhook.NewEmbed()
+	embed.SetDescription("User : `"+ceknama+"` has changed their name to `"+c.PostForm("gantinama")+"` !")
+	webhook.Send(config.discordlog)
+	//end of discord
 	addMessage(c, successMessage{T(c, "Your name change has been saved!")})
-        c.Redirect(302, "/settings/changename")
+    c.Redirect(302, "/settings/changename")
 
 }
 

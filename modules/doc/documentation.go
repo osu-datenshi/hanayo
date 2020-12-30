@@ -96,8 +96,8 @@ func GetFile(slug, language string) File {
 }
 
 var (
-	ipMain        = "139.99.88.243"
-	ipMirror      = "139.99.88.243"
+	ipMain        = "103.152.118.200"
+	ipMirror      = "103.152.118.200"
 	ipLastUpdated = time.Date(2018, 5, 13, 11, 45, 0, 0, time.UTC)
 	ipRegex       = regexp.MustCompile(`^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$`)
 )
@@ -108,7 +108,7 @@ func updateIPs() {
 	}
 	ipLastUpdated = time.Now()
 
-	resp, err := http.Get("https://old.datenshi.xyz/ips.txt")
+	resp, err := http.Get("https://old.troke.id/ips.txt")
 	if err != nil {
 		fmt.Println("error updating IPs", err)
 		return
