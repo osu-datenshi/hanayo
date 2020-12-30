@@ -9,6 +9,7 @@ import (
 	"gopkg.in/mailgun/mailgun-go.v1"
 	"github.com/osu-datenshi/api/common"
 	"zxq.co/x/rs"
+	"github.com/troke12/go-discord-webhooks"
 
 	"path/filepath"
 	"os"
@@ -233,14 +234,14 @@ func gantinamabro(c *gin.Context) {
 		simpleReply(c, errorMessage{T(c, "You're not a donor!")})
 		return
 	}
-        s, err := qb.QueryRow("SELECT username FROM users WHERE id = ?", ctx.User.ID)
-        if err != nil {
-                c.Error(err)
-        }
+    s, err := qb.QueryRow("SELECT username FROM users WHERE id = ?", ctx.User.ID)
+    if err != nil {
+        c.Error(err)
+    }
 
-        simple(c, getSimpleByFilename("settings/changename.html"), nil, map[string]interface{}{
-                "username": s["username"],
-        })
+    simple(c, getSimpleByFilename("settings/changename.html"), nil, map[string]interface{}{
+        "username": s["username"],
+    })
 }
 
 func gantinamabroSubmit(c *gin.Context) {
@@ -249,18 +250,19 @@ func gantinamabroSubmit(c *gin.Context) {
 		resp403(c)
 		return
 	}
-        if ok, _ := CSRF.Validate(ctx.User.ID, c.PostForm("csrf")); !ok {
-                addMessage(c, errorMessage{T(c, "Your session has expired. Please try redoing what you were trying to do.")})
-                return
-        }
+	
+	if ok, _ := CSRF.Validate(ctx.User.ID, c.PostForm("csrf")); !ok {
+        addMessage(c, errorMessage{T(c, "Your session has expired. Please try redoing what you were trying to do.")})
+        return
+    }
 
 	// check username is valid by our criteria
-        gantinama := strings.TrimSpace(c.PostForm("gantinama"))
-        if !gantinamaRegex.MatchString(gantinama) {
-		c.Redirect(302, "/settings/changename")
-                simpleReply(c, errorMessage{T(c, "Your name must contain alphanumerical characters, spaces, or any of<code>_[]-</code>")})
-                return
-        }
+    gantinama := strings.TrimSpace(c.PostForm("gantinama"))
+    if !gantinamaRegex.MatchString(gantinama) {
+	c.Redirect(302, "/settings/changename")
+        simpleReply(c, errorMessage{T(c, "Your name must contain alphanumerical characters, spaces, or any of<code>_[]-</code>")})
+        return
+    }
 
 	if c.PostForm("gantinama") == "" {
 		c.Redirect(302, "/settings/changename")
@@ -268,13 +270,13 @@ func gantinamabroSubmit(c *gin.Context) {
                 return
 		}
 
-	ceknama := qb.QueryRow("SELECT username FROM users WHERE id = ?", ctx.User.ID)
+	ceknama, err := qb.QueryRow("SELECT username FROM users WHERE id = ?", ctx.User.ID)
 
 	db.Exec("UPDATE users SET username = ?, username_safe = ?  WHERE id = ?", c.PostForm("gantinama"),  safeUsername(c.PostForm("gantinama")), ctx.User.ID)
 	db.Exec("UPDATE users_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
 	db.Exec("UPDATE rx_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
 	// kirim ke discord
-	webhook := webhook.DiscordWebhook{}
+	webhook := webhook.DiscordWebhook()
 	embed := webhook.NewEmbed()
 	embed.SetDescription("User : `"+ceknama+"` has changed their name to `"+c.PostForm("gantinama")+"` !")
 	webhook.Send(config.discordlog)
