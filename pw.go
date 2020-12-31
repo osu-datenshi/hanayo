@@ -9,7 +9,7 @@ import (
 	"gopkg.in/mailgun/mailgun-go.v1"
 	"github.com/osu-datenshi/api/common"
 	"zxq.co/x/rs"
-	"github.com/troke12/go-discord-webhooks"
+	"github.com/alexabrahall/goWebhook"
 
 	"path/filepath"
 	"os"
@@ -276,10 +276,9 @@ func gantinamabroSubmit(c *gin.Context) {
 	db.Exec("UPDATE users_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
 	db.Exec("UPDATE rx_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
 	// kirim ke discord
-	webhook := webhook.DiscordWebhook()
-	embed := webhook.NewEmbed()
-	embed.SetDescription("User : `"+ceknama+"` has changed their name to `"+c.PostForm("gantinama")+"` !")
-	webhook.Send(config.discordlog)
+	hook := goWebhook.CreateWebhook()
+  	hook.AddField("Changename","User : "+ceknama+" has changed their name to "+c.PostForm("gantinama")+" !",true)
+  	hook.SendWebhook(config.discordlog)
 	//end of discord
 	addMessage(c, successMessage{T(c, "Your name change has been saved!")})
     c.Redirect(302, "/settings/changename")
