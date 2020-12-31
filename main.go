@@ -131,7 +131,6 @@ func main() {
 		&config.APISecret:        "Potato",
 		&config.IP_API:           "https://ip.zxq.co",
 		&config.DiscordServer:    "https://discord.io/datenshi",
-		&config.discordlog:       "masukinwebhook",
 		&config.MainRippleFolder: "/root/ripple/",
 		&config.MailgunFrom:      `"Datenshi" <noreply@datenshi.xyz>`,
 	}
