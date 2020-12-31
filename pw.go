@@ -269,15 +269,15 @@ func gantinamabroSubmit(c *gin.Context) {
                 simpleReply(c, errorMessage{T(c, "Username cannot empty.")})
                 return
 		}
-	
-	//ceknama := db.Get("SELECT username FROM users WHERE id = ?", ctx.User.ID)
+	var username string
+	db.Get(&username, "SELECT username FROM users WHERE id = ?", ctx.User.ID)
 
 	db.Exec("UPDATE users SET username = ?, username_safe = ?  WHERE id = ?", c.PostForm("gantinama"),  safeUsername(c.PostForm("gantinama")), ctx.User.ID)
 	db.Exec("UPDATE users_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
 	db.Exec("UPDATE rx_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
 	// kirim ke discord
 	hook := goWebhook.CreateWebhook()
-  	hook.AddField("Changename","UserID : "+ctx.User.ID+" has changed their name to "+c.PostForm("gantinama")+" !",true)
+  	hook.AddField("Changename","UserID : "+username+" has changed their name to "+c.PostForm("gantinama")+" !",true)
   	hook.SendWebhook(config.discordlog)
 	//end of discord
 	addMessage(c, successMessage{T(c, "Your name change has been saved!")})
