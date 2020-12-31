@@ -157,7 +157,6 @@
 				banchoAPI: {{ .Conf.BanchoAPIPublic }},
 				baseAPI:   {{ .Conf.BaseAPIPublic }},
 				cheesegullAPI: {{ .Conf.CheesegullAPI }},
-				misakiAPI:	{{ .Conf.MisakiAPI }},
 				language:  {{ with $lang }}{{ . }}{{ else }}"en"{{ end }},
 			};
 			var currentUserID = {{ .Context.User.ID }};
