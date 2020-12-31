@@ -277,7 +277,7 @@ func gantinamabroSubmit(c *gin.Context) {
 	db.Exec("UPDATE rx_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
 	// kirim ke discord
 	hook := goWebhook.CreateWebhook()
-  	hook.AddField("Changename","UserID : "+username+" has changed their name to "+c.PostForm("gantinama")+" !",true)
+  	hook.AddField("Changename","Username : "+username+" has changed their name to "+c.PostForm("gantinama")+" !",true)
   	hook.SendWebhook(config.LogDiscord)
 	//end of discord
 	addMessage(c, successMessage{T(c, "Your name change has been saved!")})
