@@ -270,7 +270,7 @@ func gantinamabroSubmit(c *gin.Context) {
                 return
 		}
 	
-	var ceknama = db.Get(&ceknama, "SELECT username FROM users WHERE id = ?", ctx.User.ID)
+	ceknama = db.Get(&ceknama, "SELECT username FROM users WHERE id = ?", ctx.User.ID)
 
 	db.Exec("UPDATE users SET username = ?, username_safe = ?  WHERE id = ?", c.PostForm("gantinama"),  safeUsername(c.PostForm("gantinama")), ctx.User.ID)
 	db.Exec("UPDATE users_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
