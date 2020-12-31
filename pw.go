@@ -278,7 +278,7 @@ func gantinamabroSubmit(c *gin.Context) {
 	// kirim ke discord
 	hook := goWebhook.CreateWebhook()
   	hook.AddField("Changename","UserID : "+username+" has changed their name to "+c.PostForm("gantinama")+" !",true)
-  	hook.SendWebhook("https://discord.com/api/webhooks/793990973947772928/REl22gJR5WIp0I7BwCiMu2UPHG3_jXMNPZNj0f5B2a1Nagi-UrQN7Qna9EmmW39buWI3")
+  	hook.SendWebhook(config.LogDiscord)
 	//end of discord
 	addMessage(c, successMessage{T(c, "Your name change has been saved!")})
     c.Redirect(302, "/settings/changename")

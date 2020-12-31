@@ -47,7 +47,7 @@ var (
 		BanchoAPI       string `description:"Bancho base url (without /api) that hanayo will use to contact bancho"`
 		BanchoAPIPublic string `description:"same as above but this will be put in js files and used by clients. Must be publicly accessible. Leave empty to set to BanchoAPI"`
 		CheesegullAPI   string
-		MisakiAPI       string
+		LogDiscord      string
 		APISecret       string
 		Offline         bool `description:"If this is true, files will be served from the local server instead of the CDN."`
 
