@@ -62,7 +62,6 @@ var (
 		RedisPassword       string
 
 		DiscordServer string
-		discordlog string
 
 		BaseAPIPublic string
 
