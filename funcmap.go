@@ -514,7 +514,7 @@ var logoColours = [...]string{
 	"red",
 }
 
-func BlockIp() {
+func BlockIp(c *gin.Context) {
 	if strings.Contains(c.ClientIP(), ":") {
 		c.String(http.StatusForbiddden, "IPV6 not allowed!")
 		c.Abort()
