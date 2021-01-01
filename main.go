@@ -233,13 +233,6 @@ func httpLoop() {
 	}
 }
 
-func BlockIp(c *gin.Context) {
-	if strings.Contains(c.ClientIP(), ":") {
-		c.String(http.StatusForbiddden, "IPV6 not allowed!")
-		c.Abort()
-	}
-}
-
 func generateEngine() *gin.Engine {
 	fmt.Println("Starting session system...")
 	var store sessions.Store
