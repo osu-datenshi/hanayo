@@ -514,14 +514,6 @@ var logoColours = [...]string{
 	"red",
 }
 
-func BlockIp() func(c *gin.Context) {
-	return func(c *gin.Context) {
-	if strings.Contains(c.ClientIP(), ":") {
-		c.String(http.StatusForbidden, "IPV6 not allowed!")
-		c.Abort()
-	}
-}
-
 // we still haven't got jquery when the script is here, so well shit.
 const ieUnfucker = `<input type="submit" class="ie" name="submit" value="submit">
 <script>
