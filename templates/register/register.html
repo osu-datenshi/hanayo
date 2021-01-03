@@ -33,7 +33,7 @@
 						</div>
 						<div class="field">
 							<label>{{ .T "Invite Code" }}</label>
-							<input tabindex="4" type="invitecode" name="invitecode" placeholder="{{ .T "Invite Code" }}" value="{{ .FormData.invitecode }}" required>
+							<input tabindex="4" type="text" name="invitecode" placeholder="{{ .T "Invite Code" }}" value="{{ .FormData.invitecode }}" required>
 						</div>
 						{{ with config "RecaptchaSite" }}
 						<div class="field">
