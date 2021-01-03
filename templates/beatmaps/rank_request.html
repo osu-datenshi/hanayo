@@ -9,8 +9,8 @@ MinPrivileges=2
 <div class="ui container">
 	<div class="ui raised segment center aligned">
 		{{ $f := ieForm .Gin }}
-		<h4>{{ .T "Want to play an unranked beatmap and get pp? You can submit beatmaps rank requests here!" }}</h4>
-		<h1>READ OUR CRITERIA BEFORE REQUESTS : <a href="/doc/beatmap_ranking_criteria">EN RULES</a> | <a href="/doc/beatmap_ranking_criteria_id">ID RULES</a></h1>
+		<h4>{{ .T "Ingin mapnya ke rank dan dapetin pp? bisa submit disini!" }}</h4>
+		<h1>BACA KRITERIA DULU SEBELUM SUBMIT! : <a href="/doc/beatmap_ranking_criteria_id">RULES</a></h1>
 		{{ with .Get "beatmaps/rank_requests/status" }}
 			<h4 class="ui horizontal divider header">
 				<i class="wait icon"></i>

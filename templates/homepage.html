@@ -9,7 +9,7 @@ KyutGrill=homepage2.jpg
 {{ $   := . }}
 <div class="ui container">
 <div class="ui center aligned segment">
-	<img src="https://cdn.troke.id/static/17agustusbaru.png">
+	<img src="https://cdn.troke.id/banner.png">
 </div>
 {{ $set := systemSettings "website_home_alert" }}
 {{ with $set.website_home_alert.String }}
@@ -18,32 +18,6 @@ KyutGrill=homepage2.jpg
 	</div>
 {{ end }}
 {{/* Not logged in block */}}
-{{ if not .Context.User.ID }}
-	<div class="ui segment center aligned">
-		<h1 class="ui header">{{ .T "Selamat datang di Tokek" }}</h1>
-		<p>
-			{{ .T "Lanjutannya datenshi yang kemarin" }}
-		</p>
-		<h3 class="ui header center aligned">{{ .T "Ayok join ae lah" | html }}
-		<br>
-		<br>
-		<a href="/register"><div class="ui inverted violet button"><i class="edit icon"></i>Register</div></a>
-		<a href="https://link.troke.id/tokekdiscord"><div class="ui inverted violet button"><i class="fab fa-discord"></i>  Discord</div></a>
-		<a href="https://osu.troke.id/switcher"><div class="ui inverted violet button"><i class="download icon"></i>Switcher</div></a><br><br>
-		<div class="ui inverted violet button"><i class="icon user"></i>{{ .T "%s Online" (rediget "ripple:online_users") | html }}</div>
-		<div class="ui inverted violet button"><i class="edit icon"></i>{{ .T "%s Registered" (rediget "ripple:registered_users") | html }}</div>
-		<h3>
-	</div>
-{{ else }}
-	<div class="ui center aligned segment">
-		<h1 class="ui header">{{ .T "Halo coeg, %s!" .Context.User.Username }}</h1>
-		<p>
-			{{ .T "Selamat datang kembali coeg" }}
-		</p>
-		<div class="ui inverted violet button"><i class="icon user"></i>{{ .T "%s Online" (rediget "ripple:online_users") | html }}</div>
-		<div class="ui inverted violet button"><i class="edit icon"></i>{{ .T "%s Registered" (rediget "ripple:registered_users") | html }}</div>
-	</div>
-	{{ end }}
 <div class="ui segments">
 	<div class="ui segment">
 	<h1 class="ui header">{{ "Featured Video" }}</h1>

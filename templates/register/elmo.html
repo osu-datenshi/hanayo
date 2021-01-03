@@ -11,32 +11,32 @@ HeadingOnRight=true
 			{{ $username := .RequestInfo.Username }}
 			<img src="https://cdn.troke.id/static/jack_black.jpg" class="ui small right floated image" alt="Jack black">
 
-			<p>{{ .T "We see that you're trying to sign up while having already signed up as %s! Please note that multiaccounting is punishable, and can lead to a one month restriction!" $username }}</p>
+			<p>{{ .T "Wah kamu berani sekali ya! disini keliatan kok kamu sudah terdaftar sebagai %s! Tolong jangan multi-account, itu akan membuatmu menderita dan sampai akhir hayatmu!" $username }}</p>
 
 			<ul>
 				<li>
-					{{ .T "If you're %s, keep in mind that multiaccounting = ban." $username }}
+					{{ .T "Jika kamu adalah %s, tolong diingat bahwa hukuman multiaccount = ban." $username }}
 				</li>
 				<li>
-					{{ .T "If you're not %s, but you're using %s's computer, please sign up on Datenshi from your own computer." $username $username }}
+					{{ .T "Jika kamu bukan %s, tapi menggunakan komputer milik %s, sebaiknya jangan! Tolong daftar di komputer kalian masing-masing!" $username $username }}
 				</li>
 				<li>
-					{{ .T "If you live with %s and you don't have your own computer from which to sign up on Datenshi, then please contact support@datenshi.xyz, and we'll deal with your specific case." $username }}
+					{{ .T "Jika kamu tinggal dengan %s dan tidak memiliki komputer untuk mendaftar, silahkan kontak staff pada discord!" $username }}
 				</li>
 			</ul>
 			
 			<p>
-				{{ .T "This warning may pop up also if you're using another computer on the same network of %s. As long as you're not using the same computer, you should be all good." $username }}
+				{{ .T "Peringatan ini muncul jika kamu menggunakan komputer lain yang berada pada jaringan yang sama dengan %s. Setidaknya tidak menggunakan komputer yang sama, kamu akan aman." $username }}
 			</p>
 			<p style="margin-bottom:40px;">
-				<a href="/register?stopsign=1" class="camouflaged">{{ .T "If you truly have understood what's written above and you have understood that creating a multiaccount will lead to a restriction on your main account, you can click here and you'll be brought to the sign up page." }}</a> 
+				<a href="/register?stopsign=1" class="camouflaged">{{ .T "Jika kamu mengerti maksud yang diatas dan menerima konsekuensinya, kamu boleh menekan link ini untuk melanjutkan ke halaman pendaftaran." }}</a> 
 			</p>
 		</div>
 		<div class="ui right aligned segment">
 			<div class="ui buttons">
 				<a tabindex="1" class="ui labeled blue icon button" href="/">
 					<i class="left chevron icon"></i>
-					{{ .T "Bring me back to safety!" }}
+					{{ .T "Tetap kembali!" }}
 				</a>
 			</div>
 		</div>

@@ -2,30 +2,29 @@
 <div class="ui container">
 	<div class="ui segments">
 		{{/* Dirty hack to detect if it's a multi */}}
-		{{ if eq .TitleBar (.T "Welcome back!") }}
+		{{ if eq .TitleBar (.T "Selamat Datang!") }}
 			<div class="ui segment">
-				{{ .T "Congratulations for not reading things!" }}
+				{{ .T "Selamat karena tidak membaca!" }}
 			</div>
 			<div class="ui center aligned segment">
-				<h1 class="ui heading">{{ .T "Multiaccounts are not allowed on Datenshi!" }}</h1>
+				<h1 class="ui heading">{{ .T "Multiaccount dilarang disini!" }}</h1>
 			</div>
 			<div class="ui segment">
-				{{ .T "Your new account has been <b>banned</b> and your main account has been <b>restricted</b>. You can appeal in a month by sending an appeals to Discord Channel. You better read the rules next time." | html }}
+				{{ .T "Akun baru kamu sudah <b>di banned</b> dan akun utama kamu sudah <b>di restrict</b>. Hubungi staff untuk appeal di discord channel. Lain kali baca rules!" | html }}
 			</div>
 		{{ else }}
 			<div class="ui segment">
-				<h1 class="ui heading">{{ .T "Welcome to Tokek!" }}</h1>
+				<h1 class="ui heading">{{ .T "Selamat datang kembali!" }}</h1>
 			</div>
 			<div class="ui segment">
-				<p>{{ .T "We're glad to have you here. <b>Your account is now active.</b> You can now play on Datenshi! and <a href='/login'>log in</a> on the website!" | html }}</p>
-				<p>{{ .T "Here's a few things you might want to check out:" }}</p>
+				<p>{{ .T "Kami senang kalian disini. <b>Akun kalian sudah aktif.</b> Kalian dapat bermain di Datenshi! dan <a href='/login'>login</a> ke website!" | html }}</p>
+				<p>{{ .T "Berikut ini yang mungkin kalian bisa perhatikan:" }}</p>
 				<ul class="ui list">
-					<li><b><a href="/login">{{ .T "Login" }}</a></b>{{ .T " - in case you don't know where to start" }}</li>
-					<li><b><a href="/doc/rules">{{ .T "Rules" }}</a></b>{{ .T " - in case you haven't already read them" }}</li>
-					<li><b><a href="/doc">{{ .T "Documentation" }}</a></b>{{ .T " - in case, well, you need help doing stuff" }}</li>
-					<li><b><a href="https://status.datenshi.xyz">{{ .T "Status" }}</a></b>{{ .T " - in case you believe Datenshi! is down" }}</li>
-					<li><b><a href="{{ .Conf.DiscordServer }}">{{ .T "Discord" }}</a></b>{{ .T " - in case you want to talk with people about Datenshi!" }}</li>
-					<li><b><a href="https://orhachaim.co.il/wp-content/uploads/thumbs/watermelon-347fysmllqsslgzv9w2vi8.jpg">{{ .T "Watermelon" }}</a></b>{{ .T " - just in case" }}</li>
+					<li><b><a href="/login">{{ .T "Login" }}</a></b>{{ .T " - mungkin tidak tau dimana login atau buta, bisa klik ini" }}</li>
+					<li><b><a href="/doc/rules">{{ .T "Rules" }}</a></b>{{ .T " - baca peraturan ini penting, ntar awas aja" }}</li>
+					<li><b><a href="/doc">{{ .T "Documentation" }}</a></b>{{ .T " - dokumentasi-dokumentasi yang mungkin dapat membantu" }}</li>
+					<li><b><a href="{{ .Conf.DiscordServer }}">{{ .T "Discord" }}</a></b>{{ .T " - discord cok!" }}</li>
+					<li><b><a href="https://cdn-2.tstatic.net/aceh/foto/bank/images/daun-ganja_20170824_160705.jpg">{{ .T "Ganja Aceh" }}</a></b>{{ .T " - ganja aceh" }}</li>
 				</ul>
 			</div>
 		{{ end }}
