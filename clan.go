@@ -10,6 +10,7 @@ import (
 	"regexp"
 	"strings"
 	"github.com/osu-datenshi/api/common"
+	"github.com/alexabrahall/goWebhook"
 )
 
 // TODO: replace with simple ResponseInfo containing userid
@@ -254,9 +255,16 @@ func gantinamaclanSubmit(c *gin.Context) {
                  c.Redirect(302, "/settings/changeclanname")
                  addMessage(c, errorMessage{T(c, "An name can't contain both underscores and spaces.")})
                  return
-        }
+		}
+	var name string
+	db.Get(&name, "SELECT name FROM clans WHERE id = ?", clan)
 	db.Exec("UPDATE clans SET name = ? WHERE id = ?", c.PostForm("gantinamaclan"), clan)
 	addMessage(c, successMessage{T(c, "Success!")})
+	// kirim ke discord
+	hook := goWebhook.CreateWebhook()
+	hook.AddField("Changename","Username : "+name+" has changed their name to "+c.PostForm("gantinamaclan")+" !",true)
+	hook.SendWebhook(config.LogDiscord)
+	//end of discord
 	c.Redirect(302, "/settings/changeclanname")
 }
 
