@@ -262,7 +262,7 @@ func gantinamaclanSubmit(c *gin.Context) {
 	addMessage(c, successMessage{T(c, "Success!")})
 	// kirim ke discord
 	hook := goWebhook.CreateWebhook()
-	hook.AddField("Changename","Username : "+name+" has changed their name to "+c.PostForm("gantinamaclan")+" !",true)
+	hook.AddField("Change Clan Name","Clan with name "+name+" has changed their name to "+c.PostForm("gantinamaclan")+" !",true)
 	hook.SendWebhook(config.LogDiscord)
 	//end of discord
 	c.Redirect(302, "/settings/changeclanname")
