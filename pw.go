@@ -10,7 +10,7 @@ import (
 	"github.com/osu-datenshi/api/common"
 	"zxq.co/x/rs"
 	"github.com/alexabrahall/goWebhook"
-
+	"encoding/json"
 	"path/filepath"
 	"os"
 	"fmt"
@@ -244,13 +244,18 @@ func gantinamabro(c *gin.Context) {
     })
 }
 
+type NotifKePubNama struct {
+	UserID      int    `json:"userID"`
+	NewUsername string `json:"newUsername"`
+}
+
 func gantinamabroSubmit(c *gin.Context) {
 	ctx := getContext(c)
 	if ctx.User.ID == 0 {
 		resp403(c)
 		return
 	}
-	
+
 	if ok, _ := CSRF.Validate(ctx.User.ID, c.PostForm("csrf")); !ok {
         addMessage(c, errorMessage{T(c, "Your session has expired. Please try redoing what you were trying to do.")})
         return
@@ -269,6 +274,23 @@ func gantinamabroSubmit(c *gin.Context) {
                 simpleReply(c, errorMessage{T(c, "Username cannot empty.")})
                 return
 		}
+
+	notifData := NotifKePubNama{
+		UserID: ctx.User.ID,
+		NewUsername: c.PostForm("gantinama"),
+	}
+
+	Notif, err := json.Marshal(&notifData)
+	if err != nil {
+	    c.Error(err)
+	}
+	//publish disini bro
+	err = rd.Publish("peppy:change_username", string(Notif)).Err()
+	if err != nil {
+	    c.Error(err)
+	}
+
+
 	var username string
 	db.Get(&username, "SELECT username FROM users WHERE id = ?", ctx.User.ID)
 
@@ -280,10 +302,12 @@ func gantinamabroSubmit(c *gin.Context) {
   	hook.AddField("Changename","Username : "+username+" has changed their name to "+c.PostForm("gantinama")+" !",true)
   	hook.SendWebhook(config.LogDiscord)
 	//end of discord
+
 	addMessage(c, successMessage{T(c, "Your name change has been saved!")})
     c.Redirect(302, "/settings/changename")
 
 }
+
 
 func changePasswordSubmit(c *gin.Context) {
 	var messages []message
