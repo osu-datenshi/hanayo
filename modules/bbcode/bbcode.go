@@ -192,15 +192,7 @@ var bbcodeCompiler = func() bbcode.Compiler {
 }()
 
 var emojis = []string{
-	"peppy",
-	"barney",
-	"akerino",
-	"foka",
-	"kappy",
-	"creepypeppy",
-	"peppyfiero",
-	"djpeppy",
-	"kappa",
+// ripple sucks. we need daten special emotes
 }
 var emojiReplacer = func() *strings.Replacer {
 	var list []string
