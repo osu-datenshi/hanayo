@@ -9,6 +9,7 @@ import (
 
 	"github.com/frustra/bbcode"
 	"github.com/microcosm-cc/bluemonday"
+	"github.com/wangii/emoji"
 )
 
 var bbcodeCompiler = func() bbcode.Compiler {
@@ -213,7 +214,10 @@ var emojiReplacer = func() *strings.Replacer {
 func Compile(s string) string {
 	s = emojiReplacer.Replace(s)
 	s = strings.TrimSpace(s)
-	return mondaySanitise(bbcodeCompiler.Compile(s))
+	s = mondaySanitise(bbcodeCompiler.Compile(s))
+	s = emoji.UnicodeToEmojiTag(s)
+	s = emoji.EmojiTagToTwemoji(s,24,false)
+	return s
 }
 
 var policy = func() *bluemonday.Policy {
