@@ -18,15 +18,79 @@ KyutGrill=homepage2.jpg
 	</div>
 {{ end }}
 {{/* Not logged in block */}}
-<div class="ui segments">
-	<div class="ui segment">
-	<h1 class="ui header">{{ "Featured Video" }}</h1>
-	</div>
+<div class="ui stackable two column grid">
 	{{ $set := systemSettings "featuredvideo" }}
 	{{ with $set.featuredvideo.String }}
-        <div class="ui segment">
-        {{ . | html }}
-        </div>
+        <div class="column">
+		<div class="ui segment">
+        	{{ . | html }}
+        	</div>
+	</div>
 	{{ end }}
+	<div class="column">
+	<div class="ui segment">
+        <div class="widget-facebook">
+          <script>
+            function setupFBframe(frame) {
+              if (frame.src) return; // already set up
+            
+              var container = frame.parentNode;
+              console.log(frame.parentNode);
+            
+              var containerWidth = container.offsetWidth;
+              var containerHeight = container.offsetHeight;
+            
+              var src =
+                "https://www.facebook.com/plugins/page.php" +
+                "?href=https%3A%2F%2Fwww.facebook.com%2Fdatenshicommunity" +
+                "&tabs=timeline" +
+                "&width=" +
+                containerWidth +
+                "&height=" +
+                containerHeight +
+                "&small_header=false" +
+                "&adapt_container_width=false" +
+                "&hide_cover=false" +
+                "&hide_cta=true" +
+                "&show_facepile=false" +
+		"&appId";
+            
+              frame.width = containerWidth;
+              frame.height = containerHeight;
+              frame.src = src;
+            }
+            
+            var facebookIframe;
+            
+            /* begin Window Resize                       				   		
+            ############################################ */
+            
+            // Why resizeThrottler? See more : https://developer.mozilla.org/ru/docs/Web/Events/resize
+            (function() {
+              window.addEventListener("resize", resizeThrottler, false);
+            
+              var resizeTimeout;
+            
+              function resizeThrottler() {
+                if (!resizeTimeout) {
+                  resizeTimeout = setTimeout(function() {
+                    resizeTimeout = null;
+                    actualResizeHandler();
+                  }, 66);
+                }
+              }
+            
+              function actualResizeHandler() {
+                document.querySelector('#facebook_iframe').removeAttribute('src');
+                setupFBframe(facebookIframe);
+              }
+            })();
+            /* end Window Resize
+            ############################################ */
+          </script>
+          <iframe id="facebook_iframe" class="facebook_iframe" onload="facebookIframe = this; setupFBframe(facebookIframe)"></iframe>
+        </div>
+	</div>
+	</div>
 </div>
 {{ end }}

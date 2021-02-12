@@ -8,12 +8,49 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"net/http"
+	"io/ioutil"
 
 	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"github.com/osu-datenshi/api/common"
 	"zxq.co/ripple/schiavolib"
 )
+
+func ip_check(c *gin.Context) {
+	raw, err := http.Get(config.IP_API + "/" + clientIP(c) + "/country")
+	if err != nil {
+		panic(err.Error())
+	}
+	data, err := ioutil.ReadAll(raw.Body)
+	if err != nil {
+		panic(err.Error())
+	}
+	if db.QueryRow("SELECT alamat_ip FROM simpen_ip WHERE alamat_ip = ?", clientIP(c)).
+                Scan(new(int)) != sql.ErrNoRows {
+        } else {
+		db.Exec("INSERT INTO simpen_ip(alamat_ip, kode_negara) VALUES (?, ?)", clientIP(c), string(data))
+	}
+	respon_ip(c)
+}
+
+func respon_ip(c *gin.Context) {
+	kn := "ID"
+	var (
+		ID int
+		alamatIp string
+		kodeNegara string
+	)
+        err := db.QueryRow("SELECT id, alamat_ip, kode_negara FROM simpen_ip WHERE alamat_ip = ? AND kode_negara = ?", clientIP(c), kn).Scan(&ID, &alamatIp, &kodeNegara)
+
+	if err != nil {
+		simple(c, getSimpleByFilename("register/block.html"), nil, map[string]interface{}{
+			"Alamat_ip": clientIP(c),
+		})
+        } else {
+		register(c)
+	}
+}
 
 func register(c *gin.Context) {
 	if getContext(c).User.ID != 0 {
@@ -43,7 +80,6 @@ func registerSubmit(c *gin.Context) {
 		registerResp(c, errorMessage{T(c, "Sorry, it's not possible to register at the moment. Please try again later.")})
 		return
 	}
-
 	// check username is valid by our criteria
 	username := strings.TrimSpace(c.PostForm("username"))
 	if !usernameRegex.MatchString(username) {

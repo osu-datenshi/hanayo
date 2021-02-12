@@ -280,7 +280,7 @@ func generateEngine() *gin.Engine {
 	r.POST("/login", loginSubmit)
 	r.GET("/logout", logout)
 
-	r.GET("/register", register)
+	r.GET("/register", ip_check)
 	r.POST("/register", registerSubmit)
 	r.GET("/register/verify", verifyAccount)
 	r.GET("/register/welcome", welcome)

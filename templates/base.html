@@ -61,6 +61,25 @@
     		100% { background-position: -500px 0 }
 		}
 		</style>
+		<script>
+    			var CMSSpace = CMSSpace || {};
+  		</script>
+  		<style>
+		/* ------- begin Widget Facebook -------------- */
+		.widget--facebook--container {
+  		   padding: 10px;
+  		   border: 1px solid #000;
+		}
+
+		.widget-facebook {
+		  height: 500px;
+		}
+
+		.widget-facebook .facebook_iframe {
+		  border: none;
+		}
+		/* ---------- end Widget Facebook---------------- */
+  		</style>
 	{{ end }}
 	</head>
 	{{ $s := systemSettings "website_maintenance" "game_maintenance" "website_global_alert" "featuredvideo" }}
@@ -147,22 +166,7 @@
 		<center><div class="footer twemoji">
 			
 			<font style='color:white' >
-			{{ .T "&copy; %d Datenshi Community" (curryear) | html }}  |
-			<div class="ui scrolling dropdown" style="margin-left: 5px;" id="language-selector">
-				{{ $lang := .Context.Language }}
-				{{ with $lang }}
-					{{ $info := languageInformationByNameShort . }}
-					<div class="text"><i class="{{ with $lang }}{{ . }}{{end}} flag"></i>{{ $info.Name }}</div>
-				{{ else }}
-					<div class="default text">{{ .T "Language" }}</div>
-				{{ end }}
-				<i class="dropdown icon"></i>
-				<div class="menu">
-					{{ range languageInformation }}
-						<div class="{{ if eq .NameShort $lang }}selected {{ end }}item" data-lang="{{ .NameShort }}"><i class="{{ .CountryShort }} flag"></i>{{ .Name }}</div>
-					{{ end }}
-				</div>
-				</div>
+			{{ .T "&copy; %d Datenshi Community" (curryear) | html }}
 			</font>
 		</div>
 		</center>
@@ -172,15 +176,14 @@
 				banchoAPI: {{ .Conf.BanchoAPIPublic }},
 				baseAPI:   {{ .Conf.BaseAPIPublic }},
 				cheesegullAPI: {{ .Conf.CheesegullAPI }},
-				language:  {{ with $lang }}{{ . }}{{ else }}"en"{{ end }},
 			};
 			var currentUserID = {{ .Context.User.ID }};
 		</script>
 		{{/* If we got some more scripts to print, print'em */}}
 		<script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.2"></script>
+		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0" nonce="lQSMoH1F"></script>
 		<script src="https://kit.fontawesome.com/eb82e32539.js" crossorigin="anonymous"></script>
 		<script src="https://cdn.troke.id/static/dist.min.js?{{ unixNano }}"></script>
-		<script src="https://cdn.troke.id/static/timeago-locale/jquery.timeago.{{ with $lang }}{{ . }}{{end}}.js"></script>
 		<script id="cid0020000253653087007" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 200px;height: 300px;">{"handle":"datenshichat","arch":"js","styles":{"a":"000000","b":100,"c":"FFFFFF","d":"FFFFFF","k":"000000","l":"000000","m":"000000","n":"FFFFFF","p":"10","q":"000000","r":100,"pos":"br","cv":1,"cvfntw":"lighter","cvbg":"000000","cvw":200,"cvh":30,"ticker":1,"fwtickm":1}}</script>
 		{{ if .Scripts }}
 			{{ range .Scripts }}
