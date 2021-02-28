@@ -15,6 +15,7 @@ func DiscordGenToken(c *gin.Context) {
 	s := rs.String(32)
 	db.Exec("INSERT INTO discord_tokens(userid, token) VALUES (?, ?)", ctx.User.ID, s)
 	addMessage(c, successMessage{T(c, "Your Discord token is <code>%s</code> . Please note that code are for 1 time validation!", s)})
+	c.Redirect(302, "/discordtokens")
 }
 
 func CheckDCToken(c *gin.Context) {

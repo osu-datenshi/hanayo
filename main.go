@@ -305,7 +305,7 @@ func generateEngine() *gin.Engine {
 
 	r.POST("/irc/generate", ircGenToken)
 	r.GET("/discordtokens", CheckDCToken)
-	r.POST("/discordtokens/generate", DiscordGenToken)
+	r.POST("/discordtokens", DiscordGenToken)
 
 	r.GET("/settings/password", changePassword)
 	r.GET("/settings/changename", gantinamabro)
