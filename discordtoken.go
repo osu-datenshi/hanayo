@@ -20,10 +20,6 @@ func DiscordGenToken(c *gin.Context) {
 
 func CheckDCToken(c *gin.Context) {
 	ctx := getContext(c)
-	if ctx.User.ID == 0 {
-		resp403(c)
-		return
-	}
 	var (
 		Token     string
 		Userid    int
