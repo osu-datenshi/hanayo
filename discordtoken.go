@@ -42,4 +42,9 @@ func CheckDCToken(c *gin.Context) {
         } else {
 		DiscordGenToken(c)
 	}
+	resp(c, 200, "discordtokens.html", &baseTemplateData{
+		TitleBar:       "Discord Validation",
+		HeadingOnRight: true,
+		KyutGrill:      "welcome.jpg",
+	})
 }
