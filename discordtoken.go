@@ -15,8 +15,7 @@ func DiscordGenToken(c *gin.Context) {
 	db.Exec("DELETE FROM discord_tokens WHERE userid = ?", ctx.User.ID)
 	s := rs.String(32)
 	db.Exec("INSERT INTO discord_tokens(userid, token) VALUES (?, ?)", ctx.User.ID, s)
-	addMessage(c, successMessage{T(c, "Your Discord token is <code>%s</code> . Please note that code are for 1 time validation!", template.HTMLEscapeString(s))})
-	c.Redirect(302, "/discordtokens")
+	DiscordGenResp(c, successMessage{T(c, "Your Discord token is <code>%s</code> . Please note that code are for 1 time validation!", template.HTMLEscapeString(s))})
 }
 
 func CheckDCToken(c *gin.Context) {
