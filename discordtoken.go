@@ -39,6 +39,13 @@ func CheckDCToken(c *gin.Context) {
 			"DiscordID": DiscordID,
 		})
         } else {
-		DiscordGenToken(c)
+		DiscordGenHalilintar(c)
 	}
+}
+
+func DiscordGenHalilintar(c *gin.Context) {
+	resp(c, 200, "discordtokens.html", &baseTemplateData{
+		TitleBar:  "Discord Link Account",
+		KyutGrill: "default.jpg",
+	})
 }
