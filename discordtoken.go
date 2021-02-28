@@ -15,7 +15,7 @@ func DiscordGenToken(c *gin.Context) {
 	s := rs.String(32)
 	db.Exec("INSERT INTO discord_tokens(userid, token) VALUES (?, ?)", ctx.User.ID, s)
 	simple(c, getSimple("/discordtokens"), []message{successMessage{
-		T(c, "Your new Discord token is <code>%s</code>. Do not use this if you already verify it.", key),
+		T(c, "Your new Discord token is <code>%s</code>. Do not use this if you already verify it.", s),
 	}}, nil)
 }
 
