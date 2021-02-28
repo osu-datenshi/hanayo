@@ -23,11 +23,11 @@ func CheckDCToken(c *gin.Context) {
 	SudahVerified := 1
 
 	var (
-		Token     string      `json:"token"`
-		Userid    int         `json:"userid"`
-		RoleID    interface{} `json:"role_id"`
-		Verified  int         `json:"verified"`
-		DiscordID interface{} `json:"discord_id"`
+		Token     string
+		Userid    int
+		RoleID    interface{}
+		Verified  int
+		DiscordID interface{}
 	)
 
     d, err := db.QueryRow("SELECT * FROM discord_tokens WHERE verified = ? AND userid = ?", ctx.User.ID, SudahVerified).Scan(&Token, &Userid, &RoleID, &Verified, &DiscordID)
