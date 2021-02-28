@@ -20,8 +20,7 @@ func DiscordGenToken(c *gin.Context) {
 }
 
 func CheckDCToken(c *gin.Context) {
-	SudahVerified := 1
-
+	ctx := getContext(c)
 	var (
 		Token     string
 		Userid    int
@@ -30,7 +29,7 @@ func CheckDCToken(c *gin.Context) {
 		DiscordID interface{}
 	)
 
-    d, err := db.QueryRow("SELECT * FROM discord_tokens WHERE verified = ? AND userid = ?", SudahVerified, ctx.User.ID).Scan(&Token, &Userid, &RoleID, &Verified, &DiscordID)
+    d, err := db.QueryRow("SELECT * FROM discord_tokens WHERE verified = 1 AND userid = ?", ctx.User.ID).Scan(&Token, &Userid, &RoleID, &Verified, &DiscordID)
 
 	if err != nil {
 		simple(c, getSimpleByFilename("discordblock.html"), nil, map[string]interface{}{
