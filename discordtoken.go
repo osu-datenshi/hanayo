@@ -14,7 +14,7 @@ func DiscordGenToken(c *gin.Context) {
 	db.Exec("DELETE FROM discord_tokens WHERE userid = ?", ctx.User.ID)
 	s := rs.String(32)
 	db.Exec("INSERT INTO discord_tokens(userid, token) VALUES (?, ?)", ctx.User.ID, s)
-	simple(c, getSimple("/discordtokens"), []message{successMessage{
+	simple(c, getSimpleByFilename("discordtokens.html"), []message{successMessage{
 		T(c, "Your new Discord token is <code>%s</code>. Do not use this if you already verify it.", s),
 	}}, nil)
 }
@@ -42,9 +42,4 @@ func CheckDCToken(c *gin.Context) {
         } else {
 		DiscordGenToken(c)
 	}
-	resp(c, 200, "discordtokens.html", &baseTemplateData{
-		TitleBar:       "Discord Validation",
-		HeadingOnRight: true,
-		KyutGrill:      "welcome.jpg",
-	})
 }
