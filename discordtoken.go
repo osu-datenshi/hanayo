@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"zxq.co/x/rs"
+	"html/template"
 )
 
 func DiscordGenToken(c *gin.Context) {
