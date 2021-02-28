@@ -1,0 +1,17 @@
+{{/*###
+TitleBar=Stop !
+HeadingTitle=Stop!
+KyutGrill=stop_sign.png
+HeadingOnRight=true
+*/}}
+{{ define "tpl" }}
+<div class="ui container">
+	<div class="ui raised segments">
+		<div class="ui segment">
+			{{ $discordid := .RequestInfo.DiscordID }}
+			<h1>Access Denied</h1>
+			<p>Looks like you already verified with Discord ID ({{ $discordid }}) so you dont need to make new token again, if you want to make new again, please Contact Staff on discord to make new token again</p>
+		</div>
+	</div>
+</div>
+{{ end }}

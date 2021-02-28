@@ -11,8 +11,16 @@ func DiscordGenToken(c *gin.Context) {
 		resp403(c)
 		return
 	}
+	db.Exec("DELETE FROM discord_tokens WHERE userid = ?", ctx.User.ID)
+	s := rs.String(32)
+	db.Exec("INSERT INTO discord_tokens(userid, token) VALUES (?, ?)", ctx.User.ID, s)
+	simple(c, getSimple("/discordtokens"), []message{successMessage{
+		T(c, "Your new Discord token is <code>%s</code>. Do not use this if you already verify it.", key),
+	}}, nil)
+}
 
-	//db.Exec("DELETE FROM discord_tokens WHERE userid = ?", ctx.User.ID)
+func CheckDCToken(c *gin.Context) {
+	SudahVerified := 1
 
 	var (
 		Token     string      `json:"token"`
@@ -22,16 +30,13 @@ func DiscordGenToken(c *gin.Context) {
 		DiscordID interface{} `json:"discord_id"`
 	)
 
-	err := db.QueryRow("SELECT token, userid, role_id, verified, discord_id FROM discord_tokens WHERE verified = 1 AND userid = ?", ctx.User.ID).Scan(&Token, &Userid, &RoleID, &Verified, &DiscordID)
-	if err != nill {
-		key := rs.String(32)
-		db.Exec("INSERT INTO discord_tokens(userid, token) VALUES (?, ?)", ctx.User.ID, key)
-		simple(c, getSimple("/discordtokens"), []message{successMessage{
-			T(c, "Your new Discord token is <code>%s</code>. Do not use this if you already verify it.", key),
-		}}, nil)
-	} else {
-		simple(c, getSimple("/discordtokens"), []message{errorMessage{
-			T(c, "You are already verified!"),
-		}}, nil)
+    d, err := db.QueryRow("SELECT * FROM discord_tokens WHERE verified = ? AND userid = ?", ctx.User.ID, SudahVerified).Scan(&Token, &Userid, &RoleID, &Verified, &DiscordID)
+
+	if err != nil {
+		simple(c, getSimpleByFilename("discordblock.html"), nil, map[string]interface{}{
+			"DiscordID": d["discord_id"],
+		})
+        } else {
+		DiscordGenToken(c)
 	}
 }
