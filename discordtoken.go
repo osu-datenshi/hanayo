@@ -33,7 +33,7 @@ func CheckDCToken(c *gin.Context) {
 		DiscordID interface{}
 	)
 
-    d, err := db.QueryRow("SELECT token, userid, role_id, verified, discord_id FROM discord_tokens WHERE verified = 1 AND userid = ? LIMIT 1", ctx.User.ID).Scan(&Token, &Userid, &RoleID, &Verified, &DiscordID)
+    d, err := db.QueryRow("SELECT token, userid, role_id, verified, discord_id FROM discord_tokens WHERE userid = ? AND verified = 1 LIMIT 1", ctx.User.ID).Scan(&Token, &Userid, &RoleID, &Verified, &DiscordID)
 
 	if err != nil {
 		simple(c, getSimpleByFilename("discordblock.html"), nil, map[string]interface{}{
