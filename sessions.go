@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/osu-datenshi/api/common"
-	"zxq.co/x/rs"
+	"github.com/osu-datenshi/lib/rs"
 )
 
 func sessionInitializer() func(c *gin.Context) {
@@ -76,10 +76,10 @@ func sessionInitializer() func(c *gin.Context) {
 		c.Set("session", sess)
 
 		if addBannedMessage {
-			addMessage(c, warningMessage{T(c, "You have been automatically logged out of your account because your account has either been banned or locked. Should you believe this is a mistake, you can contact our support team at support@ripple.moe.")})
+			addMessage(c, warningMessage{T(c, "Akun kamu sudah otomatis dikeluarkan karena akun kamu sepertinya sudah di banned atau locked. Tolong hubungi staff jika ada masalah tertentu melalui Discord.")})
 		}
 		if passwordChanged {
-			addMessage(c, warningMessage{T(c, "You have been automatically logged out for security reasons. Please <a href='/login?redir=%s'>log back in</a>.", url.QueryEscape(c.Request.URL.Path))})
+			addMessage(c, warningMessage{T(c, "Akun kamu sudah otomatis dikeluarkan dengan alasan keamanan. Tolong <a href='/login?redir=%s'>masuk kembali</a>.", url.QueryEscape(c.Request.URL.Path))})
 		}
 
 		c.Next()
