@@ -25,12 +25,13 @@ func ccreateSubmit(c *gin.Context) {
 		return
 	}
 
+	//Ga kepake anjing nyusahin
 	// check name is valid by our criteria
-	name := strings.TrimSpace(c.PostForm("name"))
-	if !cnameRegex.MatchString(name) {
-		ccreateResp(c, errorMessage{T(c, "Your clan can have alphabets, number and these symbols <code>_[]-</code>.")})
-		return
-	}
+	//name := strings.TrimSpace(c.PostForm("name"))
+	//if !cnameRegex.MatchString(name) {
+	//	ccreateResp(c, errorMessage{T(c, "Your clan can have alphabets, number and these symbols <code>_[]-</code>.")})
+	//	return
+	//}
 
 
 	// check whether name already exists
@@ -46,9 +47,6 @@ func ccreateSubmit(c *gin.Context) {
 		ccreateResp(c, errorMessage{T(c, "Someone already took that TAG!")})
 		return
 	}
-	
-	
-	// recaptcha verify
 
 	tag := "0"
 		if c.PostForm("tag") != "" {
@@ -57,9 +55,7 @@ func ccreateSubmit(c *gin.Context) {
 	
 	// The actual registration.
 
-	res, err := db.Exec(`INSERT INTO clans(name, description, icon, tag)
-							  VALUES (?, ?, ?, ?);`,
-		name, c.PostForm("description"), c.PostForm("icon"), tag)
+	res, err := db.Exec(`INSERT INTO clans(name, description, icon, tag) VALUES (?, ?, ?, ?);`, name, c.PostForm("description"), c.PostForm("icon"), tag)
 	if err != nil {
 		ccreateResp(c, errorMessage{T(c, "Uh oh... Unexpected error! Clan might be created... I'm not sure though.")})
 		fmt.Println(err)
@@ -68,8 +64,6 @@ func ccreateSubmit(c *gin.Context) {
 	lid, _ := res.LastInsertId()
 
 	db.Exec("INSERT INTO `user_clans`(user, clan, perms) VALUES (?, ?, 8);", getContext(c).User.ID, lid)
-
-
 
 	addMessage(c, successMessage{T(c, "Clan created.")})
 	getSession(c).Save()
@@ -104,4 +98,4 @@ func ccin(s string, ss []string) bool {
 	return false
 }
 
-var cnameRegex = regexp.MustCompile(`^[A-Za-z0-9 '_\[\]-]{2,15}$`)
+//var cnameRegex = regexp.MustCompile(`^[A-Za-z0-9 '_\[\]-]{2,15}$`)
