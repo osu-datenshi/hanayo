@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"strconv"
 	"strings"
-	"regexp"
 
 	"github.com/gin-gonic/gin"
 )
