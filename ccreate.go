@@ -27,7 +27,7 @@ func ccreateSubmit(c *gin.Context) {
 
 	//Ga kepake anjing nyusahin
 	// check name is valid by our criteria
-	//name := strings.TrimSpace(c.PostForm("name"))
+	name := strings.TrimSpace(c.PostForm("name"))
 	//if !cnameRegex.MatchString(name) {
 	//	ccreateResp(c, errorMessage{T(c, "Your clan can have alphabets, number and these symbols <code>_[]-</code>.")})
 	//	return
@@ -55,7 +55,9 @@ func ccreateSubmit(c *gin.Context) {
 	
 	// The actual registration.
 
-	res, err := db.Exec(`INSERT INTO clans(name, description, icon, tag) VALUES (?, ?, ?, ?);`, name, c.PostForm("description"), c.PostForm("icon"), tag)
+	res, err := db.Exec(`INSERT INTO clans(name, description, icon, tag)
+							  VALUES (?, ?, ?, ?);`,
+		name, c.PostForm("description"), c.PostForm("icon"), tag)
 	if err != nil {
 		ccreateResp(c, errorMessage{T(c, "Uh oh... Unexpected error! Clan might be created... I'm not sure though.")})
 		fmt.Println(err)
