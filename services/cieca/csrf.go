@@ -6,7 +6,7 @@ import (
 
 	"github.com/thehowl/cieca"
 	"github.com/osu-datenshi/hanayo/services"
-	"zxq.co/x/rs"
+	"github.com/osu-datenshi/lib/rs"
 )
 
 // NewCSRF creates a new CSRF service as described in the services.CSRF
