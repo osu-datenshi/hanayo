@@ -13,7 +13,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"github.com/osu-datenshi/api/common"
-	"zxq.co/x/rs"
+	"github.com/osu-datenshi/lib/rs"
 )
 
 func loginSubmit(c *gin.Context) {

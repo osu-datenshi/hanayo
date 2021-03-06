@@ -8,7 +8,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/mailgun/mailgun-go.v1"
 	"github.com/osu-datenshi/api/common"
-	"zxq.co/x/rs"
+	"github.com/osu-datenshi/lib/rs"
 	"github.com/alexabrahall/goWebhook"
 	"encoding/json"
 	"path/filepath"

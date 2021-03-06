@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"zxq.co/x/rs"
+	"github.com/osu-datenshi/lib/rs"
 	"html/template"
 )
 

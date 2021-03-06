@@ -20,12 +20,12 @@ import (
 	"github.com/russross/blackfriday"
 	"github.com/thehowl/qsql"
 	"golang.org/x/oauth2"
-	"zxq.co/ripple/go-discord-oauth"
+	"github.com/osu-datenshi/lib/go-discord-oauth"
 	"github.com/osu-datenshi/hanayo/modules/bbcode"
 	"github.com/osu-datenshi/hanayo/modules/btcaddress"
 	"github.com/osu-datenshi/hanayo/modules/doc"
 	"github.com/osu-datenshi/hanayo/modules/fa-semantic-mappings"
-	"zxq.co/ripple/playstyle"
+	"github.com/osu-datenshi/lib/playstyle"
 	"github.com/osu-datenshi/api/common"
 )
 
@@ -599,18 +599,5 @@ type langInfo struct {
 }
 
 var languageInformation = []langInfo{
-	{"Deutsch", "de", "de"},
 	{"English (UK)", "gb", "en"},
-	{"Español", "es", "es"},
-	{"Français", "fr", "fr"},
-	{"Italiano", "it", "it"},
-	{"Nederlands", "nl", "nl"},
-	{"Polski", "pl", "pl"},
-	{"Русский", "ru", "ru"},
-	{"Română", "ro", "ro"},
-	{"Suomi", "fi", "fi"},
-	{"Svenska", "se", "sv"},
-	{"Tiếng Việt Nam", "vn", "vi"},
-	{"ภาษาไทย", "th", "th"},
-	{"한국어", "kr", "ko"},
 }

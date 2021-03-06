@@ -27,9 +27,9 @@ import (
 	"github.com/thehowl/qsql"
 	"gopkg.in/mailgun/mailgun-go.v1"
 	"gopkg.in/redis.v5"
-	"zxq.co/ripple/agplwarning"
-	"zxq.co/ripple/schiavolib"
-	"zxq.co/x/rs"
+	"github.com/osu-datenshi/lib/agplwarning"
+	"github.com/osu-datenshi/lib/schiavolib"
+	"github.com/osu-datenshi/lib/rs"
 )
 
 var startTime = time.Now()

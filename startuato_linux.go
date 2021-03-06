@@ -15,7 +15,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/rcrowley/goagain"
-	"zxq.co/ripple/schiavolib"
+	"github.com/osu-datenshi/lib/schiavolib"
 )
 
 var l net.Listener

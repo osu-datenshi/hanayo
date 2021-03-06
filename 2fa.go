@@ -15,7 +15,7 @@ import (
 	"github.com/pquerna/otp"
 	"github.com/pquerna/otp/totp"
 	"github.com/osu-datenshi/api/common"
-	"zxq.co/x/rs"
+	"github.com/osu-datenshi/lib/rs"
 )
 
 var allowedPaths = [...]string{

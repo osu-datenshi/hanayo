@@ -19,7 +19,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/nfnt/resize"
 	"github.com/osu-datenshi/api/common"
-	"zxq.co/x/rs"
+	"github.com/osu-datenshi/lib/rs"
 )
 
 func createAPIToken(c *gin.Context) {
