@@ -13,13 +13,13 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
+	"github.com/russross/blackfriday"
 	"github.com/dustin/go-humanize"
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
 	"github.com/thehowl/qsql"
-	"golang.org/x/oauth2"
-	"github.com/osu-datenshi/lib/go-discord-oauth"
+	//"golang.org/x/oauth2"
+	//"github.com/osu-datenshi/lib/go-discord-oauth"
 	"github.com/osu-datenshi/hanayo/modules/bbcode"
 	"github.com/osu-datenshi/hanayo/modules/btcaddress"
 	"github.com/osu-datenshi/hanayo/modules/doc"
@@ -227,6 +227,23 @@ var funcMap = template.FuncMap{
 		}
 		return nil, errors.New("y must be at maximum 1 parameter")
 	},
+
+	// blackfriday passes some markdown through blackfriday.
+	"blackfriday": func(m string) template.HTML {
+		// The reason of m[strings.Index...] is to remove the "header", where
+		// there is the information about the file (namely, title, old_id and
+		// reference_version)
+		return template.HTML(
+			blackfriday.Run(
+				[]byte(
+					m[strings.Index(m, "\n---\n")+5:],
+				),
+				blackfriday.WithExtensions(blackfriday.CommonExtensions),
+			),
+		)
+	},
+
+
 	// i is an inline if.
 	// i (cond) (true) (false)
 	"i": func(a bool, x, y interface{}) interface{} {
@@ -407,7 +424,7 @@ var funcMap = template.FuncMap{
 	"systemSettings": systemSettings,
 	// authCodeURL gets the auth code for discord
 	"authCodeURL": func(u int) string {
-		return getDiscord().AuthCodeURL(mustCSRFGenerate(u))
+		return ""//getDiscord().AuthCodeURL(mustCSRFGenerate(u))
 	},
 	// perc returns a percentage
 	"perc": func(i, total float64) string {
@@ -556,15 +573,15 @@ func systemSettings(names ...string) map[string]systemSetting {
 	return settings
 }
 
-func getDiscord() *oauth2.Config {
-	return &oauth2.Config{
-		ClientID:     config.DiscordOAuthID,
-		ClientSecret: config.DiscordOAuthSecret,
-		RedirectURL:  config.BaseURL + "/settings/discord/finish",
-		Endpoint:     discordoauth.Endpoint,
-		Scopes:       []string{"identify"},
-	}
-}
+//func getDiscord() *oauth2.Config {
+//	return &oauth2.Config{
+//		ClientID:     config.DiscordOAuthID,
+//		ClientSecret: config.DiscordOAuthSecret,
+//		RedirectURL:  config.BaseURL + "/settings/discord/finish",
+//		Endpoint:     discordoauth.Endpoint,
+//		Scopes:       []string{"identify"},
+//	}
+//}
 
 func getLanguageFromGin(c *gin.Context) string {
 	for _, l := range getLang(c) {
