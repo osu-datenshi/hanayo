@@ -65,7 +65,8 @@
                                         </div>
                                 </div>
                         </div>
-                        {{ navbarItem .Path (.T "Donate" | printf "<i class=\"red heart icon\"></i>%s") "https://trakteer.id/osudatenshi" }}
+                        {{ navbarItem .Path (.T "" | printf "<i class=\"red heart icon\"></i>%s") "https://trakteer.id/osudatenshi" }}
+			{{ navbarItem .Path (.T "" | printf "<i class=\"fab fa-discord\"></i>%s") "https://link.troke.id/datenshi" }}
                         {{ if .Context.User.Username }}
 			<div class="ui dropdown item">
                         	<img id="avatar" class="ui avatar image" src="{{ config "AvatarURL" }}/{{ .Context.User.ID }}">

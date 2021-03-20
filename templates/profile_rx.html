@@ -183,7 +183,7 @@
 						</div>
 						<div class="column">
 							{{ range $k, $v := (slice .std .taiko .ctb .mania) }}
-							{{ $maxcombo := qb "SELECT FORMAT(scores_relax.max_combo,0) AS combo FROM scores_relax WHERE userid = ? ORDER BY max_combo DESC;" $.UserID}}
+							{{ $maxcombo := qb "SELECT FORMAT(scores_master.max_combo,0) AS combo FROM scores_master WHERE userid = ? AND special_mode = 1 ORDER BY max_combo DESC;" $.UserID}}
 								<div data-mode="{{ $k }}" {{ if ne $k (int $favouritemode) }} hidden{{ end }}>
 									<table class="ui very basic two column compact table nopad">
 										<tbody>
