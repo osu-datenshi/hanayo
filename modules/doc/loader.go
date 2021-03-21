@@ -133,7 +133,6 @@ func loadLanguages(langs []string, fname string, referenceMD5 string) (map[strin
 		}
 
 		header := loadHeader(data)
-		webTitle := baseTemplateData
 
 		m[lang] = File{
 			IsUpdated:      lang == referenceLanguage || header.ReferenceVersion == referenceMD5,
@@ -142,7 +141,10 @@ func loadLanguages(langs []string, fname string, referenceMD5 string) (map[strin
 		}
 	}
 
-	webTitle.TitleBar = T(c, "%s", header.Title)
+	resp(c, 200, "doc_content.html", &baseTemplateData{
+		TitleBar:  header.Title,
+		KyutGrill: "documentation.jpg",
+	})
 
 	return m, nil
 }
