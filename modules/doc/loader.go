@@ -10,7 +10,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/gin-gonic/gin"
 	"gopkg.in/yaml.v2"
 )
 
@@ -140,11 +139,6 @@ func loadLanguages(langs []string, fname string, referenceMD5 string) (map[strin
 			referencesFile: "website-docs/" + lang + "/" + fname,
 		}
 	}
-
-	resp(c, 200, "doc_content.html", &baseTemplateData{
-		TitleBar:  header.Title,
-		KyutGrill: "documentation.jpg",
-	})
 
 	return m, nil
 }
