@@ -27,8 +27,8 @@ func ip_check(c *gin.Context) {
 		panic(err.Error())
 	}
 	if db.QueryRow("SELECT alamat_ip FROM simpen_ip WHERE alamat_ip = ?", clientIP(c)).
-                Scan(new(int)) != sql.ErrNoRows {
-        } else {
+        Scan(new(int)) != sql.ErrNoRows {
+    } else {
 		db.Exec("INSERT INTO simpen_ip(alamat_ip, kode_negara) VALUES (?, ?)", clientIP(c), string(data))
 	}
 	respon_ip(c)
@@ -41,14 +41,18 @@ func respon_ip(c *gin.Context) {
 		alamatIp string
 		kodeNegara string
 	)
-        err := db.QueryRow("SELECT id, alamat_ip, kode_negara FROM simpen_ip WHERE alamat_ip = ? AND kode_negara = ?", clientIP(c), kn).Scan(&ID, &alamatIp, &kodeNegara)
-
-	if err != nil {
-		simple(c, getSimpleByFilename("register/block.html"), nil, map[string]interface{}{
-			"Alamat_ip": clientIP(c),
-		})
-        } else {
+	if !regblockHidup() {
 		register(c)
+	} else {
+		err := db.QueryRow("SELECT id, alamat_ip, kode_negara FROM simpen_ip WHERE alamat_ip = ? AND kode_negara = ?", clientIP(c), kn).Scan(&ID, &alamatIp, &kodeNegara)
+
+		if err != nil {
+			simple(c, getSimpleByFilename("register/block.html"), nil, map[string]interface{}{
+				"Alamat_ip": clientIP(c),
+			})
+    	} else {
+			register(c)
+		}
 	}
 }
 
@@ -189,6 +193,8 @@ func registerSubmit(c *gin.Context) {
 
 	rd.Incr("ripple:registered_users")
 	addMessage(c, successMessage{T(c, "You have been successfully registered on Datenshi! You now need to verify your account.")})
+	// hapus ip
+	db.Exec("DELETE FROM simpen_ip WHERE alamat_ip = ?", clientIP(c))
 	getSession(c).Save()
 	c.Redirect(302, "/register/verify?u="+strconv.Itoa(int(lid)))
 }
@@ -207,6 +213,11 @@ func registrationsEnabled() bool {
 	var enabled bool
 	db.QueryRow("SELECT value_int FROM system_settings WHERE name = 'registrations_enabled'").Scan(&enabled)
 	return enabled
+}
+func regblockHidup() bool {
+	var hidup bool
+    db.QueryRow("SELECT value_int FROM system_settings WHERE name = 'regblock'").Scan(&hidup)
+	return hidup
 }
 
 func verifyAccount(c *gin.Context) {
