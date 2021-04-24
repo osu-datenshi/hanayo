@@ -32,8 +32,8 @@
 							<input tabindex="3" type="email" name="email" placeholder="{{ .T "Email" }}" value="{{ .FormData.email }}" required>
 						</div>
 						<div class="field">
-							<label>{{ .T "Invite Code" }}</label>
-							<input tabindex="4" type="text" name="invitecode" placeholder="{{ .T "Invite Code" }}" value="{{ .FormData.invitecode }}" required>
+							<label><a href="{{ .Conf.DiscordServer }}">{{ .T "Invite Code" }}</a></label>
+							<input tabindex="4" type="text" name="invitecode" placeholder="{{ .T "Please go to Discord and look at the bottom of welcome channel" }}" value="{{ .FormData.invitecode }}" required>
 						</div>
 						{{ with config "RecaptchaSite" }}
 						<div class="field">

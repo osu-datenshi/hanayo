@@ -1,13 +1,17 @@
 {{/*###
 Handler=/doc/:id
+TitleBar=View Document
 KyutGrill=documentation.jpg
 HugeHeadingRight=true
 */}}
 {{ define "tpl" }}
 <div class="ui container">
 	<div class="ui segments">
-		{{ $ := . }}
-		{{ with documentationData (.Gin.Param "id") (or (.Gin.Query "lang") .Context.Language) }}
+			{{ $ := . }}
+			{{ with documentationData (.Gin.Param "id") (or (.Gin.Query "lang") .Context.Language) }}
+			<meta property="og:type" content="website" />
+			<meta property="og:title" content="{{ .Title }}" />
+			<meta property="og:description" content="{{ blackfriday .Data }}" />
 			{{ if .Title }}
 				<div class="ui segment">
 					<h1 class="ui header">{{ .Title }}</h1>
