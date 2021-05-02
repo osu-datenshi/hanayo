@@ -248,8 +248,14 @@ func verifyAccount(c *gin.Context) {
 	})
 }
 
-func BlockerIPV6() {
-	resp(c, 200, "ipv6.html")
+func BlockerIPV6(c *gin.Context) {
+	if getContext(c).User.ID != 0 {
+		resp403(c)
+		return
+	}
+	simple(c, getSimpleByFilename("ipv6.html"), nil, map[string]interface{}{
+		"IPV6address": c.ClientIP(),
+	})
 }
 
 func welcome(c *gin.Context) {

@@ -2,8 +2,10 @@
 <div class="ui container">
     <div class="ui stackable grid">
         <div class="wide column">
+            {{ $getipv6 := .RequestInfo.IPV6address }}
             <div class="ui red center aligned segment">
                 <h3 class="ui header">{{ .T "Please disable your IPV6!" }}</h3>
+                <h1>{{ $getipv6 }}</h1>
                 <img src="https://raw.githubusercontent.com/osu-datenshi/assets/master/fuck-ipv6.jpg"></img>
 	        </div>
             <div class="ui segmen">

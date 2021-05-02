@@ -37,7 +37,7 @@ func CheckDCToken(c *gin.Context) {
 		simple(c, getSimpleByFilename("discordblock.html"), nil, map[string]interface{}{
 			"DiscordID": DiscordID,
 		})
-        } else {
+    } else {
 		DiscordGenResp(c)
 	}
 }
