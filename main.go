@@ -293,8 +293,6 @@ func generateEngine() *gin.Engine {
 	r.GET("/c/:cid", clanPage)
 	r.GET("/b/:bid", beatmapInfo)
 
-	r.GET("/blockedipv6", BlockerIPV6)
-
 	r.POST("/pwreset", passwordReset)
 	r.GET("/pwreset/continue", passwordResetContinue)
 	r.POST("/pwreset/continue", passwordResetContinueSubmit)
