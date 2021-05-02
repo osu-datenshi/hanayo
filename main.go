@@ -270,7 +270,6 @@ func generateEngine() *gin.Engine {
 		pagemappings.CheckRedirect,
 		sessions.Sessions("session", store),
 		sessionInitializer(),
-		BlockIp(),
 		rateLimiter(false),
 		twoFALock,
 	)
