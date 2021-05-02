@@ -1,17 +1,16 @@
 {{/*###
 Handler=/blockedipv6
+TitleBar=Please disable the IPV6!
 */}}
 {{ define "tpl" }}
 <div class="ui container">
     <div class="ui stackable grid">
         <div class="wide column">
-            {{ $getipv6 := .RequestInfo.IPV6address }}
             <div class="ui red center aligned segment">
-                <h3 class="ui header">{{ .T "Please disable your IPV6!" }}</h3>
-                <h1>{{ $getipv6 }}</h1>
+                <h1 class="ui header">{{ .T "Please disable your IPV6 before register!" }}</h1>
                 <img src="https://raw.githubusercontent.com/osu-datenshi/assets/master/fuck-ipv6.jpg"></img>
 	        </div>
-            <div class="ui segmen">
+            <div class="ui segment">
                 <li><a href="https://answers.uillinois.edu/uis/page.php?id=99981">How to disable IPV6 (Windows 10)</a></li>
                 <li><a href="https://answers.uillinois.edu/uis/page.php?id=99966">How to disable IPV6 (Windows 7/8)</a></li>
                 <li><a href="https://www.techrepublic.com/article/how-to-disable-ipv6-on-linux/">How to disable IPV6 (Linux)</a></li>
