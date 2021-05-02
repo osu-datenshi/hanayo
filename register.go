@@ -249,9 +249,7 @@ func verifyAccount(c *gin.Context) {
 }
 
 func BlockerIPV6(c *gin.Context) {
-	resp(c, 200, "ipv6.html", &baseTemplateData{
-		TitleBar:       "Please disable IPV6!",
-	})
+	resp(c, 200, "ipv6.html")
 }
 
 func welcome(c *gin.Context) {
