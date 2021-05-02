@@ -19,18 +19,26 @@ import (
 
 func ip_check(c *gin.Context) {
 	raw, err := http.Get(config.IP_API + "/" + clientIP(c) + "/country")
+	// Redirect kalau ada ipv6
+	if strings.Contains(c.ClientIP(), ":") {
+		c.Redirect(302, "/blockedipv6")
+	}
+
 	if err != nil {
 		panic(err.Error())
 	}
+
 	data, err := ioutil.ReadAll(raw.Body)
 	if err != nil {
 		panic(err.Error())
 	}
+
 	if db.QueryRow("SELECT alamat_ip FROM simpen_ip WHERE alamat_ip = ?", clientIP(c)).
         Scan(new(int)) != sql.ErrNoRows {
     } else {
 		db.Exec("INSERT INTO simpen_ip(alamat_ip, kode_negara) VALUES (?, ?)", clientIP(c), string(data))
 	}
+	
 	respon_ip(c)
 }
 
