@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/mailgun/mailgun-go.v1"
+	"gopkg.in/gomail.v2"
 	"github.com/osu-datenshi/api/common"
 	"github.com/osu-datenshi/lib/rs"
 	"github.com/alexabrahall/goWebhook"
@@ -75,6 +76,8 @@ func passwordReset(c *gin.Context) {
 		resp500(c)
 		return
 	}
+	
+	sendToZoho(username, email, key)
 
 	eWrap.Content = "Hey"+username+"! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please click the button below to reset your password on Datenshi. Otherwise, silently ignore this email."
 	eWrap.Url = config.BaseURL+"/pwreset/continue?k="+key
@@ -118,6 +121,26 @@ func passwordReset(c *gin.Context) {
 	addMessage(c, successMessage{T(c, "Done! You should shortly receive an email from us at the email you used to sign up on Datenshi.")})
 	getSession(c).Save()
 	c.Redirect(302, "/")
+}
+
+func sendToZoho(nicknamedaten, emaildaten, kunciNya) {
+	mailer := gomail.NewMessage()
+    mailer.SetHeader("From", config.ZohoSenderName)
+    mailer.SetHeader("To", emaildaten)
+    mailer.SetHeader("Subject", "Datenshi Password Recovery")
+    mailer.SetBody("text/html", "Hey "+nicknamedaten+"! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please click the button below to reset your password on Datenshi. Otherwise, silently ignore this email.<br><a href="+config.BaseURL+"/pwreset/continue?k="+kunciNya+">Click Here for reset your password</a>")
+
+    dialer := gomail.NewDialer(
+        config.ZohoSenderHost,
+        config.ZohoSenderPort,
+        config.ZohoSenderAuth,
+        config.ZohoSenderPassword,
+    )
+
+    err := dialer.DialAndSend(mailer)
+    if err != nil {
+        log.Fatal(err.Error())
+    }
 }
 
 func passwordResetContinue(c *gin.Context) {
