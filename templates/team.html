@@ -30,6 +30,14 @@ KyutGrill=team2.jpg
 			<h1 class="ui heading">{{ .T "Beatmap Nominators" }}</h1>
 			{{ template "userGroup" (.Get "badges/members?id=%d" 5) }}
 		</div>
+		<div class="ui left algined segment">
+                        <h1 class="ui heading">{{ .T "Designer" }}</h1>
+                        {{ template "userGroup" (.Get "badges/members?id=%d" 1021) }}
+                </div>
+		<div class="ui left algined segment">
+			<h1 class="ui heading">{{ .T "Brand Ambassador" }}</h1>
+			{{ template "userGroup" (.Get "badges/members?id=%d" 1020) }}
+		</div>
 		<div class="ui left aligned segment">
 			<h1 class="ui heading">{{ .T "Replay Watcher" }}</h1>
 			{{ template "userGroup" (.Get "badges/members?id=%d" 1014) }}
