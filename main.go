@@ -25,7 +25,6 @@ import (
 	"github.com/osu-datenshi/hanayo/services/cieca"
 	"github.com/thehowl/conf"
 	"github.com/thehowl/qsql"
-	"gopkg.in/mailgun/mailgun-go.v1"
 	"gopkg.in/redis.v5"
 	"github.com/osu-datenshi/lib/agplwarning"
 	"github.com/osu-datenshi/lib/schiavolib"
@@ -66,11 +65,6 @@ var (
 		BaseAPIPublic string
 
 		Production int `description:"This is a fake configuration value. All of the following from now on should only really be set in a production environment."`
-
-		MailgunDomain        string
-		MailgunPrivateAPIKey string
-		MailgunPublicAPIKey  string
-		MailgunFrom          string
 
 		RecaptchaSite    string
 		RecaptchaPrivate string
@@ -137,8 +131,7 @@ func main() {
 		&config.APISecret:        "Potato",
 		&config.IP_API:           "https://ip.zxq.co",
 		&config.DiscordServer:    "https://discord.io/datenshi",
-		&config.MainRippleFolder: "/root/ripple/",
-		&config.MailgunFrom:      `"Datenshi" <noreply@datenshi.xyz>`,
+		&config.MainRippleFolder: "/root/datenshi/",
 	}
 	for key, value := range configDefaults {
 		if *key == "" {
@@ -155,13 +148,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
-	// initialise mailgun
-	mg = mailgun.NewMailgun(
-		config.MailgunDomain,
-		config.MailgunPrivateAPIKey,
-		config.MailgunPublicAPIKey,
-	)
 
 	// initialise CSRF service
 	CSRF = cieca.NewCSRF()

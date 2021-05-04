@@ -6,7 +6,6 @@ import (
 	"regexp"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
-	"gopkg.in/mailgun/mailgun-go.v1"
 	"gopkg.in/gomail.v2"
 	"github.com/osu-datenshi/api/common"
 	"github.com/osu-datenshi/lib/rs"
@@ -18,14 +17,7 @@ import (
 	"log"
 )
 
-type emailWrapper struct {
-	Content string
-	Url string
-}
-
 func passwordReset(c *gin.Context) {
-	var eWrap emailWrapper;
-
 	ctx := getContext(c)
 	if ctx.User.ID != 0 {
 		simpleReply(c, errorMessage{T(c, "You're already logged in!")})
@@ -78,46 +70,8 @@ func passwordReset(c *gin.Context) {
 		return
 	}
 
+	// KIRIM EMAIL MENGGUNAKAN ZOHO
 	sendToZoho(username, email, key)
-
-	eWrap.Content = "Hey"+username+"! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please click the button below to reset your password on Datenshi. Otherwise, silently ignore this email."
-	eWrap.Url = config.BaseURL+"/pwreset/continue?k="+key
-
-	cwd, _ := os.Getwd()
-
-	// Get email html template in string format
-	htmlContent, err := ParseTemplate(filepath.Join(cwd, "templates", "./email/pw-recover.html"), eWrap)
-	if err != nil {
-		c.Error(err)
-		resp500(c)
-		return
-	}
-	fmt.Println(htmlContent)
-
-	// Get email text template in string format
-	textContent, err := ParseTemplate(filepath.Join(cwd, "templates", "./email/pw-recover.tmpl"), eWrap)
-	if err != nil {
-		c.Error(err)
-		resp500(c)
-		return
-	}
-	fmt.Println(textContent)
-
-	msg := mailgun.NewMessage(
-		config.MailgunFrom,
-		T(c, "Datenshi password recovery instructions"),
-		textContent,
-		email,
-	)
-
-	msg.SetHtml(htmlContent)
-	_, _, err = mg.Send(msg)
-
-	if err != nil {
-		c.Error(err)
-		resp500(c)
-		return
-	}
 
 	addMessage(c, successMessage{T(c, "Done! You should shortly receive an email from us at the email you used to sign up on Datenshi.")})
 	getSession(c).Save()
@@ -129,7 +83,7 @@ func sendToZoho(nicknamedaten, emaildaten, kunciNya string) {
     mailer.SetHeader("From", config.ZohoSenderName)
     mailer.SetHeader("To", emaildaten)
     mailer.SetHeader("Subject", "Datenshi Password Recovery")
-    mailer.SetBody("text/html", "Hey "+nicknamedaten+"! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please click the button below to reset your password on Datenshi. Otherwise, silently ignore this email.<br><a href='"+config.BaseURL+"/pwreset/continue?k="+kunciNya+"'>Click Here for reset your password</a>")
+    mailer.SetBody("text/html", "Hey "+nicknamedaten+"! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please click the button below to reset your password on Datenshi. Otherwise, silently ignore this email.<br><a href='"+config.BaseURL+"/pwreset/continue?k="+kunciNya+"'>Click Here for reset your password</a><br><br>If you still having a problem, please reply to this email or go to the our <a href='https://link.troke.id/datenshi'>discord server</a>!")
 
     dialer := gomail.NewDialer(
         config.ZohoSenderHost,
