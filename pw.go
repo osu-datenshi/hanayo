@@ -123,7 +123,7 @@ func passwordReset(c *gin.Context) {
 	c.Redirect(302, "/")
 }
 
-func sendToZoho(nicknamedaten, emaildaten, kunciNya) {
+func sendToZoho(nicknamedaten emaildaten, kunciNya string) {
 	mailer := gomail.NewMessage()
     mailer.SetHeader("From", config.ZohoSenderName)
     mailer.SetHeader("To", emaildaten)
