@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 	"os"
 	"fmt"
+	"log"
 )
 
 type emailWrapper struct {
