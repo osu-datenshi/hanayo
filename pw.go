@@ -11,9 +11,6 @@ import (
 	"github.com/osu-datenshi/lib/rs"
 	"github.com/alexabrahall/goWebhook"
 	"encoding/json"
-	"path/filepath"
-	"os"
-	"fmt"
 	"log"
 )
 
@@ -94,7 +91,7 @@ func sendToZoho(nicknamedaten, emaildaten, kunciNya string) {
 
     err := dialer.DialAndSend(mailer)
     if err != nil {
-        log.Fatal(err.Error())
+        c.Error(err)
     }
 }
 
