@@ -76,7 +76,7 @@ func passwordReset(c *gin.Context) {
 		resp500(c)
 		return
 	}
-	
+
 	sendToZoho(username, email, key)
 
 	eWrap.Content = "Hey"+username+"! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please click the button below to reset your password on Datenshi. Otherwise, silently ignore this email."
@@ -128,7 +128,7 @@ func sendToZoho(nicknamedaten, emaildaten, kunciNya) {
     mailer.SetHeader("From", config.ZohoSenderName)
     mailer.SetHeader("To", emaildaten)
     mailer.SetHeader("Subject", "Datenshi Password Recovery")
-    mailer.SetBody("text/html", "Hey "+nicknamedaten+"! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please click the button below to reset your password on Datenshi. Otherwise, silently ignore this email.<br><a href="+config.BaseURL+"/pwreset/continue?k="+kunciNya+">Click Here for reset your password</a>")
+    mailer.SetBody("text/html", "Hey "+nicknamedaten+"! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please click the button below to reset your password on Datenshi. Otherwise, silently ignore this email.<br><a href='"+config.BaseURL+"/pwreset/continue?k="+kunciNya+"'>Click Here for reset your password</a>")
 
     dialer := gomail.NewDialer(
         config.ZohoSenderHost,
