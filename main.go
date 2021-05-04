@@ -91,7 +91,6 @@ var (
 	configMap map[string]interface{}
 	db        *sqlx.DB
 	qb        *qsql.DB
-	mg        mailgun.Mailgun
 	rd        *redis.Client
 )
 
