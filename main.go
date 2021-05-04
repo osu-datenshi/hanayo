@@ -80,6 +80,13 @@ var (
 		DonorBotURL        string
 		DonorBotSecret     string
 
+		// New sender mail, we are going to removed mailgun
+		ZohoSenderHost		string
+		ZohoSenderPort 		int
+		ZohoSenderName 		string
+		ZohoSenderAuth 		string
+		ZohoSenderPassword 	string
+
 		CoinbaseAPIKey    string
 		CoinbaseAPISecret string
 
