@@ -11,7 +11,6 @@ import (
 	"github.com/osu-datenshi/lib/rs"
 	"github.com/alexabrahall/goWebhook"
 	"encoding/json"
-	"log"
 )
 
 func passwordReset(c *gin.Context) {
@@ -68,14 +67,14 @@ func passwordReset(c *gin.Context) {
 	}
 
 	// KIRIM EMAIL MENGGUNAKAN ZOHO
-	sendToZoho(username, email, key)
+	sendToZoho(c, username, email, key)
 
 	addMessage(c, successMessage{T(c, "Done! You should shortly receive an email from us at the email you used to sign up on Datenshi.")})
 	getSession(c).Save()
 	c.Redirect(302, "/")
 }
 
-func sendToZoho(nicknamedaten, emaildaten, kunciNya string) {
+func sendToZoho(c *gin.Context, nicknamedaten, emaildaten, kunciNya string) {
 	mailer := gomail.NewMessage()
     mailer.SetHeader("From", config.ZohoSenderName)
     mailer.SetHeader("To", emaildaten)
