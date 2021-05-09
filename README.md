@@ -4,7 +4,9 @@ Original source dari [Ripple Hanayo](https://github.com/osuripple/hanayo) dan se
 
 Source ini digunakan untuk bagian website nya
 
-cara build `go get https://github.com/osu-datenshi/hanayo` dan setelah itu `go build`
+Pastikan Golang yang dipakai adalah Go 1.15.11 maksimal, jangan pernah pakai 1.16
+
+cara build `go get github.com/osu-datenshi/hanayo` dan setelah itu `go build`
 
 Reminder : Static folder dipisahkan agar mempermudah proses development, dan untuk folder profile background (`/static/profbackgrounds`) perlu dibuatkan manual di dalam vps, sedangkan folder utama di upload ke server yg lain agar website load lebih cepat seperti CDN, dan folder `website-docs` juga ikut dipisahkan
 
