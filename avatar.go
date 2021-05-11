@@ -31,7 +31,7 @@ func avatarSubmit(c *gin.Context) {
 		m = errorMessage{T(c, "An error occurred.")}
 		return
 	}
-	koewakeoawkeoakeoawke test
+	koewakeoawkeoakeoawke testd kadakdkadkaksdksa
 	img, _, err := image.Decode(file)
 	if err != nil {
 		m = errorMessage{T(c, "An error occurred.")}
