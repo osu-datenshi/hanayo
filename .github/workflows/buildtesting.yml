@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         go: [ '1.16' ]
-    name: Go ${{ matrix.go }} sample
+    name: Building in golang version ${{ matrix.go }} 
     steps:
       - uses: actions/checkout@v2
       - name: Building Go
