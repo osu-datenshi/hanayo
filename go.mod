@@ -32,7 +32,7 @@ require (
 	github.com/pborman/uuid v1.2.1 // indirect
 	github.com/pquerna/otp v1.3.0
 	github.com/rjeczalik/notify v0.9.2
-	github.com/russross/blackfriday v1.6.0
+	github.com/russross/blackfriday/v2 v2.1.0
 	github.com/thehowl/cieca v0.0.0-20161122163418-3d95e04c9b12
 	github.com/thehowl/conf v0.1.0
 	github.com/thehowl/qsql v0.0.0-20160712153739-9b9405451f47
