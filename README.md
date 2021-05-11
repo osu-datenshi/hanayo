@@ -1,4 +1,5 @@
 # Hanayo
+![brah](https://github.com/osu-datenshi/hanayo/actions/workflows/buildtesting.yml/badge.svg?branch=master)
 
 Original source dari [Ripple Hanayo](https://github.com/osuripple/hanayo)
 
