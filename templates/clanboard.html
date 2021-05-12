@@ -5,7 +5,7 @@ KyutGrill=leaderboard2.jpg
 */}}
 {{ define "tpl" }}
 <div class="ui container">
-	{{ $favMode := int(_or (atoi (.Gin.Query "mode"))) }}
+	{{ $favMode := _or (atoi (.Gin.Query "mode")) }}
 	{{ $spMode := _or (atoi (.Gin.Query "smode")) }}
 	<script>
 		var favouriteMode = {{ $favMode }};
@@ -29,7 +29,7 @@ KyutGrill=leaderboard2.jpg
 	</table>
 	<table class="ui compact unstackable table">
 		<thead>
-		{{ range (.Get "clans/stats/all?m=%d&sm=%d" $favMode $spMode).clans }}
+		{{ range (.Get "clans/stats/all?m=%.0f&sm=%d" $favMode $spMode).clans }}
 			{{ if .name }}
 			<tr>
 				<th class="four wide">#{{ .rank }} </th>
