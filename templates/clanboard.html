@@ -6,15 +6,16 @@ KyutGrill=leaderboard2.jpg
 {{ define "tpl" }}
 <div class="ui container">
 	{{ $favMode := _or (atoi (.Gin.Query "mode")) }}
+	{{ $spMode := _or (atoi (.Gin.Query "smode")) }}
 	<script>
 		var favouriteMode = {{ $favMode }};
 		var page = {{ .Gin.Query "p" | atoint | atLeastOne }};
 	</script>
 	<div class="ui four item menu" id="mode-menu">
-			<a class="0 item" href="/clans?mode=0">osu!</a>
-			<a class="1 item" href="/clans?mode=1">osu!taiko</a>
-			<a class="2 item" href="/clans?mode=2">osu!catch</a>
-			<a class="3 item" href="/clans?mode=3">osu!mania</a>
+			<a class="0 item" href="/clans?mode=0&smode=0">osu!</a>
+			<a class="1 item" href="/clans?mode=1&smode=0">osu!taiko</a>
+			<a class="2 item" href="/clans?mode=2&smode=0">osu!catch</a>
+			<a class="3 item" href="/clans?mode=3&smode=0">osu!mania</a>
 	</div>
 	<table class="ui fixed unstackable table">
 		<thead>
@@ -28,7 +29,7 @@ KyutGrill=leaderboard2.jpg
 	</table>
 	<table class="ui compact unstackable table">
 		<thead>
-		{{ range (.Get "clans/stats/all?m=$d" $favMode).clans }}
+		{{ range (.Get "clans/stats/all?m=%d&sm=%d" int($favMode) $spMode).clans }}
 			{{ if .name }}
 			<tr>
 				<th class="four wide">#{{ .rank }} </th>
