@@ -370,6 +370,8 @@ func in(s string, ss []string) bool {
 func checkBlacklist(s string) bool {
 	bad := false
 	rows, err := db.Query("select name, type from name_blacklist where active = 1")
+	if err != nil {
+	}
 	defer rows.Close()
 	for rows.Next() {
 		var (
