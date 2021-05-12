@@ -187,12 +187,24 @@ func registerSubmit(c *gin.Context) {
 		return
 	}
 	lid, _ := res.LastInsertId()
-  
-	for _, tableName := range []string{"users_stats", "rx_stats"}{
-		res, err = db.Exec("INSERT INTO `"+tableName+"`(id, username, user_color, user_style, ranked_score_std, playcount_std, total_score_std, ranked_score_taiko, playcount_taiko, total_score_taiko, ranked_score_ctb, playcount_ctb, total_score_ctb, ranked_score_mania, playcount_mania, total_score_mania) VALUES (?, ?, 'black', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);", lid, username)
-		if err != nil {
-			fmt.Println(err)
+
+	masterStatValues := make([]string, 12)
+	masterStatRankValues := nil
+	for i:=0; i<3; i++ {
+		for j:=0; j<4; i++ {
+			mstStatId := (lid-1) * 12 + i * 4 + j + 1
+			masterStatValues[i*4+j] = fmt.Sprintf("(%d,%d,%d,%d)",mstStatId,lid,i,j)
+			masterStatRankValues = make([]string, 5)
+			for k:=0; k<5; k++ {
+				masterStatRankValues[k] = fmt.Sprintf("(%d,%d,0)",mstStatId,8-k)
+			}
+			db.Exec(fmt.Sprintf("insert into `master_stat_ranks` (mst_stat_id, grade_level, grade_count) values %s;",strings.Join(masterStatRankValues,",")))
 		}
+	}
+	masterStatStmt := fmt.Sprintf("insert into `master_stats` (id, user_id, special_mode, game_mode) values %s;",strings.Join(masterStatValues,","))
+	res, err = db.Exec(masterStatStmt)
+	if err != nil {
+		fmt.Println(err)
 	}
 	schiavo.CMs.Send(fmt.Sprintf("User (**%s** | %s) registered from %s", username, c.PostForm("email"), clientIP(c)))
 
