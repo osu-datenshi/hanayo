@@ -119,7 +119,7 @@ func registerSubmit(c *gin.Context) {
 
 	// usernames with both _ and spaces are not allowed
 	if strings.Contains(username, "_") && strings.Contains(username, " ") {
-		registerResp(c, errorMessage{T(c, "An username or invite code can't contain both underscores and spaces.")})
+		registerResp(c, errorMessage{T(c, "An username can't contain both underscores and spaces.")})
 		return
 	}
 
@@ -392,7 +392,7 @@ func checkBlacklist(s string) bool {
 			bad = bad || (bliName == s)
 		}
 	}
-	return !bad
+	return bad
 }
 
 var usernameRegex = regexp.MustCompile(`^[A-Za-z0-9 _\[\]-]{2,15}$`)
