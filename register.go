@@ -99,7 +99,8 @@ func registerSubmit(c *gin.Context) {
 		return
 	}
 
-	// check whether an username is e.g. cookiezi, shigetora, peppy, wubwoofwolf, loctav
+	// check whether the username is somewhat not good to use
+	// TODO: add name_blacklist table into process
 	if in(strings.ToLower(username), forbiddenUsernames) {
 		registerResp(c, errorMessage{T(c, "You're not allowed to register with that username.")})
 		return
@@ -188,21 +189,24 @@ func registerSubmit(c *gin.Context) {
 	}
 	lid, _ := res.LastInsertId()
 
+	// add master_stats and master_stat_ranks
 	masterStatValues := make([]string, 12)
-	masterStatRankValues := nil
 	for i:=0; i<3; i++ {
 		for j:=0; j<4; i++ {
-			mstStatId := (lid-1) * 12 + i * 4 + j + 1
+			mstStatId := (lid-1) * 12 + int64(i * 4 + j + 1)
 			masterStatValues[i*4+j] = fmt.Sprintf("(%d,%d,%d,%d)",mstStatId,lid,i,j)
-			masterStatRankValues = make([]string, 5)
+			masterStatRankValues := make([]string, 5)
 			for k:=0; k<5; k++ {
 				masterStatRankValues[k] = fmt.Sprintf("(%d,%d,0)",mstStatId,8-k)
 			}
 			db.Exec(fmt.Sprintf("insert into `master_stat_ranks` (mst_stat_id, grade_level, grade_count) values %s;",strings.Join(masterStatRankValues,",")))
 		}
 	}
-	masterStatStmt := fmt.Sprintf("insert into `master_stats` (id, user_id, special_mode, game_mode) values %s;",strings.Join(masterStatValues,","))
-	res, err = db.Exec(masterStatStmt)
+	res, err = db.Exec(fmt.Sprintf("insert into `master_stats` (id, user_id, special_mode, game_mode) values %s;",strings.Join(masterStatValues,",")))
+	if err != nil {
+		fmt.Println(err)
+	}
+	res, err = db.Exec("insert into `user_config` (id) values (%d);", lid)
 	if err != nil {
 		fmt.Println(err)
 	}
