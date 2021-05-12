@@ -6,7 +6,7 @@ NoCompile=true
         <div class="ui two column stackable grid">
                 {{ $teamJSON := teamJSON }}
                 {{ range .members }}
-                        {{/* ignore fokabot */}}
+                        {{/* ignore yohane */}}
                         {{ if ne (int .id) 1 }}
                                 {{ $tj := index $teamJSON (print .id)}}
                                 <div class="column">
