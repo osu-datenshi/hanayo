@@ -50,16 +50,16 @@
 					</div>
 					<div class="table element">
 						<h1 class="ui header">
-						{{ $oof := . }}
-                                                {{ if  eq $oof.clan.tag "" }}
-                                                {{ $global.T "" }}
-                                                {{ else }}
-                                                <a href="/c/{{ $oof.clan.id }}?mode=0">[{{ $oof.clan.tag }}]</a>
-                                                {{ end }}
-                                                {{ $ochi  := has .privileges 4 }}
-                                                {{ if $ochi }}
+						{{ $self := . }}
+            {{ if  eq $self.clan.tag "" }}
+            {{ $global.T "" }}
+            {{ else }}
+            <a href="/c/{{ $self.clan.id }}?mode=0">[{{ $self.clan.tag }}]</a>
+            {{ end }}
+            {{ $donor := has .privileges 4 }}
+            {{ if $donor }}
 						<b class="animated_rainbow_1">{{ .username }}
-                                                </b>
+            </b>
 						{{ else }}
 						{{ .username }}
 						{{ end }}
