@@ -5,7 +5,8 @@ Include=clan_members.html
 <div class="ui container">
 
 	{{ if .ClanID }}
-		{{ $gqm := .Gin.Query "mode" }}
+		{{ $gqm := .Gin.Query "mode" | int }}
+		{{ $spm := .Gin.Query "smode" | int }}
 		{{ $global := . }}
 		{{ $favouritemode := $gqm }}
 		{{ range (.Get "clans?id=%d" .ClanID).clans }}
@@ -27,11 +28,15 @@ Include=clan_members.html
 				</div>
 			</div>
 		</div>
+		<div class="ui two item bottom attached menu" id="mode-menu">
+			<a class="mode item" href="/c/{{ .id }}?mode={{ $gqm }}&smode=0">Vanilla</a>
+			<a class="mode item" href="/c/{{ .id }}?mode={{ $gqm }}&smode=1">Relax</a>
+		</div>
 		<div class="ui four item bottom attached menu" id="mode-menu">
-			<a class="mode item" href="/c/{{ .id }}?mode=0">osu!</a>
-			<a class="mode item" href="/c/{{ .id }}?mode=1">osu!taiko</a>
-			<a class="mode item" href="/c/{{ .id }}?mode=2">osu!catch</a>
-			<a class="mode item" href="/c/{{ .id }}?mode=3">osu!mania</a>
+			<a class="mode item" href="/c/{{ .id }}?mode=0&smode={{ $spm }}">osu!</a>
+			<a class="mode item" href="/c/{{ .id }}?mode=1&smode={{ $spm }}">osu!taiko</a>
+			<a class="mode item" href="/c/{{ .id }}?mode=2&smode={{ $spm }}">osu!catch</a>
+			<a class="mode item" href="/c/{{ .id }}?mode=3&smode={{ $spm }}">osu!mania</a>
 		</div>
 		{{ if .description }}
 			{{ with parseUserpage .description }}

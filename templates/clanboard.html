@@ -38,8 +38,8 @@ KyutGrill=leaderboard2.jpg
 			<tr>
 				<th class="four wide">#{{ .rank }} </th>
 				<th class="four wide"> <a href="/c/{{ .id }}?mode={{ $favMode }}&smode={{ $spMode }}">{{ .name }}</a></th>
-				<th class="four wide">{{ .chosen_mode.pp }}pp ({{ humanize .chosen_mode.total_score }})</th>
-				<th class="four wide">{{ .chosen_mode.playcount }}</th>
+				<th class="four wide">{{ humanize .chosen_mode.pp }}pp ({{ humanize .chosen_mode.total_score }})</th>
+				<th class="four wide">{{ humanize .chosen_mode.playcount }}</th>
 			</tr>
 			{{end}}
 			{{end}}
