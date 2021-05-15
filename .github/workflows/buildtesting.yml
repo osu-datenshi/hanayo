@@ -1,9 +1,5 @@
-name: BuildTest
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+name: Build Passing
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
