@@ -1,3 +1,6 @@
 [submodule "website-docs"]
 	path = website-docs
 	url = https://github.com/osu-datenshi/website-docs
+[submodule "static"]
+	path = static
+	url = https://gitlab.com/osudatenshi/static.git
