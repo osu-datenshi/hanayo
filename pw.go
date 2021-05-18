@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"strings"
 	"regexp"
 	"github.com/gin-gonic/gin"
@@ -342,6 +343,7 @@ func changePasswordSubmit(c *gin.Context) {
 	messages = append(messages, successMessage{T(c, "Your settings have been saved.")})
 }
 
+/* error they said, comment i do
 func checkBlacklist(s string) bool {
 	bad := false
 	rows, err := db.Query("select name, type from name_blacklist where active = 1")
@@ -368,6 +370,6 @@ func checkBlacklist(s string) bool {
 		}
 	}
 	return bad
-}
+}*/
 
 var gantinamaRegex = regexp.MustCompile(`^[A-Za-z0-9 _\.[\]-]{2,20}$`)
