@@ -217,11 +217,12 @@ func main() {
 
 func httpLoop() {
 	for {
-		e := generateEngine()
+		generateEngine()
+		//e := generateEngine()
 		fmt.Println("Listening on", config.ListenTo)
-		if !startuato(e) {
-			break
-		}
+		//if !startuato(e) {
+		//	break
+		//}
 	}
 }
 
@@ -342,7 +343,7 @@ func generateEngine() *gin.Engine {
 	loadSimplePages(r)
 
 	r.NoRoute(notFound)
-
+	r.Run(config.ListenTo)
 	return r
 }
 
