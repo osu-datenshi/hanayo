@@ -31,20 +31,17 @@ type rawFile struct {
 func loadDocFiles() error {
 	langs, err := loadLanguagesAvailable()
 	if err != nil {
-		fmt.Println(err)
 		return err
 	}
 
 	files, err := ioutil.ReadDir("website-docs/" + referenceLanguage)
 	if err != nil {
-		fmt.Println(err)
 		return err
 	}
 
 	for _, file := range files {
 		data, err := ioutil.ReadFile("website-docs/" + referenceLanguage + "/" + file.Name())
 		if err != nil {
-			fmt.Println(err)
 			return err
 		}
 
@@ -58,12 +55,10 @@ func loadDocFiles() error {
 
 		doc.Languages, err = loadLanguages(langs, file.Name(), md5sum)
 		if err != nil {
-			fmt.Println(err)
 			return err
 		}
 
 		docFiles = append(docFiles, doc)
-		fmt.Println(docFiles)
 	}
 
 	return nil
@@ -103,7 +98,6 @@ func loadHeader(b []byte) rawFile {
 func loadLanguagesAvailable() ([]string, error) {
 	files, err := ioutil.ReadDir("website-docs")
 	if err != nil {
-		fmt.Println(err)
 		return nil, err
 	}
 
