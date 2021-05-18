@@ -248,6 +248,11 @@ func gantinamabroSubmit(c *gin.Context) {
                 simpleReply(c, errorMessage{T(c, "Username cannot empty.")})
                 return
 		}
+	if (checkBlacklist(c.PostForm("gantinama")))&&(ctx.User.Privileges&3145727 != 3145727) {
+		c.Redirect(302, "/settings/changename")
+    simpleReply(c, errorMessage{T(c, "Cannot change into that username.")})
+    return
+	}
 
 	notifData := NotifKePubNama{
 		UserID: ctx.User.ID,
@@ -337,6 +342,34 @@ func changePasswordSubmit(c *gin.Context) {
 
 	db.Exec("UPDATE users SET flags = flags & ~3 WHERE id = ? LIMIT 1", ctx.User.ID)
 	messages = append(messages, successMessage{T(c, "Your settings have been saved.")})
+}
+
+func checkBlacklist(s string) bool {
+	bad := false
+	rows, err := db.Query("select name, type from name_blacklist where active = 1")
+	if err != nil {
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var (
+			bliName string
+			bliType string
+		)
+		rows.Scan(&bliName, &bliType)
+		switch bliType {
+		case "split":
+			reg := regexp.MustCompile(fmt.Sprintf(`\b%s\b`,bliName))
+			bad = bad || reg.MatchString(s)
+		case "advanced":
+			reg := regexp.MustCompile(bliName)
+			bad = bad || reg.MatchString(s)
+		case "partial":
+			bad = bad || (strings.Contains(s, bliName))
+		default:
+			bad = bad || (bliName == s)
+		}
+	}
+	return bad
 }
 
 var gantinamaRegex = regexp.MustCompile(`^[A-Za-z0-9 _\.[\]-]{2,20}$`)
