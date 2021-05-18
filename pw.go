@@ -2,7 +2,7 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
+	//"fmt"
 	"strings"
 	"regexp"
 	"github.com/gin-gonic/gin"
