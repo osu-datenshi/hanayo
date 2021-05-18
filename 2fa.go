@@ -202,8 +202,8 @@ func loginUser(c *gin.Context, i int) {
 		Country string
 		Flags   uint
 	}
-	err := db.Get(&d, "SELECT users_stats.country, users.flags FROM users_stats "+
-		"LEFT JOIN users ON users.id = users_stats.id WHERE users_stats.id = ?", i)
+	err := db.Get(&d, "SELECT user_config.country, users.flags FROM user_config "+
+		"LEFT JOIN users ON users.id = user_config.id WHERE user_config.id = ?", i)
 	if err != nil {
 		c.Error(err)
 	}

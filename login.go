@@ -46,12 +46,12 @@ func loginSubmit(c *gin.Context) {
 		Flags           uint
 	}
 	err := db.QueryRow(`
-	SELECT 
+	SELECT
 		u.id, u.password_md5,
 		u.username, u.password_version,
 		s.country, u.privileges, u.flags
 	FROM users u
-	LEFT JOIN users_stats s ON s.id = u.id
+	LEFT JOIN user_config s ON s.id = u.id
 	WHERE u.`+param+` = ? LIMIT 1`, strings.TrimSpace(u)).Scan(
 		&data.ID, &data.Password,
 		&data.Username, &data.PasswordVersion,

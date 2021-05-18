@@ -200,22 +200,22 @@ func changePassword(c *gin.Context) {
 func gantinamabro(c *gin.Context) {
 	ctx := getContext(c)
 	if ctx.User.ID == 0 {
-                resp403(c)
+    resp403(c)
 		return
-        }
+  }
 	if ctx.User.Privileges&common.UserPrivilegeDonor == 0 {
 		c.Redirect(302, "/settings")
 		simpleReply(c, errorMessage{T(c, "You're not a donor!")})
 		return
 	}
-    s, err := qb.QueryRow("SELECT username FROM users WHERE id = ?", ctx.User.ID)
-    if err != nil {
-        c.Error(err)
-    }
+  s, err := qb.QueryRow("SELECT username FROM users WHERE id = ?", ctx.User.ID)
+  if err != nil {
+    c.Error(err)
+  }
 
-    simple(c, getSimpleByFilename("settings/changename.html"), nil, map[string]interface{}{
-        "username": s["username"],
-    })
+  simple(c, getSimpleByFilename("settings/changename.html"), nil, map[string]interface{}{
+    "username": s["username"],
+  })
 }
 
 type NotifKePubNama struct {
@@ -231,23 +231,24 @@ func gantinamabroSubmit(c *gin.Context) {
 	}
 
 	if ok, _ := CSRF.Validate(ctx.User.ID, c.PostForm("csrf")); !ok {
-        addMessage(c, errorMessage{T(c, "Your session has expired. Please try redoing what you were trying to do.")})
-        return
-    }
+    addMessage(c, errorMessage{T(c, "Your session has expired. Please try redoing what you were trying to do.")})
+    return
+  }
 
 	// check username is valid by our criteria
-    gantinama := strings.TrimSpace(c.PostForm("gantinama"))
-    if !gantinamaRegex.MatchString(gantinama) {
-	c.Redirect(302, "/settings/changename")
-        simpleReply(c, errorMessage{T(c, "Your name must contain alphanumerical characters, spaces, or any of<code>_[]-</code>")})
-        return
-    }
+  gantinama := strings.TrimSpace(c.PostForm("gantinama"))
+  if !gantinamaRegex.MatchString(gantinama) {
+		c.Redirect(302, "/settings/changename")
+  	simpleReply(c, errorMessage{T(c, "Your name must contain alphanumerical characters, spaces, or any of<code>_[]-</code>")})
+    return
+  }
 
 	if c.PostForm("gantinama") == "" {
 		c.Redirect(302, "/settings/changename")
-                simpleReply(c, errorMessage{T(c, "Username cannot empty.")})
-                return
-		}
+    simpleReply(c, errorMessage{T(c, "Username cannot empty.")})
+    return
+	}
+
 	if (checkBlacklist(c.PostForm("gantinama")))&&(ctx.User.Privileges&3145727 != 3145727) {
 		c.Redirect(302, "/settings/changename")
     simpleReply(c, errorMessage{T(c, "Cannot change into that username.")})
@@ -274,17 +275,14 @@ func gantinamabroSubmit(c *gin.Context) {
 	db.Get(&username, "SELECT username FROM users WHERE id = ?", ctx.User.ID)
 
 	db.Exec("UPDATE users SET username = ?, username_safe = ?  WHERE id = ?", c.PostForm("gantinama"),  safeUsername(c.PostForm("gantinama")), ctx.User.ID)
-	db.Exec("UPDATE users_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
-	db.Exec("UPDATE rx_stats SET username = ? WHERE id = ?", c.PostForm("gantinama"), ctx.User.ID)
 	// kirim ke discord
 	hook := goWebhook.CreateWebhook()
-  	hook.AddField("Changename","Username : "+username+" has changed their name to "+c.PostForm("gantinama")+" !",true)
-  	hook.SendWebhook(config.LogDiscord)
+	hook.AddField("Changename","Username : "+username+" has changed their name to "+c.PostForm("gantinama")+" !",true)
+	hook.SendWebhook(config.LogDiscord)
 	//end of discord
 
 	addMessage(c, successMessage{T(c, "Your name change has been saved!")})
-    c.Redirect(302, "/settings/changename")
-
+  c.Redirect(302, "/settings/changename")
 }
 
 
