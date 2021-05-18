@@ -3,4 +3,4 @@
 	url = https://github.com/osu-datenshi/website-docs
 [submodule "static"]
 	path = static
-	url = https://github.com/osu-datenshi/static
+	url = https://gitlab.com/osudatenshi/static.git
