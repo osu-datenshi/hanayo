@@ -134,13 +134,19 @@
 				{{ end }}
 				{{ $settings := systemSettings "website_maintenance" "game_maintenance" "website_global_alert" }}
 				{{ with $settings.website_global_alert.String }}
-					<div class="ui info message">
+					<div class="ui icon info message">
+					     <i class="info circle icon"></i>
+  						<div class="content">
 						{{ . | html }}
+						</div>
 					</div>
 				{{ end }}
 				{{ with $settings.game_maintenance.Int }}
-					<div class="ui warning message">
-						{{ $.T "Datenshi!'s score submission is currently in maintenance mode. You will not be allowed to submit scores for the time being." }}
+					<div class="ui icon warning message">
+					     <i class="cogs icon"></i>
+						<div class="content">
+						<p>Datenshi!'s score submission is currently in maintenance mode. You will not be allowed to submit scores for the time being.</p>
+						</div>
 					</div>
 				{{ end }}
 				</div>
