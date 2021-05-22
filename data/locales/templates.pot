@@ -302,19 +302,19 @@ msgid "Successfully logged out."
 msgstr ""
 
 # pwreset.html
-msgid "Forgot your password? Worry not! Here you can reset it. Just tell us your username or email address, and we'll take care of it. You will receive an email at the email address you used to sign up on Ripple. To continue the password reset procedure, click the link on that email."
+msgid "Forgot your password? Worry not! Here you can reset it. Just tell us your username or email address, and we'll take care of it. You will receive an email at the email address you used to sign up on Datenshi. To continue the password reset procedure, click the link on that email."
 msgstr ""
 
 msgid "You look pretty banned/locked here."
 msgstr ""
 
-msgid "Done! You should shortly receive an email from us at the email you used to sign up on Ripple."
+msgid "Done! You should shortly receive an email from us at the email you used to sign up on Datenshi."
 msgstr ""
 
-msgid "Ripple password recovery instructions"
+msgid "Datenshi password recovery instructions"
 msgstr ""
 
-msgid "Hey %s! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please <a href='%s'>click here</a> to reset your password on Ripple. Otherwise, silently ignore this email."
+msgid "Hey %s! Someone, which we really hope was you, requested a password reset for your account. In case it was you, please <a href='%s'>click here</a> to reset your password on Datenshi. Otherwise, silently ignore this email."
 msgstr ""
 
 # not_found.html
@@ -371,35 +371,35 @@ msgstr ""
 msgid "Home Page"
 msgstr ""
 
-msgid "Welcome to Ripple."
+msgid "Welcome to Datenshi."
 msgstr ""
 
-msgid "Ripple is a private osu! server, featuring multiplayer, PP, a very active community and a development team going strong implementing new features and squashing bugs. <a href='/about'>You can check out even more features here.</a> It has also a very friendly community, and it's <a href='https://github.com/osuthailand/ripple'>open source!</a> Just so you know, <b>we currently have %s users online and %s registered users!</b>"
+msgid "Datenshi is a private osu! server, featuring multiplayer, PP, a very active community and a development team going strong implementing new features and squashing bugs. <a href='/about'>You can check out even more features here.</a> It has also a very friendly community, and it's <a href='https://github.com/osuthailand/ripple'>open source!</a> Just so you know, <b>we currently have %s users online and %s registered users!</b>"
 msgstr ""
 
-msgid "What are you waiting for? Join Ripple! It's risk-free: you won't get your account banned on the official server if you play on Ripple.<br>You can also switch anytime between the official osu! server and Ripple!"
+msgid "What are you waiting for? Join Datenshi! It's risk-free: you won't get your account banned on the official server if you play on Datenshi.<br>You can also switch anytime between the official osu! server and Datenshi!"
 msgstr ""
 
 msgid "Howdy, %s!"
 msgstr ""
 
-msgid "Welcome back to Ripple. We currently have <b>%s online users and %s total registered users.</b> Nice day to farm a few maps, isn't it?"
+msgid "Welcome back to Datenshi. We currently have <b>%s online users and %s total registered users.</b> Nice day to farm a few maps, isn't it?"
 msgstr ""
 
 msgid "Latest news from our <a href='https://blog.ripple.moe'>blog</a>"
 msgstr ""
 
 # base.html
-msgid "Ripple's score submission is currently in maintenance mode. You will not be allowed to submit scores for the time being."
+msgid "Datenshi's score submission is currently in maintenance mode. You will not be allowed to submit scores for the time being."
 msgstr ""
 
-msgid "The Ripple website is currently in maintenance mode. Only certain users are allowed to access the full website."
+msgid "The Datenshi website is currently in maintenance mode. Only certain users are allowed to access the full website."
 msgstr ""
 
-msgid "Your account is currently in restricted mode. You will not be able to do certain actions, and your profile can only be seen by you and by Ripple's staff. If you believe we have mistaken putting you in restricted mode, or a month has passed since you first saw this, then you can send an appeal at <a href='https://support.ripple.moe'>support.ripple.moe</a>."
+msgid "Your account is currently in restricted mode. You will not be able to do certain actions, and your profile can only be seen by you and by Datenshi's staff. If you believe we have mistaken putting you in restricted mode, or a month has passed since you first saw this, then you can send an appeal at <a href='https://support.ripple.moe'>support.ripple.moe</a>."
 msgstr ""
 
-msgid "&copy; 2015-%d Ripple, using Hanayo %s."
+msgid "&copy; 2015-%d Datenshi, using Hanayo %s."
 msgstr ""
 
 msgid "Team"
@@ -485,10 +485,10 @@ msgstr ""
 msgid "Two Factor Authentication"
 msgstr ""
 
-msgid "Before proceding further on Ripple, we require you to use your Google Authenticator App to use the code for Ripple, so that we can log you in."
+msgid "Before proceding further on Datenshi, we require you to use your Google Authenticator App to use the code for Datenshi, so that we can log you in."
 msgstr ""
 
-msgid "Before proceding any further on Ripple, we require you to use the message you just received on telegram to log in to your account."
+msgid "Before proceding any further on Datenshi, we require you to use the message you just received on telegram to log in to your account."
 msgstr ""
 
 msgid "Lost your phone, or can't access Google Authenticator?"
@@ -518,14 +518,14 @@ msgstr ""
 msgid "You've been successfully logged in."
 msgstr ""
 
-msgid "Ooops! Looks like something went really wrong while trying to process your request. Perhaps report this to a Ripple developer? Retrying doing what you were trying to do might work, too."
+msgid "Ooops! Looks like something went really wrong while trying to process your request. Perhaps report this to a Datenshi developer? Retrying doing what you were trying to do might work, too."
 msgstr ""
 
 # about.html
-msgid "Welcome to Ripple."
+msgid "Welcome to Datenshi."
 msgstr ""
 
-msgid "Ripple is a private osu! server."
+msgid "Datenshi is a private osu! server."
 msgstr ""
 
 msgid "There are many like it, but this one is ours."
@@ -568,21 +568,21 @@ msgstr ""
 msgid "And a lot more to come!"
 msgstr ""
 
-msgid "Ripple is the result of the hard work of two Italian developers, who got tired about the whole osu! ecosystem, and also because they wanted to play with a few banned friends."
+msgid "Datenshi is the result of the hard work of two Italian developers, who got tired about the whole osu! ecosystem, and also because they wanted to play with a few banned friends."
 msgstr ""
 
 # %s is wink emoji
-msgid "It has now evolved into the largest available osu! private server, with more than 50,000 registered users. <a href=\"/register\">Signing up</a> on Ripple won't result in getting your account on osu! restricted, so what are you waiting for?! Come join us! %s"
+msgid "It has now evolved into the largest available osu! private server, with more than 50,000 registered users. <a href=\"/register\">Signing up</a> on Datenshi won't result in getting your account on osu! restricted, so what are you waiting for?! Come join us! %s"
 msgstr ""
 
-msgid "In case you want to make sure we're not doing shady stuff with your data, you can also check the <a href=\"https://github.com/osuthailand/ripple\">source code</a> Ripple is running on."
+msgid "In case you want to make sure we're not doing shady stuff with your data, you can also check the <a href=\"https://github.com/osuthailand/ripple\">source code</a> Datenshi is running on."
 msgstr ""
 
 # changelog.html
 msgid "This is the changelog. Changes are published here as soon as they hit the production status (as in, live on the website)."
 msgstr ""
 
-msgid "For various reasons, some software of Ripple does not contribute to the changelog, to which this website is a part of. In case you want to see the changelog of Hanayo, you can do so by <a href=\"https://github.com/osuthailand/hanayo/commits/master\">clicking here</a>."
+msgid "For various reasons, some software of Datenshi does not contribute to the changelog, to which this website is a part of. In case you want to see the changelog of Hanayo, you can do so by <a href=\"https://github.com/osuthailand/hanayo/commits/master\">clicking here</a>."
 msgstr ""
 
 msgid "Author"
@@ -622,7 +622,7 @@ msgid "Remove"
 msgstr ""
 
 # irc.html
-msgid "Here you can generate a new IRC token. You can use it to connect to Ripple's chat using IRC. Remember that your IRC token is like a password, anyone who knows it, has access to your account. If you're interested knowing how to connect to Ripple's chat via IRC, you may want to check out <a href=\"/doc/11\">this</a>."
+msgid "Here you can generate a new IRC token. You can use it to connect to Datenshi's chat using IRC. Remember that your IRC token is like a password, anyone who knows it, has access to your account. If you're interested knowing how to connect to Datenshi's chat via IRC, you may want to check out <a href=\"/doc/11\">this</a>."
 msgstr ""
 
 msgid "Generate a new token!"
@@ -683,13 +683,13 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-msgid "<b>%s</b> is a Ripple player from <b>%s</b>."
+msgid "<b>%s</b> is a Datenshi player from <b>%s</b>."
 msgstr ""
 
 msgid "Last seen: %s."
 msgstr ""
 
-msgid "They signed up on Ripple %s."
+msgid "They signed up on Datenshi %s."
 msgstr ""
 
 msgid "They play with %s."
@@ -753,7 +753,7 @@ msgid "Achievements"
 msgstr ""
 
 # support.html
-msgid "Support Ripple"
+msgid "Support Datenshi"
 msgstr ""
 
 msgid "You are a donor!"
@@ -771,16 +771,16 @@ msgstr ""
 msgid "(Probably not.)"
 msgstr ""
 
-msgid "Ripple is not cheap to run."
+msgid "Datenshi is not cheap to run."
 msgstr ""
 
-msgid "While we provide this service for free, we still have to pay for it, and if we always took the money out of our own pockets, 1. we would be broke, 2. we wouldn't be able to upgrade our hardware to accomodate our users. While we do have loads of software optimisations that allow us to have Ripple run crazy fast while still being on not so high-end hardware, the more users we have, the higher-end our hardware needs to be. So we are asking you for help on this :)."
+msgid "While we provide this service for free, we still have to pay for it, and if we always took the money out of our own pockets, 1. we would be broke, 2. we wouldn't be able to upgrade our hardware to accomodate our users. While we do have loads of software optimisations that allow us to have Datenshi run crazy fast while still being on not so high-end hardware, the more users we have, the higher-end our hardware needs to be. So we are asking you for help on this :)."
 msgstr ""
 
 msgid "We are still students."
 msgstr ""
 
-msgid "Ripple developers, and most of the Ripple staff, do not have a day job. This means that we get most of our income as students from doing small jobs as \"freelancers\" every so often, or, you know, allowance."
+msgid "Datenshi developers, and most of the Datenshi staff, do not have a day job. This means that we get most of our income as students from doing small jobs as \"freelancers\" every so often, or, you know, allowance."
 msgstr ""
 
 msgid "We do not have ads. And never will."
@@ -922,7 +922,7 @@ msgstr ""
 msgid "Google Authenticator recovery keys"
 msgstr ""
 
-msgid "These are the only thing that will let you get back into your Ripple account if you lose your device. Our suggestion is to paste them inside a document in your word processor (Microsoft Word, LibreOffice Writer), print them and store them in a safe place."
+msgid "These are the only thing that will let you get back into your Datenshi account if you lose your device. Our suggestion is to paste them inside a document in your word processor (Microsoft Word, LibreOffice Writer), print them and store them in a safe place."
 msgstr ""
 
 msgid "Open File"
@@ -931,10 +931,10 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-msgid "Your discord account has been linked to this Ripple account. <b>Welcome to the donors club and thank you for supporting us!</b> You have now access to the #donators text and voice channels on our official Discord server! You can also set a custom role name and username colour and change your nickname on Discord. If you want to change your nickname, you can use the <code>/nick</code> command. To set or edit your <b>custom role</b> name and colour, use the command <code>!role HEX_COLOUR ROLE_NAME</code>. You can pick your HEX colour <a href=\"http://www.colorpicker.com/\" target=\"_blank\">here</a>, it's the one that starts with '#'. You can change your role name and colour <b>whenever you want!</b>"
+msgid "Your discord account has been linked to this Datenshi account. <b>Welcome to the donors club and thank you for supporting us!</b> You have now access to the #donators text and voice channels on our official Discord server! You can also set a custom role name and username colour and change your nickname on Discord. If you want to change your nickname, you can use the <code>/nick</code> command. To set or edit your <b>custom role</b> name and colour, use the command <code>!role HEX_COLOUR ROLE_NAME</code>. You can pick your HEX colour <a href=\"http://www.colorpicker.com/\" target=\"_blank\">here</a>, it's the one that starts with '#'. You can change your role name and colour <b>whenever you want!</b>"
 msgstr ""
 
-msgid "Thank you for supporting us and have fun on Ripple!"
+msgid "Thank you for supporting us and have fun on Datenshi!"
 msgstr ""
 
 msgid "Donors get special privileges on our Discord server too!"
@@ -1118,12 +1118,12 @@ msgstr ""
 msgid "If you truly have understood what's written above and you have understood that creating a multiaccount will lead to a restriction on your main account, you can click here and you'll be brought to the sign up page."
 msgstr ""
 
-msgid "You look new here. Allow us to introduce you to what Ripple is."
+msgid "You look new here. Allow us to introduce you to what Datenshi is."
 msgstr ""
 
-# PAY ATTENTION! This is Log in *with* Ripple, not *on* Ripple. This is for
+# PAY ATTENTION! This is Log in *with* Datenshi, not *on* Datenshi. This is for
 # oauth.
-msgid "Log in with Ripple"
+msgid "Log in with Datenshi"
 msgstr ""
 
 msgid "This application will be able to:"
@@ -1144,7 +1144,7 @@ msgstr ""
 msgid "Write"
 msgstr ""
 
-msgid "This application will be able to make modifications to your Ripple account. This is potentially really dangerous! Use this only with applications that you trust."
+msgid "This application will be able to make modifications to your Datenshi account. This is potentially really dangerous! Use this only with applications that you trust."
 msgstr ""
 
 msgid "Access to Bancho"
@@ -1161,7 +1161,7 @@ msgstr ""
 
 # Team page
 
-msgid "This is a list of the wonderful people who keep Ripple up and running and deal with its community."
+msgid "This is a list of the wonderful people who keep Datenshi up and running and deal with its community."
 msgstr ""
 
 msgid "Community Managers"
@@ -1194,7 +1194,7 @@ msgstr ""
 msgid "Special thanks"
 msgstr ""
 
-msgid "Here's a list of people who helped with Ripple."
+msgid "Here's a list of people who helped with Datenshi."
 msgstr ""
 
 msgid "<b>Franc[e]sco/lolisamurai</b>, for <a href='https://github.com/Francesco149/oppai'>oppai</a>, used as standard pp calculator."
@@ -1209,13 +1209,13 @@ msgstr ""
 msgid "<b>jrosdahl</b>, for <a href='https://github.com/jrosdahl/miniircd'>miniircd</a>, used as a base for our IRC server."
 msgstr ""
 
-msgid "<b>Avail</b>, for having hosted Ripple on his server."
+msgid "<b>Avail</b>, for having hosted Datenshi on his server."
 msgstr ""
 
-msgid "<b>Angela Guerra</b>, for designing the Ripple logo."
+msgid "<b>Angela Guerra</b>, for designing the Datenshi logo."
 msgstr ""
 
-msgid "<b><a id='everyone' class='clickable'>Everyone</a></b> who has supported the Ripple project by donating or inviting other people."
+msgid "<b><a id='everyone' class='clickable'>Everyone</a></b> who has supported the Datenshi project by donating or inviting other people."
 msgstr ""
 
 msgid "They told me these are very cool people."
@@ -1236,7 +1236,7 @@ msgstr ""
 msgid "(You get other cool perks too)"
 msgstr ""
 
-msgid "The Ripple API is the system through which developers can create applications to interact with Ripple. <b>If you're asked to fill out an API token from this page, be wary and only actually create the token if you really trust the owner of the application.</b>"
+msgid "The Datenshi API is the system through which developers can create applications to interact with Datenshi. <b>If you're asked to fill out an API token from this page, be wary and only actually create the token if you really trust the owner of the application.</b>"
 msgstr ""
 
 msgid "The 'Ranking Criteria' are as follows:"
