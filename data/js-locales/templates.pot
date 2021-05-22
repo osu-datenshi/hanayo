@@ -1,13 +1,7 @@
 # JavaScript
-msgid "An error occurred while contacting the Ripple API. Please report this to a Ripple developer."
+msgid "An error occurred while contacting the Datenshi API. Please report this to a Datenshi developer."
 msgstr ""
 
-# This is a quote of UNDERTALE if you didn't know.
-# It is shown regarding the level of an user, but it is shortened to "Lv.".
-# Of course, this means Level on Ripple, but in UNDERTALE, it actually means LOVE.
-# I'm not gonna spoil you why it's called LOVE.
-# It's hard to keep this cultural reference, so you can also just write the
-# translation for "Level" in this.
 msgid "Why, LOVE, of course!"
 msgstr ""
 
@@ -117,4 +111,3 @@ msgstr ""
 
 msgid "Add"
 msgstr ""
-

@@ -87,7 +87,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-msgid "You have been successfully registered on Ripple! You now need to verify your account."
+msgid "You have been successfully registered on Datenshi! You now need to verify your account."
 msgstr ""
 
 # Register checks
@@ -140,10 +140,10 @@ msgstr ""
 msgid "Extract it, disable your antivirus, execute <i>datenshi.exe</i> <b>as administrator</b>"
 msgstr ""
 
-msgid "Click on <b>Connect to Ripple</b>, then <b>Ok/Yes</b>"
+msgid "Click on <b>Connect to Datenshi</b>, then <b>Ok/Yes</b>"
 msgstr ""
 
-msgid "Make sure the switcher says you're connected to <b>Ripple</b>"
+msgid "Make sure the switcher says you're connected to <b>Datenshi</b>"
 msgstr ""
 
 msgid "If it says something about read-only mode, go to <code>C:\\Windows\\System32\\Drivers\\etc</code>, open the hosts' file Properties and make sure it's not set to \"Read only\"."
@@ -210,10 +210,10 @@ msgstr ""
 msgid " - in case, well, you need help doing stuff"
 msgstr ""
 
-msgid " - in case you believe Ripple is down"
+msgid " - in case you believe Datenshi is down"
 msgstr ""
 
-msgid " - in case you want to talk with people about Ripple"
+msgid " - in case you want to talk with people about Datenshi"
 msgstr ""
 
 msgid " - just in case"
@@ -223,7 +223,7 @@ msgstr ""
 msgid "Recover account"
 msgstr ""
 
-msgid "Can't find a way to get back access to your Ripple account? Fear not! If you have your recovery codes which we recommended you to print you can type one in here and we'll magically log you in this time. After you've managed to get in, please disable and then re-enable 2FA, so you won't risk losing your account again."
+msgid "Can't find a way to get back access to your Datenshi account? Fear not! If you have your recovery codes which we recommended you to print you can type one in here and we'll magically log you in this time. After you've managed to get in, please disable and then re-enable 2FA, so you won't risk losing your account again."
 msgstr ""
 
 msgid "Oh no you don't."
@@ -248,10 +248,10 @@ msgstr ""
 msgid "If you're %s, keep in mind that multiaccounting = ban."
 msgstr ""
 
-msgid "If you're not %s, but you're using %s's computer, please sign up on Ripple from your own computer."
+msgid "If you're not %s, but you're using %s's computer, please sign up on Datenshi from your own computer."
 msgstr ""
 
-msgid "If you live with %s and you don't have your own computer from which to sign up on Ripple, then please contact support@ripple.moe, and we'll deal with your specific case."
+msgid "If you live with %s and you don't have your own computer from which to sign up on Datenshi, then please contact our discord, and we'll deal with your specific case."
 msgstr ""
 
 msgid "This warning may pop up also if you're using another computer on the same network of %s. As long as you're not using the same computer, you should be all good."
