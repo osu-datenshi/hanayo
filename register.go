@@ -191,7 +191,7 @@ func registerSubmit(c *gin.Context) {
 	// add master_stats and master_stat_ranks
 	masterStatValues := make([]string, 12)
 	for i:=0; i<3; i++ {
-		for j:=0; j<4; i++ {
+		for j:=0; j<4; j++ {
 			mstStatId := (lid-1) * 12 + int64(i * 4 + j + 1)
 			masterStatValues[i*4+j] = fmt.Sprintf("(%d,%d,%d,%d)",mstStatId,lid,i,j)
 			masterStatRankValues := make([]string, 5)
