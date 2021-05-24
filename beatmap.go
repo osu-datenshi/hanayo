@@ -68,6 +68,7 @@ func beatmapInfo(c *gin.Context) {
 }
 
 func getBeatmapData(b string) (beatmap models.Beatmap, err error) {
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	resp, err := http.Get(config.CheesegullAPI + "/b/" + b)
 	if err != nil {
 		return beatmap, err
@@ -87,6 +88,7 @@ func getBeatmapData(b string) (beatmap models.Beatmap, err error) {
 }
 
 func getBeatmapSetData(beatmap models.Beatmap) (bset models.Set, err error) {
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	resp, err := http.Get(config.CheesegullAPI + "/s/" + strconv.Itoa(beatmap.ParentSetID))
 	if err != nil {
 		return bset, err
