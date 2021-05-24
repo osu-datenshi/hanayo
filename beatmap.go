@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"sort"
 	"strconv"
+	"crypto/tls"
 
 	"github.com/gin-gonic/gin"
 	"github.com/osuripple/cheesegull/models"
