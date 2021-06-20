@@ -81,7 +81,7 @@ func beatmapSetInfo(c *gin.Context) {
 			return
 		}
 	}
-	location := "/beatmaps" + data.Beatmapset.ID
+	location := "/beatmaps" + strconv.Atoi(data.Beatmapset.ID)
     c.Redirect(http.StatusFound, location)
 }
 
