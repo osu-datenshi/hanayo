@@ -80,7 +80,8 @@ func beatmapSetInfo(c *gin.Context) {
 			return
 		}
 	}
-	c.Redirect(302, "/beatmaps/%d", data.Beatmapset.ID)
+	c.Request.URL.Path = "/beatmaps/" + data.Beatmapset.ID
+    r.HandleContext(c)
 }
 
 func getBeatmapData(b string) (beatmap models.Beatmap, err error) {
