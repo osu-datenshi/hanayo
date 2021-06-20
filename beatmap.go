@@ -80,7 +80,7 @@ func beatmapSetInfo(c *gin.Context) {
 			return
 		}
 	}
-	c.Redirect(302, "/beatmaps/" + data.Beatmapset.ChildrenBeatmaps.BeatmapID)
+	c.Redirect(302, "/beatmaps/" + data.Beatmapset.ID)
 }
 
 func getBeatmapData(b string) (beatmap models.Beatmap, err error) {
