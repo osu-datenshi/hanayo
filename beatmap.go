@@ -76,7 +76,7 @@ func beatmapSetInfo(c *gin.Context) {
 	if _, err := strconv.Atoi(s); err != nil {
 		c.Error(err)
 	} else {
-		data.Beatmapset, err = getBeatmapSetData(s)
+		data.Beatmapset, err = getBeatmapSetV2(s)
 		if err != nil {
 			c.Error(err)
 			return
@@ -128,6 +128,27 @@ func getBeatmapData(b string) (beatmap models.Beatmap, err error) {
 
 	return beatmap, nil
 }
+
+func getBeatmapSetV2(s string) (bset models.Set, err error) {
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+	resp, err := http.Get(config.CheesegullAPI + "/s/" + s)
+	if err != nil {
+		return bset, err
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return bset, err
+	}
+
+	err = json.Unmarshal(body, &bset)
+	if err != nil {
+		return bset, err
+	}
+
+	return bset, nil
+}
+
 
 func getBeatmapSetData(beatmap models.Beatmap) (bset models.Set, err error) {
 	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
