@@ -23,38 +23,39 @@ type beatmapPageData struct {
 }
 
 type BeatmapSETV2 struct {
-	SetID            int `json:"SetID"`
-	ChildrenBeatmaps []struct {
-		BeatmapID        int     `json:"BeatmapID"`
-		ParentSetID      int     `json:"ParentSetID"`
-		DiffName         string  `json:"DiffName"`
-		FileMD5          string  `json:"FileMD5"`
-		Bpm              int     `json:"BPM"`
-		Ar               float64 `json:"AR"`
-		Od               int     `json:"OD"`
-		Cs               int     `json:"CS"`
-		Hp               int     `json:"HP"`
-		TotalLength      int     `json:"TotalLength"`
-		HitLength        int     `json:"HitLength"`
-		Playcount        int     `json:"Playcount"`
-		Passcount        int     `json:"Passcount"`
-		MaxCombo         int     `json:"MaxCombo"`
-		DifficultyRating float64 `json:"DifficultyRating"`
-	} `json:"ChildrenBeatmaps"`
-	RankedStatus int         `json:"RankedStatus"`
-	ApprovedDate interface{} `json:"ApprovedDate"`
-	LastUpdate   interface{} `json:"LastUpdate"`
-	LastChecked  interface{} `json:"LastChecked"`
-	Artist       string      `json:"Artist"`
-	Title        string      `json:"Title"`
-	Creator      string      `json:"Creator"`
-	CreatorID    string      `json:"CreatorID"`
-	Source       string      `json:"Source"`
-	Tags         string      `json:"Tags"`
-	HasVideo     bool        `json:"HasVideo"`
-	Genre        int         `json:"Genre"`
-	Language     int         `json:"Language"`
-	Favourites   int         `json:"Favourites"`
+	SetID            int                `json:"SetID"`
+	ChildrenBeatmaps []ChildrenBeatmaps
+	RankedStatus     int                `json:"RankedStatus"`
+	ApprovedDate     interface{}        `json:"ApprovedDate"`
+	LastUpdate       interface{}        `json:"LastUpdate"`
+	LastChecked      interface{}        `json:"LastChecked"`
+	Artist           string             `json:"Artist"`
+	Title            string             `json:"Title"`
+	Creator          string             `json:"Creator"`
+	CreatorID        string             `json:"CreatorID"`
+	Source           string             `json:"Source"`
+	Tags             string             `json:"Tags"`
+	HasVideo         bool               `json:"HasVideo"`
+	Genre            int                `json:"Genre"`
+	Language         int                `json:"Language"`
+	Favourites       int                `json:"Favourites"`
+}
+type ChildrenBeatmaps struct {
+	BeatmapID        int     `json:"BeatmapID"`
+	ParentSetID      int     `json:"ParentSetID"`
+	DiffName         string  `json:"DiffName"`
+	FileMD5          string  `json:"FileMD5"`
+	Bpm              int     `json:"BPM"`
+	Ar               float64 `json:"AR"`
+	Od               int     `json:"OD"`
+	Cs               int     `json:"CS"`
+	Hp               int     `json:"HP"`
+	TotalLength      int     `json:"TotalLength"`
+	HitLength        int     `json:"HitLength"`
+	Playcount        int     `json:"Playcount"`
+	Passcount        int     `json:"Passcount"`
+	MaxCombo         int     `json:"MaxCombo"`
+	DifficultyRating float64 `json:"DifficultyRating"`
 }
 
 func beatmapInfo(c *gin.Context) {
@@ -113,9 +114,9 @@ func beatmapSetInfo(c *gin.Context) {
 	if err != nil {
         panic(err.Error())
     }
-	var data BeatmapSETV2
-	json.Unmarshal(body, &data)
-	location := fmt.Sprintf("/beatmaps/%d", data.ChildrenBeatmaps.ParentSetID)
+    var data BeatmapSETV2
+    json.Unmarshal(body, &data)
+	location := fmt.Sprintf("/beatmaps/%d", data.ChildrenBeatmaps[0].BeatmapID)
     c.Redirect(302, location)
 }
 
