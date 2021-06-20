@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"sort"
 	"strconv"
 	"crypto/tls"
@@ -80,8 +81,8 @@ func beatmapSetInfo(c *gin.Context) {
 			return
 		}
 	}
-	c.Request.URL.Path = "/beatmaps/" + data.Beatmapset.ID
-    r.HandleContext(c)
+	location := "/beatmaps" + data.Beatmapset.ID
+    c.Redirect(http.StatusFound, location)
 }
 
 func getBeatmapData(b string) (beatmap models.Beatmap, err error) {
