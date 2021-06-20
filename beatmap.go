@@ -22,6 +22,41 @@ type beatmapPageData struct {
 	SetJSON    string
 }
 
+type BeatmapSETV2 struct {
+	SetID            int `json:"SetID"`
+	ChildrenBeatmaps []struct {
+		BeatmapID        int     `json:"BeatmapID"`
+		ParentSetID      int     `json:"ParentSetID"`
+		DiffName         string  `json:"DiffName"`
+		FileMD5          string  `json:"FileMD5"`
+		Bpm              int     `json:"BPM"`
+		Ar               float64 `json:"AR"`
+		Od               int     `json:"OD"`
+		Cs               int     `json:"CS"`
+		Hp               int     `json:"HP"`
+		TotalLength      int     `json:"TotalLength"`
+		HitLength        int     `json:"HitLength"`
+		Playcount        int     `json:"Playcount"`
+		Passcount        int     `json:"Passcount"`
+		MaxCombo         int     `json:"MaxCombo"`
+		DifficultyRating float64 `json:"DifficultyRating"`
+	} `json:"ChildrenBeatmaps"`
+	RankedStatus int         `json:"RankedStatus"`
+	ApprovedDate interface{} `json:"ApprovedDate"`
+	LastUpdate   interface{} `json:"LastUpdate"`
+	LastChecked  interface{} `json:"LastChecked"`
+	Artist       string      `json:"Artist"`
+	Title        string      `json:"Title"`
+	Creator      string      `json:"Creator"`
+	CreatorID    string      `json:"CreatorID"`
+	Source       string      `json:"Source"`
+	Tags         string      `json:"Tags"`
+	HasVideo     bool        `json:"HasVideo"`
+	Genre        int         `json:"Genre"`
+	Language     int         `json:"Language"`
+	Favourites   int         `json:"Favourites"`
+}
+
 func beatmapInfo(c *gin.Context) {
 	data := new(beatmapPageData)
 	defer resp(c, 200, "beatmap.html", data)
@@ -69,18 +104,18 @@ func beatmapInfo(c *gin.Context) {
 }
 
 func beatmapSetInfo(c *gin.Context) {
-	data := new(beatmapPageData)
 	s := c.Param("bsetid")
-	if _, err := strconv.Atoi(s); err != nil {
-		c.Error(err)
-	} else {
-		data.Beatmapset, err = getBeatmapSetV2(s)
-		if err != nil {
-			c.Error(err)
-			return
-		}
+	raw, err := http.Get(config.CheesegullAPI + "/s/" + s)
+	if err != nil {
+		panic(err.Error())
 	}
-	location := fmt.Sprintf("/beatmaps/%d", data.Beatmapset.ID)
+	body, err := ioutil.ReadAll(raw.Body)
+	if err != nil {
+        panic(err.Error())
+    }
+	var data BeatmapSETV2
+	json.Unmarshal(body, &data)
+	location := fmt.Sprintf("/beatmaps/%d", data.ChildrenBeatmaps.ParentSetID)
     c.Redirect(302, location)
 }
 
@@ -103,27 +138,6 @@ func getBeatmapData(b string) (beatmap models.Beatmap, err error) {
 
 	return beatmap, nil
 }
-
-func getBeatmapSetV2(s string) (bset models.Set, err error) {
-	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
-	resp, err := http.Get(config.CheesegullAPI + "/s/" + s)
-	if err != nil {
-		return bset, err
-	}
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return bset, err
-	}
-
-	err = json.Unmarshal(body, &bset)
-	if err != nil {
-		return bset, err
-	}
-
-	return bset, nil
-}
-
 
 func getBeatmapSetData(beatmap models.Beatmap) (bset models.Set, err error) {
 	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
