@@ -69,18 +69,18 @@ func beatmapInfo(c *gin.Context) {
 }
 
 func beatmapSetInfo(c *gin.Context) {
-
+	data := new(beatmapPageData)
 	s := c.Param("bsetid")
 	if _, err := strconv.Atoi(s); err != nil {
 		c.Error(err)
 	} else {
-		Beatmapset, err = getBeatmapSetV2(s)
+		data.Beatmapset, err = getBeatmapSetV2(s)
 		if err != nil {
 			c.Error(err)
 			return
 		}
 	}
-	c.Redirect(302, "/beatmaps/" + Beatmapset.ChildrenBeatmaps.BeatmapID)
+	c.Redirect(302, "/beatmaps/" + data.Beatmapset.ChildrenBeatmaps.BeatmapID)
 }
 
 func getBeatmapData(b string) (beatmap models.Beatmap, err error) {
