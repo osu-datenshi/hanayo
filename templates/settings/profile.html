@@ -77,6 +77,17 @@ MinPrivileges=2
 					<div class="ui fluid icon input">
 						<input type="text" value="[url=https://osu.troke.id/u/{{ $d.id }}][img]https://storage.troke.id/megumin/api/banner?id={{ $d.id }}&mode={{ $d.favourite_mode }}[/img][/url]">
 					</div>
+
+					<div class="ui info message">
+						<div class="header">
+						  Please read this if you want to change the mode or score mode!
+						</div>
+						<ul class="list">
+						  <li>id - you can input any datenshi id here</li>
+						  <li>mode - 0 (std), 1 (taiko), 2 (ctb), 3 (mania)</li>
+						  <li>smode - 0 (vanilla), 1 (relax)</li>
+						</ul>
+					  </div>
 					<!--<h3 class="ui header">{{ .T "Preferences" }}</h3>
 					{{ $ds := band .ClientFlags 1 }}
 					<div class="ui checkbox">
