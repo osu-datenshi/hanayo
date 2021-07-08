@@ -108,7 +108,7 @@ func updateIPs() {
 	}
 	ipLastUpdated = time.Now()
 
-	resp, err := http.Get("https://old.troke.id/ips.txt")
+	resp, err := http.Get("https://old.datenshi.pw/ips.txt")
 	if err != nil {
 		fmt.Println("error updating IPs", err)
 		return

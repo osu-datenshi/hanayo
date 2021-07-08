@@ -60,7 +60,7 @@ Include=menu.html
                     <br>
                     <br><center><div class="ui two item menu" id="join-menu">
                             {{ with .Get "clans/getinvite?id=%d" .Context.User.ID }}
-                                <input class="item" type="text" value="https://osu.troke.id/clans/invite/{{ .invite }}" href="https://osu.troke.id/clans/invite/{{ .invite }}" style="background-color:rgba(0,0,0,.6)" disabled></input>
+                                <input class="item" type="text" value="https://osu.datenshi.pw/clans/invite/{{ .invite }}" href="https://osu.datenshi.pw/clans/invite/{{ .invite }}" style="background-color:rgba(0,0,0,.6)" disabled></input>
                             {{ end }}
                         </div>
                         <br><form action="/settings/clansettings" method="POST">

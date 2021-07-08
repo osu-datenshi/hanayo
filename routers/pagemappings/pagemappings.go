@@ -75,7 +75,7 @@ func CheckRedirect(c *gin.Context) {
 		mapped := pageMappings[i]
 		if mapped == nil {
 			u := c.Request.URL
-			u.Host = "old.troke.id"
+			u.Host = "old.datenshi.pw"
 			c.Redirect(302, u.String())
 			return
 		}
